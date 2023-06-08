@@ -40,6 +40,8 @@ import { LoginDialogComponent } from './components/auth/login-dialog/login-dialo
 import { SignUpDialogComponent } from './components/auth/sign-up-dialog/sign-up-dialog.component';
 import { ForgotPasswordDialogComponent } from './components/auth/forgot-password-dialog/forgot-password-dialog.component';
 import { AuthComponent } from './components/auth/auth/auth.component';
+import { MainComponent } from './components/main/main/main.component';
+import { HeaderComponent } from './components/main/header/header.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { AuthComponent } from './components/auth/auth/auth.component';
     SignUpDialogComponent,
     ForgotPasswordDialogComponent,
     AuthComponent,
+    MainComponent,
+    HeaderComponent,
 
   ],
   imports: [
