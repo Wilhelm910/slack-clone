@@ -12,8 +12,12 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
 
- 
+    
 
+  }
+
+  receiver(sidebar:boolean){
+    this.sidebar = sidebar;
   }
 
 }
