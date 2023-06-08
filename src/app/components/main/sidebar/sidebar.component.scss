@@ -1,0 +1,69 @@
+.sidebar {
+    width: 300px;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    padding-right: 24px;
+    border-bottom: 1px solid black;
+}
+
+.menu {
+    border-bottom: 1px solid black;
+    div {
+        display: flex;
+        align-items: center;
+        margin: 16px 0;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #6e1470;
+        }
+
+        span {
+            padding: 8px 8px 8px 24px;
+        }
+
+        p {
+            padding: 8px;
+        }
+    }
+}
+
+img {
+    width: 50px;
+}
+
+.pi-pencil {
+    padding: 8px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #6e1470;
+        border-radius: 50%;
+        scale: 1.1;
+    }
+    
+}
+
+.toggled {
+    animation: rotate90 0.25s ease-in-out forwards;
+}
+
+@keyframes rotate90 {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(90deg);}
+}
+
+.not-toggled {
+    animation: rotate90 0.25s ease-in-out forwards;
+}
+
+@keyframes rotateM90 {
+    100% {transform: rotate(90deg);}
+    0% {transform: rotate(0deg);}
+    
+}

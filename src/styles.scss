@@ -1,5 +1,8 @@
 * {
     font-family: 'Lato';
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
 }
 
 a {
@@ -14,7 +17,6 @@ a {
 
 body {
     position: relative;
-    margin: 0px;
     background-color: #3F0E40;
     color: white;
 }

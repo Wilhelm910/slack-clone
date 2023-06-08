@@ -45,6 +45,7 @@ import { AuthService } from './core/services/auth.service';
 import { MainComponent } from './components/main/main/main.component';
 import { SidebarComponent } from './components/main/sidebar/sidebar.component';
 import { HeaderComponent } from './components/main/header/header.component';
+import { ContentComponent } from './components/main/content/content.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { HeaderComponent } from './components/main/header/header.component';
     AuthComponent,
     MainComponent,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,

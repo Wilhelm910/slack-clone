@@ -1,4 +1,7 @@
 <div class="wrapper">
     <app-header (sender)="receiver($event)"></app-header>
-    <app-sidebar *ngIf="sidebar"></app-sidebar>
+    <div class="main-container">
+        <app-sidebar class="sidebar" *ngIf="!sidebar"></app-sidebar>
+        <app-content></app-content>
+    </div>
 </div>
