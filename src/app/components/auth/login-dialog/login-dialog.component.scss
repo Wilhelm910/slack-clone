@@ -1,7 +1,7 @@
 form {
     display: flex;
     flex-direction: column;
-    align-items: center
+    align-items: center;
 }
 
 .manage-password {
@@ -32,7 +32,6 @@ form {
         margin: unset;
     }
 
-    height: 40px;
     font-size: 12px;
     color: red;
 }

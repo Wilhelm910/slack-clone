@@ -9,5 +9,3 @@ import { InputTextModule } from 'primeng/inputtext';
 export class MainComponent {
 
   }
-
-}
