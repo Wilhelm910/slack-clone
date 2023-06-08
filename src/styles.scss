@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    font-family: 'Lato';
+}
+
+a {
+    color: unset;
+    text-decoration: unset;
+
+    &:hover {
+        color: unset;
+        text-decoration: underline;
+    }
+}
+
+body {
+    position: relative;
+    margin: 0px;
+    background-color: #3F0E40;
+    color: white;
+}
+
+.auth-dialog {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+
+    h1, p {
+        text-align: center;
+    }
+
+    h1 {
+        position: inherit;
+        padding-bottom: 30px;
+    }
+}

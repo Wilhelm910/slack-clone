@@ -60,7 +60,7 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(formData.email, formData.password)
       .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign 
+        /* Call the SendVerificationMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(

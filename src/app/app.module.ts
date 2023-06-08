@@ -39,7 +39,10 @@ import { environment } from '../environments/environment';
 import { LoginDialogComponent } from './components/auth/login-dialog/login-dialog.component';
 import { SignUpDialogComponent } from './components/auth/sign-up-dialog/sign-up-dialog.component';
 import { ForgotPasswordDialogComponent } from './components/auth/forgot-password-dialog/forgot-password-dialog.component';
-import { AuthComponent } from './components/auth/auth/auth.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './core/services/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -52,6 +55,7 @@ import { AuthComponent } from './components/auth/auth/auth.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     MenuModule,
     DialogModule,
@@ -70,11 +74,17 @@ import { AuthComponent } from './components/auth/auth/auth.component';
     AvatarModule,
     DragDropModule,
     SplitButtonModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    provideDatabase(() => getDatabase()),
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
