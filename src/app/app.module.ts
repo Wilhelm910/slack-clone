@@ -42,7 +42,8 @@ import { ForgotPasswordDialogComponent } from './components/auth/forgot-password
 import { AuthComponent } from './components/auth/auth.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './core/services/auth.service';
-
+import { MainComponent } from './components/main/main/main.component';
+import { HeaderComponent } from './components/main/header/header.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,8 @@ import { AuthService } from './core/services/auth.service';
     SignUpDialogComponent,
     ForgotPasswordDialogComponent,
     AuthComponent,
+    MainComponent,
+    HeaderComponent,
 
   ],
   imports: [
