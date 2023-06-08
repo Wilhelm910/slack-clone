@@ -36,9 +36,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 
-import { LoginDialogComponent } from './components/components/auth/login-dialog/login-dialog.component';
-import { SignUpDialogComponent } from './components/components/auth/sign-up-dialog/sign-up-dialog.component';
-import { ForgotPasswordDialogComponent } from './components/components/auth/forgot-password-dialog/forgot-password-dialog.component';
+import { LoginDialogComponent } from './components/auth/login-dialog/login-dialog.component';
+import { SignUpDialogComponent } from './components/auth/sign-up-dialog/sign-up-dialog.component';
+import { ForgotPasswordDialogComponent } from './components/auth/forgot-password-dialog/forgot-password-dialog.component';
 import { AuthComponent } from './components/auth/auth/auth.component';
 
 @NgModule({
