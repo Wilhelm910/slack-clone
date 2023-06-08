@@ -26,18 +26,32 @@ form {
 }
 
 .login-no-success {
+    font-size: 16px;
+    height: 24px;
     margin: 8px 0px;
 
-    p {
-        margin: unset;
+    span {
+        animation: transformColor 6s forwards;
+
+        @keyframes transformColor {
+            0% {
+                opacity: 0;
+            }
+            16% {
+                opacity: 1;
+            }
+            84% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0
+            }
+        }
     }
 
-    font-size: 12px;
-    color: red;
+
 }
 
 .buttons {
     width: 100%;
 }
-
-

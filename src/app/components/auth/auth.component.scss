@@ -1,6 +1,21 @@
-* { position: relative;
+.content-wrapper {
+    position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+
+    header {
+        font-size: 2.5rem;
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        img {
+            max-height: 80px;
+            max-width: 50%;
+        }
+    }
+
 }

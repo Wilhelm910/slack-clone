@@ -4,7 +4,7 @@
 
     <form #loginForm="ngForm" (ngSubmit)="submitForm()" class="gap-1">
 
-        <div class="card w-12 flex flex-column gap-5">
+        <div class="card w-12 flex flex-column gap-3">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon">
                     <i class="pi pi-envelope"></i>
@@ -22,8 +22,7 @@
         </div>
 
         <div class="login-no-success">
-            <p *ngIf="wrongInput && !loginForm.dirty">This did not work. <br>
-                Try again or reset your password.</p>
+            <span *ngIf="wrongInput && !loginForm.dirty">User/Password combination not found</span>
         </div>
 
         <div class="flex gap-3 manage-password">
@@ -47,7 +46,7 @@
                 styleClass="p-button-raised p-button-secondary w-full"></p-button>
         </div>
         <div class="flex gap-3">
-            <span>Got a signup Code? <a href="" routerLink="/auth/signup">Register here</a></span>
+            <span>Don't have an account? <a href="" routerLink="/auth/signup">Register here</a></span>
             
         </div>
 

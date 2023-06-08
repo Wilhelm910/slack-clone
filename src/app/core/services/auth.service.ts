@@ -52,7 +52,7 @@ export class AuthService {
         this.noMatchingData.next(true);
         setTimeout(() => {
           this.noMatchingData.next(false)
-        }, 6000)
+        }, 8000)
       });
   }
 
