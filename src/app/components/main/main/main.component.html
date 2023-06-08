@@ -1,5 +1,4 @@
-
-<span class="p-input-icon-right">
-    <i class="pi pi-search"></i>
-    <input type="text" pInputText/>
-</span>
+<div class="wrapper">
+    <app-header (sender)="receiver($event)"></app-header>
+    <app-sidebar *ngIf="sidebar"></app-sidebar>
+</div>

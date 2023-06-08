@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InputTextModule } from 'primeng/inputtext';
+
 
 @Component({
   selector: 'app-main',
@@ -8,10 +8,16 @@ import { InputTextModule } from 'primeng/inputtext';
 })
 export class MainComponent implements OnInit {
 
-  constructor(){}
+  public sidebar: boolean = false;
 
   ngOnInit(): void {
 
+ 
+
+  }
+
+  receiver(sidebar: boolean) {
+    this.sidebar = sidebar
   }
 
 }

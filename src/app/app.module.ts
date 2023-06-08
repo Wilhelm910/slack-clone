@@ -44,6 +44,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from './core/services/auth.service';
 import { MainComponent } from './components/main/main/main.component';
 import { HeaderComponent } from './components/main/header/header.component';
+import { SidebarComponent } from './components/main/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { HeaderComponent } from './components/main/header/header.component';
     AuthComponent,
     MainComponent,
     HeaderComponent,
+    SidebarComponent,
 
   ],
   imports: [
