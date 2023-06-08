@@ -7,9 +7,9 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { LoginDialogComponent } from './auth/login-dialog/login-dialog.component';
-import { SignUpDialogComponent } from './auth/sign-up-dialog/sign-up-dialog.component';
-import { ForgotPasswordDialogComponent } from './auth/forgot-password-dialog/forgot-password-dialog.component';
+import { LoginDialogComponent } from './components/auth/login-dialog/login-dialog.component';
+import { SignUpDialogComponent } from './components/auth/sign-up-dialog/sign-up-dialog.component';
+import { ForgotPasswordDialogComponent } from './components/auth/forgot-password-dialog/forgot-password-dialog.component';
 
 @NgModule({
   declarations: [
