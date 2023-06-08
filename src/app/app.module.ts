@@ -43,8 +43,8 @@ import { AuthComponent } from './components/auth/auth.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './core/services/auth.service';
 import { MainComponent } from './components/main/main/main.component';
-import { HeaderComponent } from './components/main/header/header.component';
 import { SidebarComponent } from './components/main/sidebar/sidebar.component';
+import { HeaderComponent } from './components/main/header/header.component';
 
 @NgModule({
   declarations: [
@@ -54,9 +54,8 @@ import { SidebarComponent } from './components/main/sidebar/sidebar.component';
     ForgotPasswordDialogComponent,
     AuthComponent,
     MainComponent,
-    HeaderComponent,
     SidebarComponent,
-
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

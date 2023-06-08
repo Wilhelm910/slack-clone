@@ -16,8 +16,4 @@ export class MainComponent implements OnInit {
 
   }
 
-  receiver(sidebar: boolean) {
-    this.sidebar = sidebar
-  }
-
 }

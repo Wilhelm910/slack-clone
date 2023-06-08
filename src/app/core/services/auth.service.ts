@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { User } from '../models/user';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import * as auth from 'firebase/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -73,10 +74,29 @@ export class AuthService {
       .catch((error) => {
         window.alert(error.message);
       })
-
   }
 
-  // Send email verfificaiton when new user sign up
+  // Sign in with Google
+  GoogleAuth() {
+
+    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+      this.router.navigate(['main']);
+    });
+  }
+   // Auth logic to run auth providers
+   AuthLogin(provider: any) {
+    return this.afAuth
+      .signInWithPopup(provider)
+      .then((result) => {
+        this.router.navigate(['dashboard']);
+        this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
+  }
+
+  // Send email verificaiton when new user sign up
   SendVerificationMail() {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())

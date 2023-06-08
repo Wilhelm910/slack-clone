@@ -2,7 +2,7 @@
 
     <h1>Log in</h1>
 
-    <form #loginForm="ngForm" (ngSubmit)="submitForm()">
+    <form #loginForm="ngForm" (ngSubmit)="submitForm()" class="gap-1">
 
         <div class="card w-12 flex flex-column gap-5">
             <div class="p-inputgroup">
@@ -38,12 +38,13 @@
             </span>
             <a routerLink="/forgotPassword">Forgot password?</a>
         </div>
-        <div class="flex justify-content-center align-items-center login-buttons gap-5 mt-5 mb-5">
-            <p-button [disabled]="loginForm.invalid" type="submit" label="Login"
-                styleClass="p-button-raised"></p-button>
-            <span>OR</span>
-            <p-button routerLink="/summary" label="Guest Login"
-                styleClass="p-button-raised p-button-secondary"></p-button>
+        <div class="buttons flex flex-column justify-content-center align-items-center login-buttons gap-2 mt-5 mb-5">
+            <p-button class="w-full" [disabled]="loginForm.invalid" type="submit" label="Login"
+                styleClass="p-button-raised w-full"></p-button>
+            <p-button (onClick)="authService.GoogleAuth()" class="w-full" type="submit" label="Login with Google"
+                styleClass="p-button-raised w-full"></p-button>
+            <p-button class="w-full" routerLink="/summary" label="Guest Login"
+                styleClass="p-button-raised p-button-secondary w-full"></p-button>
         </div>
         <div class="flex gap-3">
             <span>Got a signup Code? <a href="" routerLink="/auth/signup">Register here</a></span>
