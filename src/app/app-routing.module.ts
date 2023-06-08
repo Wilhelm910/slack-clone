@@ -4,6 +4,7 @@ import { AuthComponent } from './components/auth/auth/auth.component';
 import { LoginDialogComponent } from './components/auth/login-dialog/login-dialog.component';
 import { ForgotPasswordDialogComponent } from './components/auth/forgot-password-dialog/forgot-password-dialog.component';
 import { SignUpDialogComponent } from './components/auth/sign-up-dialog/sign-up-dialog.component';
+import { MainComponent } from './components/main/main/main.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'auth/signup', component: SignUpDialogComponent}
     ]
   },
+  { path: 'main/main', component: MainComponent },
 
 ];
 
