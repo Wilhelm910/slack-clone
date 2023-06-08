@@ -9,11 +9,11 @@ import { MainComponent } from './components/main/main/main.component';
 const routes: Routes = [
   // { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
   // { path: '', redirectTo: 'project/tasks', pathMatch: 'full'},
-  { 
+  {
     path: '', component: AuthComponent, children: [
-      { path: 'auth/login', component: LoginDialogComponent},
-      { path: 'auth/forgotPassword', component: ForgotPasswordDialogComponent},
-      { path: 'auth/signup', component: SignUpDialogComponent}
+      { path: 'auth/login', component: LoginDialogComponent },
+      { path: 'auth/forgotPassword', component: ForgotPasswordDialogComponent },
+      { path: 'auth/signup', component: SignUpDialogComponent }
     ]
   },
   { path: 'main/main', component: MainComponent },
