@@ -30,7 +30,6 @@ export class LoginDialogComponent {
   }
 
   submitForm() {
-    console.log('submit??')
     this.authService.SignIn(this.formData.usermail, this.formData.password)
     this.loginForm?.reset();
 
