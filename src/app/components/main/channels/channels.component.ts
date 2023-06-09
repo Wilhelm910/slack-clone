@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Channel } from 'src/app/core/models/channel';
+import { Channel } from 'src/app/core/models/channel.class';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 
 @Component({
@@ -10,26 +10,29 @@ import { CreateChannelComponent } from '../create-channel/create-channel.compone
 })
 export class ChannelsComponent implements OnInit {
 
-  channel: Channel;
   public createChannelDialog: boolean = false;
+  channel = new Channel();
+  allChannels = [];
 
-  constructor(private firestore: AngularFirestore){}
+
+  constructor(private firestore: AngularFirestore) { }
+
 
   ngOnInit(): void {
-    
+    this.firestore
+      .collection('channels')
+      .valueChanges()
+      .subscribe((changes: any) => {
+        this.allChannels = changes;
+        console.log(this.allChannels);
+      })
+     
+
   }
 
-  createChannel() {
-
-  }
-
-  newChannel() {
-    this.channel = new Channel
-  }
 
 
- 
-  
+
 
   @Output() sender = new EventEmitter<boolean>();
 
@@ -40,7 +43,6 @@ export class ChannelsComponent implements OnInit {
       this.createChannelDialog = true;
     }
     this.sender.emit(this.createChannelDialog)
-    console.log(this.createChannelDialog)
   }
 
 

@@ -13,24 +13,22 @@
 
 .menu {
     border-bottom: 1px solid black;
+}
 
-    div {
-        display: flex;
-        align-items: center;
-        margin: 16px 0;
+.headline {
+    display: flex;
+    align-items: center;
+    margin: 8px 16px;
+    padding: 8px 8px;
+    border-radius: 8px;
 
-        &:hover {
-            cursor: pointer;
-            background-color: #6e1470;
-        }
+    &:hover {
+        cursor: pointer;
+        background-color: #6e1470;
+    }
 
-        span {
-            padding: 8px 8px 8px 24px;
-        }
-
-        p {
-            padding: 8px;
-        }
+    span {
+        margin-right: 8px;
     }
 }
 

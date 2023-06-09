@@ -41,7 +41,6 @@ export class SidebarComponent {
 
   showDialog(createChannelDialog:boolean) {
     this.sender.emit(this.createChannelDialog)
-    console.log(this.createChannelDialog)
   }
 
 }

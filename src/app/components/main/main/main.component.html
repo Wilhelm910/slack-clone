@@ -9,15 +9,7 @@
 
 
     <div class="create-channel-container" *ngIf="createChannelDialog">
-        <div>
-            <p>Create Channel</p>
-        </div>
-        <div class="card flex justify-content-center">
-            <input type="text" pInputText [(ngModel)]="value" placeholder="Channel name"/>
-        </div>
-        <p-button label="OK"></p-button>
-        <p-button label="Cancle"></p-button>
-
+        <app-create-channel></app-create-channel>
     </div>
 
 

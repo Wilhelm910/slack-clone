@@ -11,7 +11,7 @@ export class MainComponent implements OnInit {
 
   public createChannelDialog: boolean;
   public sidebar: boolean = false;
-  value: string;
+
 
   ngOnInit(): void {
 
@@ -25,7 +25,6 @@ export class MainComponent implements OnInit {
 
   receiverChannelDialog(createChannelDialog:boolean){
     this.createChannelDialog = createChannelDialog;
-    console.log(this.createChannelDialog)
   }
 
 }
