@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -7,11 +8,24 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './sign-up-dialog.component.html',
   styleUrls: ['./sign-up-dialog.component.scss']
 })
-export class SignUpDialogComponent { passwordsMatching: boolean;
+export class SignUpDialogComponent {
+  passwordsMatching: boolean;
+  showMailVerifyHint: boolean = false;
 
   constructor(
-    public authService: AuthService
-  ) {}
+    public authService: AuthService,
+    public router: Router
+  ) {
+    this.authService.verificationMailSent.subscribe((value) => {
+      console.log(value);
+      if(value) {
+        this.showMailVerifyHint = true;
+        setTimeout(() => {
+          this.router.navigate(['auth/login']);
+        }, 5000)
+      }
+    })
+  }
 
   @ViewChild('signUpForm') signUpForm?: NgForm;
 

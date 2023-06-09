@@ -1,8 +1,10 @@
+
+
 <div class="auth-dialog card">
 
     <h1>Sign up</h1>
-
     <form #signUpForm="ngForm" (ngSubmit)="submitForm()">
+
         <div class="card w-12 flex flex-column gap-3">
             <div class="nameInputs flex">
                 <div class="card w-12 flex flex-column">
@@ -10,14 +12,14 @@
                         <span class="p-inputgroup-addon">
                             <i class="pi pi-user-edit"></i>
                         </span>
-                        <input [(ngModel)]="formData.firstName" required pInputText name="firstName"
-                            placeholder="First Name" />
+                        <input [(ngModel)]="formData.firstName" required [disabled]="showMailVerifyHint" pInputText
+                            name="firstName" placeholder="First Name" />
                     </div>
                 </div>
                 <div class="card w-12 flex flex-column">
                     <div class="p-inputgroup">
-                        <input [(ngModel)]="formData.lastName" required pInputText name="lastName"
-                            placeholder="Last Name" />
+                        <input [(ngModel)]="formData.lastName" required [disabled]="showMailVerifyHint" pInputText
+                            name="lastName" placeholder="Last Name" />
                     </div>
                 </div>
             </div>
@@ -27,28 +29,37 @@
                 <span class="p-inputgroup-addon">
                     <i class="pi pi-envelope"></i>
                 </span>
-                <input [(ngModel)]="formData.email" required email pInputText name="email" placeholder="Email" />
+                <input [(ngModel)]="formData.email" required [disabled]="showMailVerifyHint" email pInputText
+                    name="email" placeholder="Email" />
             </div>
 
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon">
                     <i class="pi pi-key"></i>
                 </span>
-                <input #password="ngModel" (input)="checkPwMatch()" [(ngModel)]="formData.password" required minlength="7" pattern=".*\d.*" type="password"
-                    pInputText name="password" placeholder="Password" />
+                <input #password="ngModel" (input)="checkPwMatch()" [disabled]="showMailVerifyHint"
+                    [(ngModel)]="formData.password" required minlength="7" pattern=".*\d.*" type="password" pInputText
+                    name="password" placeholder="Password" />
             </div>
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon">
                     <i class="pi pi-ellipsis-h"></i>
                 </span>
-                <input (input)="checkPwMatch()" [disabled]="password.invalid" [(ngModel)]="formData.passwordCheck" type="password"
-                    pInputText name="passwordCheck" placeholder="Confirm password" />
+                <input (input)="checkPwMatch()" [disabled]="password.invalid || showMailVerifyHint"
+                    [(ngModel)]="formData.passwordCheck" type="password" pInputText name="passwordCheck"
+                    placeholder="Confirm password" />
             </div>
         </div>
 
         <div class="flex justify-content-center align-items-center login-buttons gap-5 mt-5">
-            <p-button [disabled]="signUpForm.invalid || !passwordsMatching" type="submit" label="Sign up"
-                styleClass="p-button-raised"></p-button>
+            <p-button [disabled]="signUpForm.invalid || !passwordsMatching || showMailVerifyHint" type="submit"
+                label="Sign up" styleClass="p-button-raised"></p-button>
+        </div>
+        <div class="verify-mail">
+            <div *ngIf="showMailVerifyHint">
+                <span>Sent verification link.</span>
+                <span>Please check your emails.</span>
+            </div>
         </div>
 
     </form>

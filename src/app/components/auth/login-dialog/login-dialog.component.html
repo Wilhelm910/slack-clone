@@ -38,7 +38,7 @@
             <a routerLink="/forgotPassword">Forgot password?</a>
         </div>
         <div class="buttons flex flex-column justify-content-center align-items-center login-buttons gap-2 mt-5 mb-5">
-            <p-button class="w-full" [disabled]="loginForm.invalid" type="submit" label="Login"
+            <p-button class="w-full" [disabled]="loginForm.invalid" type="ngSubmit" label="Login"
                 styleClass="p-button-raised w-full"></p-button>
             <p-button (onClick)="authService.GoogleAuth()" class="w-full" type="submit" label="Login with Google"
                 styleClass="p-button-raised w-full"></p-button>
@@ -50,6 +50,7 @@
             
         </div>
 
+        <div class="logout" (click)="authService.SignOut()">Logout</div>
 
     </form>
 

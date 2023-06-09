@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import * as auth from 'firebase/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -14,6 +14,7 @@ export class AuthService {
   userData: Subject<any> = new Subject;
   userSpecValues: any;
   noMatchingData: Subject<boolean> = new Subject;
+  verificationMailSent: Subject<boolean> = new Subject;
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
@@ -25,7 +26,7 @@ export class AuthService {
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        localStorage.setItem('user', JSON.stringify(user));        
+        localStorage.setItem('user', JSON.stringify(user));
         JSON.parse(localStorage.getItem('user')!);
       } else {
         localStorage.setItem('user', 'null');
@@ -49,6 +50,7 @@ export class AuthService {
         });
       })
       .catch((error) => {
+
         this.noMatchingData.next(true);
         setTimeout(() => {
           this.noMatchingData.next(false)
@@ -83,8 +85,8 @@ export class AuthService {
       this.router.navigate(['main']);
     });
   }
-   // Auth logic to run auth providers
-   AuthLogin(provider: any) {
+  // Auth logic to run auth providers
+  AuthLogin(provider: any) {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
@@ -101,13 +103,12 @@ export class AuthService {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
-        // this.router.navigate(['verify-email-address']);
+        this.verificationMailSent.next(true)
       });
   }
 
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-  
     return user !== null && user.emailVerified !== false ? true : false;
   }
 
@@ -121,14 +122,14 @@ export class AuthService {
     lastName?: string,
     initials?: string,
 
-    ) {
+  ) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
 
     userRef.get().subscribe(ref => {
-      const userDocData: any = ref.data();
-    
+      const userDocData: any = ref.data();      
+
       const userData: User = {
         uid: user.uid,
         firstName: firstName || userDocData.firstName,
@@ -137,11 +138,10 @@ export class AuthService {
         email: user.email,
         displayName: user.displayName,
         emailVerified: user.emailVerified,
-
-      };
+      };      
 
       this.userData.next(userData);
-     
+
 
       return userRef.set(userData, {
         merge: true,
@@ -152,6 +152,7 @@ export class AuthService {
   // Sign out
   SignOut() {
     return this.afAuth.signOut().then(() => {
+      
       localStorage.removeItem('user');
       this.router.navigate(['auth/login']);
     });
