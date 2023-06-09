@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 
 
 @Component({
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
+  public createChannelDialog: boolean;
   public sidebar: boolean = false;
+  value: string;
 
   ngOnInit(): void {
 
@@ -16,8 +19,13 @@ export class MainComponent implements OnInit {
 
   }
 
-  receiver(sidebar:boolean){
+  receiverSidebar(sidebar:boolean){
     this.sidebar = sidebar;
+  }
+
+  receiverChannelDialog(createChannelDialog:boolean){
+    this.createChannelDialog = createChannelDialog;
+    console.log(this.createChannelDialog)
   }
 
 }

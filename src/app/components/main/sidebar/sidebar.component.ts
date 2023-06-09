@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,8 +7,11 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
+
   public channels:boolean = false;
   public messages:boolean = false;
+  public createChannelDialog: boolean;
+
 
   toggleChannels() {
     if (this.channels == true) {
@@ -16,8 +19,8 @@ export class SidebarComponent {
     } else {
       this.channels = true;
     }
-    console.log(this.channels)
   }
+
 
   toggleMessages() {
     if (this.messages == true) {
@@ -25,6 +28,20 @@ export class SidebarComponent {
     } else {
       this.messages = true;
     }
+  }
+
+
+  receiverChannelDialog(createChannelDialog:boolean){
+    this.createChannelDialog = createChannelDialog;
+    this.showDialog(createChannelDialog)
+  }
+
+  
+  @Output() sender = new EventEmitter<boolean>();
+
+  showDialog(createChannelDialog:boolean) {
+    this.sender.emit(this.createChannelDialog)
+    console.log(this.createChannelDialog)
   }
 
 }

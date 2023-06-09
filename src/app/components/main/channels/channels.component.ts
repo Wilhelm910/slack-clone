@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Channel } from 'src/app/core/models/channel';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
-import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-channels',
@@ -12,8 +11,9 @@ import { DialogModule } from 'primeng/dialog';
 export class ChannelsComponent implements OnInit {
 
   channel: Channel;
+  public createChannelDialog: boolean = false;
 
-  constructor(private firestore: AngularFirestore, public dialog: DialogModule){}
+  constructor(private firestore: AngularFirestore){}
 
   ngOnInit(): void {
     
@@ -28,8 +28,19 @@ export class ChannelsComponent implements OnInit {
   }
 
 
+ 
+  
+
+  @Output() sender = new EventEmitter<boolean>();
+
   showDialog() {
-   // const dialogRef = this.dialog.open(CreateChannelComponent)
+    if (this.createChannelDialog == true) {
+      this.createChannelDialog = false;
+    } else {
+      this.createChannelDialog = true;
+    }
+    this.sender.emit(this.createChannelDialog)
+    console.log(this.createChannelDialog)
   }
 
 

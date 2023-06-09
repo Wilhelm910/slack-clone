@@ -1,7 +1,24 @@
 <div class="wrapper">
-    <app-header (sender)="receiver($event)"></app-header>
+    <app-header (sender)="receiverSidebar($event)"></app-header>
     <div class="main-container">
-        <app-sidebar class="sidebar" *ngIf="!sidebar"></app-sidebar>
+        <app-sidebar (sender)="receiverChannelDialog($event)" class="sidebar" *ngIf="!sidebar"></app-sidebar>
         <app-content></app-content>
     </div>
+
+
+
+
+    <div class="create-channel-container" *ngIf="createChannelDialog">
+        <div>
+            <p>Create Channel</p>
+        </div>
+        <div class="card flex justify-content-center">
+            <input type="text" pInputText [(ngModel)]="value" placeholder="Channel name"/>
+        </div>
+        <p-button label="OK"></p-button>
+        <p-button label="Cancle"></p-button>
+
+    </div>
+
+
 </div>
