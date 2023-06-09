@@ -16,12 +16,18 @@
     </div>
     <div class="menu">
         <div (click)="toggleChannels()">
-            <span [ngClass]="{'toggled':channels}" class="pi pi-chevron-right"></span>
+            <span [className]="channels ? 'active pi pi-chevron-right' : 'inactive pi pi-chevron-right'"></span>
             <h3>Channels</h3>
         </div>
+        <div>
+            <app-channels *ngIf="channels"></app-channels>
+        </div>
         <div (click)="toggleMessages()">
-            <span class="pi pi-chevron-right"></span>
+            <span [className]="messages ? 'active pi pi-chevron-right' : 'inactive pi pi-chevron-right'"></span>
             <h3>Direct Messages</h3>
+        </div>
+        <div>
+            <app-direct-messages *ngIf="messages"></app-direct-messages>
         </div>
     </div>
 </div>

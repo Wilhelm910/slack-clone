@@ -46,6 +46,9 @@ import { MainComponent } from './components/main/main/main.component';
 import { SidebarComponent } from './components/main/sidebar/sidebar.component';
 import { HeaderComponent } from './components/main/header/header.component';
 import { ContentComponent } from './components/main/content/content.component';
+import { ChannelsComponent } from './components/main/channels/channels.component';
+import { DirectMessagesComponent } from './components/main/direct-messages/direct-messages.component';
+import { CreateChannelComponent } from './components/main/create-channel/create-channel.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { ContentComponent } from './components/main/content/content.component';
     MainComponent,
     SidebarComponent,
     HeaderComponent,
-    ContentComponent
+    ContentComponent,
+    ChannelsComponent,
+    DirectMessagesComponent,
+    CreateChannelComponent
   ],
   imports: [
     BrowserModule,

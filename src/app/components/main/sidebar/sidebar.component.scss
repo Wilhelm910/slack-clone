@@ -13,6 +13,7 @@
 
 .menu {
     border-bottom: 1px solid black;
+
     div {
         display: flex;
         align-items: center;
@@ -46,24 +47,40 @@ img {
         border-radius: 50%;
         scale: 1.1;
     }
-    
+
 }
 
-.toggled {
-    animation: rotate90 0.25s ease-in-out forwards;
+.active {
+
+   
+        animation: rotate90 0.25s ease-in-out forwards;
+    
+    
 }
 
 @keyframes rotate90 {
-    0% {transform: rotate(0deg);}
-    100% {transform: rotate(90deg);}
+    0% {
+        transform: rotate(0deg);
+        transform-origin: center center;
+    }
+
+    100% {
+        transform: rotate(90deg);
+        transform-origin: center center;
+    }
 }
 
-.not-toggled {
-    animation: rotate90 0.25s ease-in-out forwards;
+.inactive {
+    animation: rotateM90 0.25s ease-in-out forwards;
 }
 
 @keyframes rotateM90 {
-    100% {transform: rotate(90deg);}
-    0% {transform: rotate(0deg);}
-    
+    0% {
+        transform: rotate(90deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+
 }
