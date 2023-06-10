@@ -43,7 +43,7 @@ export class ChannelsComponent implements OnInit {
 
 
   showChannel() {
-
+    console.log(this.channel)
   }
 
 

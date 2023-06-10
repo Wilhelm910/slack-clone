@@ -1,6 +1,6 @@
 <div class="channel-container">
     <div *ngFor="let channel of allChannels; let i = index" (click)="showChannel()" routerLink="{{ '/channel/' + channel.ID }}">
-        <p>{{ channel.name }}</p>
+        <p id="{{ channel.ID }}">{{ channel.name }}</p>
     </div>
 </div>
 
