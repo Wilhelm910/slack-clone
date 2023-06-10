@@ -1,7 +1,20 @@
-.mat-drawer-container {
-    height: 50vh;
+.main-container {
+    display: flex;
 }
 
-.container {
+.mat-drawer-container {
+    height: 100vh;
+}
+
+.header-content-container {
     display: flex;
+    flex-direction: column;
+}
+
+app-header {
+    border: 2px solid white;
+}
+
+app-content {
+    border: 2px solid white;
 }
