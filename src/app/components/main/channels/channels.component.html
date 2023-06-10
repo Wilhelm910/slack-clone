@@ -1,9 +1,5 @@
 <div class="channel-container">
-<<<<<<< HEAD
-    <div *ngFor="let channel of allChannels; let i = index" (click)="showChannel()" routerLink="{{ 'channel/' + channel.ID }}">
-=======
     <div *ngFor="let channel of allChannels; let i = index" routerLink="{{ '/channel/' + channel.ID }}">
->>>>>>> bd5143202a5ffcd7c61254031735fd876d8bbcc4
         <p id="{{ channel.ID }}">{{ channel.name }}</p>
     </div>
 </div>
