@@ -49,6 +49,7 @@ import { ContentComponent } from './components/main/content/content.component';
 import { ChannelsComponent } from './components/main/channels/channels.component';
 import { DirectMessagesComponent } from './components/main/direct-messages/direct-messages.component';
 import { CreateChannelComponent } from './components/main/create-channel/create-channel.component';
+import { ChannelDetailComponent } from './components/main/channel-detail/channel-detail.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { CreateChannelComponent } from './components/main/create-channel/create-
     ContentComponent,
     ChannelsComponent,
     DirectMessagesComponent,
-    CreateChannelComponent
+    CreateChannelComponent,
+    ChannelDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { SignUpDialogComponent } from './components/auth/sign-up-dialog/sign-up-
 import { MainComponent } from './components/main/main/main.component';
 import { HeaderComponent } from './components/main/header/header.component';
 import { SidebarComponent } from './components/main/sidebar/sidebar.component';
+import { ChannelDetailComponent } from './components/main/channel-detail/channel-detail.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
     ]
   },
   { path: 'main/main', component: MainComponent },
+  { path: 'channel/:id', component: ChannelDetailComponent },
 
 ];
 

@@ -2,6 +2,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    span {
+        margin-right: 8px;
+    }
+    &:hover {
+        cursor: pointer;
+        background-color: #6e1470;
+        border-radius: 8px;
+    }
 }
 
 .channel-container {

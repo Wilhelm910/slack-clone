@@ -5,4 +5,4 @@
     <input type="text" pInputText [(ngModel)]="channel.name" placeholder="Channel name"/>
 </div>
 <p-button (click)="createChannel()" label="OK"></p-button>
-<p-button label="Cancle"></p-button>
+<p-button label="Cancle" (click)="close()"></p-button>

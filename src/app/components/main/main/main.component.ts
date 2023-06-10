@@ -27,4 +27,9 @@ export class MainComponent implements OnInit {
     this.createChannelDialog = createChannelDialog;
   }
 
+  receiverChannelDialogClose(createChannelDialog:boolean){
+    this.createChannelDialog = createChannelDialog;
+    console.log(this.createChannelDialog)
+  }
+
 }

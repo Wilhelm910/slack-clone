@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Channel } from 'src/app/core/models/channel.class';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-channels',
@@ -21,7 +22,7 @@ export class ChannelsComponent implements OnInit {
   ngOnInit(): void {
     this.firestore
       .collection('channels')
-      .valueChanges()
+      .valueChanges({idField: 'ID'})
       .subscribe((changes: any) => {
         this.allChannels = changes;
         console.log(this.allChannels);
@@ -30,12 +31,7 @@ export class ChannelsComponent implements OnInit {
 
   }
 
-
-
-
-
   @Output() sender = new EventEmitter<boolean>();
-
   showDialog() {
     if (this.createChannelDialog == true) {
       this.createChannelDialog = false;
@@ -43,6 +39,11 @@ export class ChannelsComponent implements OnInit {
       this.createChannelDialog = true;
     }
     this.sender.emit(this.createChannelDialog)
+  }
+
+
+  showChannel() {
+
   }
 
 

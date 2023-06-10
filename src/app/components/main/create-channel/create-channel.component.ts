@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DialogModule } from 'primeng/dialog';
 import { Channel } from 'src/app/core/models/channel.class';
@@ -10,6 +10,7 @@ import { Channel } from 'src/app/core/models/channel.class';
 })
 export class CreateChannelComponent {
 
+  public createChannelDialog: boolean;
   channel = new Channel();
   allChannels = [];
 
@@ -21,6 +22,7 @@ export class CreateChannelComponent {
 
   createChannel() {
     this.newChannel()
+    this.close()
   }
 
   newChannel() {
@@ -28,12 +30,15 @@ export class CreateChannelComponent {
       .collection('channels')
       .add(this.channel.toJson())
       .then((result: any) => {
-        console.log(result)
       })
-    
-
     this.channel = new Channel
-    console.log(this.channel)
+  }
+
+  @Output() sender = new EventEmitter<boolean>();
+
+  close() {
+    this.createChannelDialog = false;
+    this.sender.emit(this.createChannelDialog)
   }
 
 }

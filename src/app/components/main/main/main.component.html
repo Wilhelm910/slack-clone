@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div [className]="createChannelDialog ? 'wrapper overlay' : 'wrapper'">
     <app-header (sender)="receiverSidebar($event)"></app-header>
     <div class="main-container">
         <app-sidebar (sender)="receiverChannelDialog($event)" class="sidebar" *ngIf="!sidebar"></app-sidebar>
@@ -9,7 +9,7 @@
 
 
     <div class="create-channel-container" *ngIf="createChannelDialog">
-        <app-create-channel></app-create-channel>
+        <app-create-channel (sender)="receiverChannelDialogClose($event)"></app-create-channel>
     </div>
 
 

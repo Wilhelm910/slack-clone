@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class SidebarComponent {
 
-
+  
   public channels:boolean = false;
   public messages:boolean = false;
   public createChannelDialog: boolean;
@@ -41,6 +41,7 @@ export class SidebarComponent {
 
   showDialog(createChannelDialog:boolean) {
     this.sender.emit(this.createChannelDialog)
+    console.log(this.createChannelDialog)
   }
 
 }
