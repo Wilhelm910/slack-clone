@@ -11,7 +11,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class CreateChannelComponent {
 
-  public createChannelDialog: boolean;
   channel = new Channel();
   allChannels = [];
 
@@ -23,7 +22,6 @@ export class CreateChannelComponent {
 
   createChannel() {
     this.newChannel()
-    this.close()
   }
 
   newChannel() {
@@ -33,13 +31,6 @@ export class CreateChannelComponent {
       .then((result: any) => {
       })
     this.channel = new Channel
-  }
-
-  @Output() sender = new EventEmitter<boolean>();
-
-  close() {
-    this.createChannelDialog = false;
-    this.sender.emit(this.createChannelDialog)
   }
 
 }
