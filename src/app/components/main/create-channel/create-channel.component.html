@@ -1,7 +1,10 @@
-<h1 mat-dialog-title>Dialog with elements</h1>
-<div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
+<h1 mat-dialog-title>Create new channel</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="channel.name" placeholder="Channel name">
+  </mat-form-field>
+</div>
 <div mat-dialog-actions>
-    <input matInput type="text" [(ngModel)]="channel.name" placeholder="Channel name" />
-    <button mat-button mat-dialog-close>Close</button>
-    <button mat-button mat-dialog-close cdkFocusInitial (click)="createChannel()">Create</button>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close (click)="createChannel()" cdkFocusInitial>Create</button>
 </div>
