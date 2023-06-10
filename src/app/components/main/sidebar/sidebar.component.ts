@@ -10,7 +10,6 @@ export class SidebarComponent {
   
   public channels:boolean = false;
   public messages:boolean = false;
-  public createChannelDialog: boolean;
 
 
   toggleChannels() {
@@ -30,18 +29,5 @@ export class SidebarComponent {
     }
   }
 
-
-  receiverChannelDialog(createChannelDialog:boolean){
-    this.createChannelDialog = createChannelDialog;
-    this.showDialog(createChannelDialog)
-  }
-
-  
-  @Output() sender = new EventEmitter<boolean>();
-
-  showDialog(createChannelDialog:boolean) {
-    this.sender.emit(this.createChannelDialog)
-    console.log(this.createChannelDialog)
-  }
 
 }

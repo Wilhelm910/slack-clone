@@ -1,16 +1,11 @@
-<div [className]="createChannelDialog ? 'wrapper overlay' : 'wrapper'">
-    <app-header (sender)="receiverSidebar($event)"></app-header>
-    <div class="main-container">
-        <app-sidebar (sender)="receiverChannelDialog($event)" class="sidebar" *ngIf="!sidebar"></app-sidebar>
-        <app-content></app-content>
+<app-header></app-header>
+<mat-drawer-container>
+    <mat-drawer #drawer mode="side">
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+    <div>
+        <button type="button" mat-button (click)="drawer.toggle()">
+            Toggle sidenav
+        </button>
     </div>
-
-
-
-
-    <div class="create-channel-container" *ngIf="createChannelDialog">
-        <app-create-channel (sender)="receiverChannelDialogClose($event)"></app-create-channel>
-    </div>
-
-
-</div>
+</mat-drawer-container>

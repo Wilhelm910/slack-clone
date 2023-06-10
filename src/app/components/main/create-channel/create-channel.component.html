@@ -1,8 +1,7 @@
-<div>
-    <p>Create Channel</p>
+<h1 mat-dialog-title>Dialog with elements</h1>
+<div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
+<div mat-dialog-actions>
+    <input matInput type="text" [(ngModel)]="channel.name" placeholder="Channel name" />
+    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="createChannel()">Create</button>
 </div>
-<div class="card flex justify-content-center">
-    <input type="text" pInputText [(ngModel)]="channel.name" placeholder="Channel name"/>
-</div>
-<p-button (click)="createChannel()" label="OK"></p-button>
-<p-button label="Cancle" (click)="close()"></p-button>
