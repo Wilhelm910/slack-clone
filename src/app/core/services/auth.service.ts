@@ -45,7 +45,7 @@ export class AuthService {
         this.afAuth.authState.subscribe((user) => {
           if (user && this.isLoggedIn == true) {
 
-            this.router.navigate(['project/summary']);
+            this.router.navigate(['main']);
           }
         });
       })
