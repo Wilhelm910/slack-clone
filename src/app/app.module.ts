@@ -50,6 +50,7 @@ import { ChannelsComponent } from './components/main/channels/channels.component
 import { DirectMessagesComponent } from './components/main/direct-messages/direct-messages.component';
 import { CreateChannelComponent } from './components/main/create-channel/create-channel.component';
 import { ChannelDetailComponent } from './components/main/channel-detail/channel-detail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { ChannelDetailComponent } from './components/main/channel-detail/channel
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideDatabase(() => getDatabase()),
+    BrowserAnimationsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
