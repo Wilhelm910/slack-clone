@@ -19,8 +19,7 @@ const routes: Routes = [
   },
 
   {
-    path: '', component: ContentComponent, children: [
-      { path: 'main', component: MainComponent },
+    path: 'main', component: MainComponent, children: [
       { path: 'channel/:id', component: ChannelDetailComponent },
     ]
   },

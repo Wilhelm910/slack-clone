@@ -3,9 +3,15 @@
 }
 
 .header {
+    width: 100vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 32px;
     height: 150px;
+    
+}
+
+.burger-icon {
+    cursor: pointer;
 }

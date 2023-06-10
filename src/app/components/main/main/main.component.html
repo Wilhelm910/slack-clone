@@ -1,12 +1,15 @@
-<div [className]="createChannelDialog ? 'wrapper overlay' : 'wrapper'">
-    <app-header (sender)="receiverSidebar($event)"></app-header>
-    <div class="main-container">
-        <app-sidebar (sender)="receiverChannelDialog($event)" class="sidebar" *ngIf="!sidebar"></app-sidebar>
-    </div>
+<div class="flex">
+    <div [className]="createChannelDialog ? 'wrapper overlay' : 'wrapper'">
+        <app-header (sender)="receiverSidebar($event)"></app-header>
+        <div class="flex wrapper">
+            <div class="main-container">
+                <app-sidebar (sender)="receiverChannelDialog($event)" class="sidebar" *ngIf="!sidebar"></app-sidebar>
+            </div>
 
-    <div class="create-channel-container" *ngIf="createChannelDialog">
-        <app-create-channel (sender)="receiverChannelDialogClose($event)"></app-create-channel>
+            <div class="create-channel-container" *ngIf="createChannelDialog">
+                <app-create-channel (sender)="receiverChannelDialogClose($event)"></app-create-channel>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>
-
-<router-outlet></router-outlet>
