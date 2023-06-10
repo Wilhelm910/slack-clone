@@ -4,7 +4,9 @@ export class Channel {
    // public users: string[] = [];
    // public messages: string[] = [];
 
-
+   constructor(obj?: any) {
+    this.name = obj.name;
+  }
 
     public toJson() {
         return {

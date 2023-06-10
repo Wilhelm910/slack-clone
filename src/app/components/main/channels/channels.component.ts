@@ -12,7 +12,7 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore';
 export class ChannelsComponent implements OnInit {
 
   public createChannelDialog: boolean = false;
-  channel = new Channel();
+  // channel = new Channel();
   allChannels = [];
 
 
@@ -33,11 +33,12 @@ export class ChannelsComponent implements OnInit {
 
   @Output() sender = new EventEmitter<boolean>();
   showDialog() {
-    if (this.createChannelDialog == true) {
+        if (this.createChannelDialog == true) {
       this.createChannelDialog = false;
     } else {
       this.createChannelDialog = true;
     }
+    
     this.sender.emit(this.createChannelDialog)
   }
 

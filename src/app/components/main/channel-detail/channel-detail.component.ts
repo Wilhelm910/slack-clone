@@ -11,7 +11,7 @@ import { Channel } from 'src/app/core/models/channel.class';
 export class ChannelDetailComponent implements OnInit {
 
   channelId = '';
-  channelData: Channel = new Channel;
+  channelData: any = {};
 
   constructor(private route:ActivatedRoute, private firestore: AngularFirestore){}
 
@@ -23,16 +23,14 @@ export class ChannelDetailComponent implements OnInit {
     })
   }
 
-
   getChannel() {
     this.firestore
     .collection('channels')
     .doc(this.channelId)
     .valueChanges()
     .subscribe((data:any) => {
-      this.channelData = new Channel(data);
+      this.channelData = data;
       console.log(this.channelData)
     })
   }
-
 }

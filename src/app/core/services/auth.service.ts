@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import * as auth from 'firebase/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
@@ -25,12 +25,13 @@ export class AuthService {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
-      if (user) {
+      if (user && user.emailVerified) {
+        console.log('was here 1');
+        
         localStorage.setItem('user', JSON.stringify(user));
         JSON.parse(localStorage.getItem('user')!);
       } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
+        console.log('was here 2');
       }
     });
   }
@@ -40,12 +41,14 @@ export class AuthService {
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
-      .then((result) => {
+      .then((result) => {                
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
-          if (user && this.isLoggedIn == true) {
-
-            this.router.navigate(['project/summary']);
+          
+          if (user && user.emailVerified) {            
+            this.router.navigate(['main/main']);
+          } else {
+            this.SignOut()
           }
         });
       })
@@ -80,17 +83,19 @@ export class AuthService {
 
   // Sign in with Google
   GoogleAuth() {
-
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate(['main']);
+      this.router.navigate(['main/main']);
     });
   }
+
   // Auth logic to run auth providers
   AuthLogin(provider: any) {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        this.router.navigate(['dashboard']);
+        console.log('google auth user', result.user);
+        
+        this.router.navigate(['main/main']);
         this.SetUserData(result.user);
       })
       .catch((error) => {
@@ -141,7 +146,6 @@ export class AuthService {
       };      
 
       this.userData.next(userData);
-
 
       return userRef.set(userData, {
         merge: true,
