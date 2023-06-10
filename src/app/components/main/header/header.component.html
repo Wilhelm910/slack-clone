@@ -1,4 +1,5 @@
 <div class="header">
+<<<<<<< HEAD
     <i class="burger-icon pi pi-bars" style="font-size: 30px" (click)="toggleSidebar()"></i>
 
     <span class="p-input-icon-right">
@@ -9,3 +10,13 @@
     <i class="pi pi-user" style="font-size: 30px"></i>
 </div>
 
+=======
+    <mat-form-field class="example-form-field">
+        <mat-label>Clearable input</mat-label>
+        <input matInput type="text" [(ngModel)]="value">
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+</div>
+>>>>>>> bd5143202a5ffcd7c61254031735fd876d8bbcc4

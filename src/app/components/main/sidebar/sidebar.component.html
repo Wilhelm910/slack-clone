@@ -20,7 +20,7 @@
             <h3>Channels</h3>
         </div>
         <div>
-            <app-channels (sender)="receiverChannelDialog($event)" *ngIf="channels"></app-channels>
+            <app-channels  *ngIf="channels"></app-channels>
         </div>
         <div (click)="toggleMessages()" class="headline">
             <span [className]="messages ? 'active pi pi-chevron-right' : 'inactive pi pi-chevron-right'"></span>

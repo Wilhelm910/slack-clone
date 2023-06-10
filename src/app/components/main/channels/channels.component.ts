@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Channel } from 'src/app/core/models/channel.class';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-channels',
@@ -11,12 +12,11 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore';
 })
 export class ChannelsComponent implements OnInit {
 
-  public createChannelDialog: boolean = false;
   channel = new Channel();
   allChannels = [];
 
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, public dialog: MatDialog) { }
 
 
   ngOnInit(): void {
@@ -31,19 +31,9 @@ export class ChannelsComponent implements OnInit {
 
   }
 
-  @Output() sender = new EventEmitter<boolean>();
-  showDialog() {
-    if (this.createChannelDialog == true) {
-      this.createChannelDialog = false;
-    } else {
-      this.createChannelDialog = true;
-    }
-    this.sender.emit(this.createChannelDialog)
-  }
 
-
-  showChannel() {
-    console.log(this.channel)
+  openDialog() {
+    this.dialog.open(CreateChannelComponent);
   }
 
 
