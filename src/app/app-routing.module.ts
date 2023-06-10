@@ -5,13 +5,11 @@ import { LoginDialogComponent } from './components/auth/login-dialog/login-dialo
 import { ForgotPasswordDialogComponent } from './components/auth/forgot-password-dialog/forgot-password-dialog.component';
 import { SignUpDialogComponent } from './components/auth/sign-up-dialog/sign-up-dialog.component';
 import { MainComponent } from './components/main/main/main.component';
-import { HeaderComponent } from './components/main/header/header.component';
-import { SidebarComponent } from './components/main/sidebar/sidebar.component';
 import { ChannelDetailComponent } from './components/main/channel-detail/channel-detail.component';
+import { ContentComponent } from './components/main/content/content.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
-  // { path: '', redirectTo: 'project/tasks', pathMatch: 'full'},
   {
     path: '', component: AuthComponent, children: [
       { path: 'auth/login', component: LoginDialogComponent },
@@ -19,8 +17,13 @@ const routes: Routes = [
       { path: 'auth/signup', component: SignUpDialogComponent }
     ]
   },
-  { path: 'main', component: MainComponent },
-  { path: 'channel/:id', component: ChannelDetailComponent },
+
+  {
+    path: '', component: ContentComponent, children: [
+      { path: 'main', component: MainComponent },
+      { path: 'channel/:id', component: ChannelDetailComponent },
+    ]
+  },
 
 ];
 
