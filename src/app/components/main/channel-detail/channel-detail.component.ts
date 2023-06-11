@@ -10,7 +10,7 @@ import { Channel } from 'src/app/core/models/channel.class';
 })
 export class ChannelDetailComponent implements OnInit {
 
-  channelId = '';
+  channelId: string = '';
   channelData: Channel = new Channel;
 
   constructor(private route:ActivatedRoute, private firestore: AngularFirestore){}
