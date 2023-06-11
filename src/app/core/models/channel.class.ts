@@ -7,6 +7,7 @@ export class Channel {
 
    constructor(obj?: any) {
     this.name = obj ? obj.name : '';
+    this.messages = obj ? obj.messages : '';
   }
 
 
