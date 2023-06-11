@@ -1,3 +1,10 @@
+
+<p [innerHTML]="this.editorContent"></p>
+
+<p [(ngModel)]="channelData.name">Name:{{ channelData.name }}</p>
+
+<p [(ngModel)]="channelData.messages">Messages:{{ channelData.messages }}</p>
+
 <form [formGroup]="editorForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="editor"><h3>Editor</h3></label>

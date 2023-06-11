@@ -16,7 +16,9 @@ export class TextEditorComponent implements OnInit {
 
   channel = new Channel();
   channelId = '';
+  channelData: Channel = new Channel;
 
+  editorContent: string;
   editorForm: FormGroup;
   editorStyle = {
     height: '200px',
@@ -37,7 +39,9 @@ export class TextEditorComponent implements OnInit {
       'editor': new FormControl(null)
     });
     this.getChannelId();
+    this.getChannelData();
   }
+
 
   getChannelId() {
     this.route.params.subscribe(params => {
@@ -46,15 +50,29 @@ export class TextEditorComponent implements OnInit {
   }
 
 
+  getChannelData() {
+    this.firestore
+      .collection('channels')
+      .doc(this.channelId)
+      .valueChanges()
+      .subscribe((data:any) => {
+        this.channelData = new Channel(data);
+        console.log(this.channelData)
+      })
+  }
+
 
   onSubmit() {
     console.log(this.editorForm.get('editor').value)
+    this.editorContent = this.editorForm.get('editor').value;
+    console.log(this.editorContent)
     this.firestore
       .collection('channels')
       .doc(this.channelId)
       .update(this.channel.toJson())
       .then((result: any) => {
         console.log(result)
+        console.log(this.channelData)
       })
   }
 
