@@ -23,7 +23,6 @@ const routes: Routes = [
       { path: 'channel/:id', component: ChannelDetailComponent },
     ]
   },
-
 ];
 
 @NgModule({

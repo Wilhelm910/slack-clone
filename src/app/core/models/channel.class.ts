@@ -2,7 +2,7 @@ export class Channel {
    // public cId: string;
     public name: string;
    // public users: string[] = [];
-   // public messages: string[] = [];
+   public messages: string[] = [];
 
 
    constructor(obj?: any) {
@@ -15,7 +15,7 @@ export class Channel {
         //    cId: this.cId,
             name: this.name,
           //  users: this.users,
-          //  messages: this.messages
+           messages: this.messages
         }
     }
 }
