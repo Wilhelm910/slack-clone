@@ -34,7 +34,8 @@ body {
     align-items: center;
     width: 350px;
 
-    h1, p {
+    h1,
+    p {
         text-align: center;
     }
 
@@ -43,5 +44,15 @@ body {
         padding-bottom: 30px;
     }
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+;

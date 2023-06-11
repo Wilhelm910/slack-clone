@@ -1,5 +1,28 @@
-<h2>Title of channel</h2>
+<div class="content-wrapper">
+    <!-- header -->
+    <h2>{{ channelData.name }}</h2>
+    <!-- content -->
+    <div class="channel-content">
+        <div class="message">
+            <div class="image">
+                <!-- <img src="" alt="profile-picture"> -->
+                <div><i class="pi pi-user" style="font-size: 2.5rem"></i></div>
+            </div>
+            <div class="message-content">
+                <h3>Ingo Hermsen</h3>
+                <p>Dies ist irgendeine sinnlose Nachricht. Sie soll möglichst lang sein, um zu sehen wie sie aussieht
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore voluptatum quidem ad unde
+                    doloremque eum veritatis qui, voluptas nesciunt? Eaque dolore perspiciatis quaerat! Pariatur quaerat
+                    eaque veniam, nemo saepe rem.
 
-<p>{{ channelData.name }}</p>
-
-<app-text-editor></app-text-editor>
+                </p>
+            </div>
+            <div class="message-icons">
+                <div><i class="pi pi-file-edit"></i></div>
+                <div><i class="pi pi-trash"></i></div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+        <app-text-editor></app-text-editor>
+</div>

@@ -1,6 +1,7 @@
 export class Message {
     mId: string;
     userId: string;
-    content: string;
+    messageText: string;
     creationTime: Date;
+    answers: any[];
 }
