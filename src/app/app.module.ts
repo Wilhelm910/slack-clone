@@ -66,6 +66,11 @@ import { CreateChannelComponent } from './components/main/create-channel/create-
 import { ChannelDetailComponent } from './components/main/channel-detail/channel-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+import { QuillModule } from 'ngx-quill';
+import { TextEditorComponent } from './components/main/text-editor/text-editor.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,9 +85,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ChannelsComponent,
     DirectMessagesComponent,
     CreateChannelComponent,
-    ChannelDetailComponent
+    ChannelDetailComponent,
+    TextEditorComponent
   ],
   imports: [
+    QuillModule.forRoot(),
+    ReactiveFormsModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,

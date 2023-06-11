@@ -1,0 +1,8 @@
+<form [formGroup]="editorForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="editor"><h3>Editor</h3></label>
+        <quill-editor [style]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)" formControlName="editor"></quill-editor>
+        <span *ngIf="editorForm.get('editor').value != null">{{ 100 - editorForm.get('editor').value.length }}</span>
+    </div>
+    <button mat-button>Submit</button>
+</form>
