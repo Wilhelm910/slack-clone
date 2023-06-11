@@ -16,9 +16,10 @@ const routes: Routes = [
       { path: 'auth/signup', component: SignUpDialogComponent }
     ]
   },
+  { path: 'main', component: MainComponent },
 
   {
-    path: 'main', component: MainComponent, children: [
+    path: '', component: MainComponent, children: [
       { path: 'channel/:id', component: ChannelDetailComponent },
     ]
   },
