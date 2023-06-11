@@ -10,11 +10,12 @@
 
 
 mat-sidenav-container {
+    min-width: 270px;
     height: calc(100vh - 64px);
 }
 
 mat-sidenav {
-    width: 300px;
+    width: 100%;
 }
 
 mat-toolbar, mat-sidenav-container, mat-sidenav {
@@ -26,6 +27,12 @@ button {
     &:hover {
         background-color: #6e1470;
     }
+}
+
+.content-wrapper {
+    display: flex;
+
+
 }
 
 
