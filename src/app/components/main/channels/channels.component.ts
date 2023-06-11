@@ -4,6 +4,7 @@ import { Channel } from 'src/app/core/models/channel.class';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-channels',
@@ -11,12 +12,17 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./channels.component.scss']
 })
 export class ChannelsComponent implements OnInit {
-
   channel = new Channel();
   allChannels = [];
 
 
-  constructor(private firestore: AngularFirestore, public dialog: MatDialog) { }
+  constructor(
+    private firestore: AngularFirestore,
+    public dialog: MatDialog,
+  
+    ) {
+
+    }
 
 
   ngOnInit(): void {

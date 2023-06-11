@@ -8,6 +8,6 @@ export class ChannelService {
   channelId: Subject<string> = new Subject;
 
   constructor() {
-    
+      
    }
 }

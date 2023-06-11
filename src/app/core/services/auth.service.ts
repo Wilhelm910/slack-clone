@@ -71,11 +71,16 @@ export class AuthService {
           formData.firstName,
           formData.lastName,
           formData.initials,
+          this.getDisplayName(formData.firstname, formData.lastName),
         );
       })
       .catch((error) => {
         window.alert(error.message);
       })
+  }
+
+  getDisplayName(firstString, secondString): string {
+       return firstString + '' + secondString;
   }
 
   // Sign in with Google
@@ -121,6 +126,7 @@ export class AuthService {
     firstName?: string,
     lastName?: string,
     initials?: string,
+    displayName?: string
 
   ) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
@@ -136,7 +142,7 @@ export class AuthService {
         lastName: lastName || userDocData.lastName,
         initials: initials || userDocData.initials,
         email: user.email,
-        displayName: user.displayName,
+        displayName: displayName || user.displayName,
         emailVerified: user.emailVerified,
       };      
 
