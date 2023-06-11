@@ -2,9 +2,6 @@
     display: flex;
 }
 
-.mat-drawer-container {
-    height: 100vh;
-}
 
 .header-content-container {
     display: flex;
@@ -13,9 +10,21 @@
 
 
 mat-sidenav-container {
-    height: calc(100vh - 100px);
+    height: calc(100vh - 64px);
 }
 
 mat-sidenav {
     width: 300px;
 }
+
+mat-toolbar, mat-sidenav-container, mat-sidenav {
+    background-color: #3F0E40;
+    color: white;
+}
+
+button {
+    &:hover {
+        background-color: #6e1470;
+    }
+}
+
