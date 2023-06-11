@@ -1,9 +1,10 @@
 <div class="channel-container">
-    <div *ngFor="let channel of allChannels; let i = index" routerLink="{{ '/channel/' + channel.ID }}">
+    <div *ngFor="let channel of allChannels; let i = index" routerLink="{{ '/channel/' + channel.ID }}" class="channel">
+        <mat-icon>tag</mat-icon>
         <p id="{{ channel.ID }}">{{ channel.name }}</p>
     </div>
 </div>
-
-<button mat-button (click)="openDialog()">Create new Channel</button>
-
-
+<div class="create-channel-container">
+    <mat-icon>add</mat-icon>
+    <button mat-button (click)="openDialog()">Create new Channel</button>
+</div>

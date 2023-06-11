@@ -11,10 +11,11 @@
     flex-direction: column;
 }
 
-app-header {
-    border: 2px solid white;
+
+mat-sidenav-container {
+    height: calc(100vh - 100px);
 }
 
-app-content {
-    border: 2px solid white;
+mat-sidenav {
+    width: 300px;
 }

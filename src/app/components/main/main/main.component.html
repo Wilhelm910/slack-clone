@@ -1,19 +1,33 @@
+<app-header>
+
+</app-header>
+<button type="button" mat-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+</button>
 <div class="main-container">
     <div>
         <mat-drawer-container class="example-container" autosize>
             <mat-drawer #drawer class="example-sidenav" mode="side">
                 <app-sidebar></app-sidebar>
             </mat-drawer>
-            <div class="example-sidenav-content">
-                <button type="button" mat-button (click)="drawer.toggle()">
-                    <mat-icon>menu</mat-icon>
-                </button>
-            </div>
-
         </mat-drawer-container>
     </div>
     <div class="header-content-container">
-        <app-header></app-header>
         <app-content></app-content>
     </div>
 </div>
+
+<mat-toolbar>
+    <mat-toolbar-row>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav [(opened)]="opened" mode="side">
+        <app-sidebar></app-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        Content
+        <button mat-button (click)="opened=!opened">Toggle</button>
+    </mat-sidenav-content>
+</mat-sidenav-container>

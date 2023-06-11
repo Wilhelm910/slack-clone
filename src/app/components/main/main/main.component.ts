@@ -12,6 +12,7 @@ export class MainComponent implements OnInit {
   public createChannelDialog: boolean;
   public sidebar: boolean = false;
 
+  opened:boolean = true;
 
   ngOnInit(): void {
 
