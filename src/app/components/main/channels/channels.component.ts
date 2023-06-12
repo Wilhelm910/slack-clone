@@ -5,6 +5,7 @@ import { CreateChannelComponent } from '../create-channel/create-channel.compone
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ChannelService } from 'src/app/core/services/channel.service';
 
 @Component({
   selector: 'app-channels',
@@ -19,22 +20,20 @@ export class ChannelsComponent implements OnInit {
   constructor(
     private firestore: AngularFirestore,
     public dialog: MatDialog,
-  
-    ) {
+    private channelService: ChannelService,
+  ) {
 
-    }
+  }
 
 
   ngOnInit(): void {
     this.firestore
       .collection('channels')
-      .valueChanges({idField: 'ID'})
+      .valueChanges({ idField: 'ID' })
       .subscribe((changes: any) => {
         this.allChannels = changes;
         console.log(this.allChannels);
       })
-     
-
   }
 
 

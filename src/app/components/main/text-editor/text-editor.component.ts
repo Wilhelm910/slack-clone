@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { update } from '@angular/fire/database';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { arrayUnion } from '@angular/fire/firestore';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Channel } from 'src/app/core/models/channel.class';
 import { Message } from 'src/app/core/models/message.class';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ChannelService } from 'src/app/core/services/channel.service';
 
 @Component({
   selector: 'app-text-editor',
@@ -19,26 +20,21 @@ export class TextEditorComponent implements OnInit {
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
     private authService: AuthService,
-    ) { }
+    public channelService: ChannelService,
+  ) { }
 
 
- ngOnInit(): void {
+  ngOnInit(): void {
     this.editorForm = new FormGroup({
       'editor': new FormControl(null)
     });
     this.getChannelId();
     this.getChannelData();
-    this.userDataSubscription = this.authService.userData.subscribe((data) => {
-      this.userId = data.uid;
-      
-    })
+    this.userId = this.authService.userData.getValue().uid;
   }
 
-
-
   userId: string;
-  channel = new Channel();
-  channelId = '';
+  channelId: string = '';
   channelData: Channel = new Channel;
 
   editorContent: string;
@@ -57,9 +53,10 @@ export class TextEditorComponent implements OnInit {
     ]
   }
 
-   getChannelId() {
+  getChannelId() {
     this.route.params.subscribe(params => {
       this.channelId = params['id'];
+      this.channelService.channelId.next(this.channelId);
     })
   }
 
@@ -69,21 +66,9 @@ export class TextEditorComponent implements OnInit {
       .collection('channels')
       .doc(this.channelId)
       .valueChanges()
-      .subscribe((data:any) => {
+      .subscribe((data: any) => {
         this.channelData = new Channel(data);
-        console.log(this.channelData)
       })
-  }
-
-
-
-  onSubmit() {
-
-    this.createNewMessage()
-
-    // let message = new Message {
-        
-    // }
   }
 
   maxLength(event) {
@@ -92,25 +77,26 @@ export class TextEditorComponent implements OnInit {
     }
   }
 
+  onSubmit() {
+    this.createNewMessage();
+  }
+
   createNewMessage() {
-    console.log('user iddd', this.userId);
-    
     let message = new Message(
       {
-        mId: '',
-        userId: this.userId, 
+        mId: 'in progress',
+        userId: this.userId,
         messageText: this.editorForm.get('editor').value,
         creationTime: new Date(),
         answers: [],
       }
     )
-    console.log(message);
-    this.updateMessagesOfChannel(message)
+    this.updateMessagesOfChannel(message)    
     return message;
   }
 
   updateMessagesOfChannel(message) {
 
+    this.channelService.collectionRef.doc(this.channelId).update({ messages: arrayUnion(message) })
   }
-
 }
