@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import * as auth from 'firebase/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { User } from '../models/user.class';
 
 
@@ -11,7 +11,7 @@ import { User } from '../models/user.class';
   providedIn: 'root'
 })
 export class AuthService {
-  userData: BehaviorSubject<any> = new BehaviorSubject('');
+  userData: any;
   userSpecValues: any;
   noMatchingData: Subject<boolean> = new Subject;
   verificationMailSent: Subject<boolean> = new Subject;
@@ -126,7 +126,7 @@ export class AuthService {
     firstName?: string,
     lastName?: string,
     initials?: string,
-    displayName?: string
+    displayName?: string,
 
   ) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
@@ -146,7 +146,7 @@ export class AuthService {
         emailVerified: user.emailVerified,
       };      
 
-      this.userData.next(userData);
+      this.userData = userData;
 
       return userRef.set(userData, {
         merge: true,

@@ -5,7 +5,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Channel } from 'src/app/core/models/channel.class';
 import { Message } from 'src/app/core/models/message.class';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { ChannelService } from 'src/app/core/services/channel.service';
 
 @Component({
@@ -19,9 +18,10 @@ export class TextEditorComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
-    private authService: AuthService,
     public channelService: ChannelService,
-  ) { }
+  ) {
+    this.userId = JSON.parse(localStorage.getItem('user')).uid
+  }
 
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class TextEditorComponent implements OnInit {
     });
     this.getChannelId();
     this.getChannelData();
-    this.userId = this.authService.userData.getValue().uid;
+
   }
 
   userId: string;

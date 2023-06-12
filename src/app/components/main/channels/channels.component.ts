@@ -22,9 +22,7 @@ export class ChannelsComponent implements OnInit {
     public dialog: MatDialog,
     private channelService: ChannelService,
   ) {
-
   }
-
 
   ngOnInit(): void {
     this.firestore
@@ -35,7 +33,6 @@ export class ChannelsComponent implements OnInit {
         console.log(this.allChannels);
       })
   }
-
 
   openDialog() {
     this.dialog.open(CreateChannelComponent);
