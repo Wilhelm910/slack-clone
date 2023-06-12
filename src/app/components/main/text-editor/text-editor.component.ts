@@ -38,8 +38,10 @@ export class TextEditorComponent implements OnInit {
     this.editorForm = new FormGroup({
       'editor': new FormControl(null)
     });
+    console.log(this.channel)
     this.getChannelId();
     this.getChannelData();
+    console.log(this.channel)
   }
 
 
