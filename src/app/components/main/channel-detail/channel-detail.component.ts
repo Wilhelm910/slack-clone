@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Channel } from 'src/app/core/models/channel.class';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ChannelService } from 'src/app/core/services/channel.service';
 
 @Component({
   selector: 'app-channel-detail',
@@ -18,6 +19,7 @@ export class ChannelDetailComponent implements OnInit {
     private route:ActivatedRoute, 
     private firestore: AngularFirestore,
     private authService: AuthService,
+    private channelService: ChannelService,
     ){}
 
   ngOnInit(): void {
@@ -28,12 +30,9 @@ export class ChannelDetailComponent implements OnInit {
 
       this.authService.userData.subscribe((data) => {
         console.log(data);
-        
       })
-        
     })
   }
-
 
   getChannel() {
     this.firestore

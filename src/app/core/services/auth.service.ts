@@ -148,7 +148,6 @@ export class AuthService {
 
       this.userData.next(userData);
 
-
       return userRef.set(userData, {
         merge: true,
       });

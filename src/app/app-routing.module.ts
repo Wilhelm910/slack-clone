@@ -8,7 +8,7 @@ import { MainComponent } from './components/main/main/main.component';
 import { ChannelDetailComponent } from './components/main/channel-detail/channel-detail.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
   {
     path: '', component: AuthComponent, children: [
       { path: 'auth/login', component: LoginDialogComponent },
