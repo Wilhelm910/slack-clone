@@ -78,7 +78,14 @@ export class TextEditorComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('userID on submit:', this.userId);
+    
     this.createNewMessage();
+    console.log('was here');
+    this.editorForm.reset();
+    console.log('userID after reset', this.userId);
+    
+    
   }
 
   createNewMessage() {
@@ -91,12 +98,14 @@ export class TextEditorComponent implements OnInit {
         answers: [],
       }
     )
-    this.updateMessagesOfChannel(message)    
+    console.log(message.toJSON());
+    
+    this.updateMessagesOfChannel(message.toJSON())
+    
     return message;
   }
 
   updateMessagesOfChannel(message) {
-
     this.channelService.collectionRef.doc(this.channelId).update({ messages: arrayUnion(message) })
   }
 }

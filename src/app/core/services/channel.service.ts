@@ -8,12 +8,12 @@ import { Subject } from 'rxjs';
 export class ChannelService implements OnInit {
   collectionRef = this.afs.collection('channels');
 
-  messagesAsJson: any;
   channelId: Subject<string> = new Subject;
 
   constructor(
     public afs: AngularFirestore,
   ) {
+
     
   }
 
