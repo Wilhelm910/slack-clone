@@ -10,7 +10,11 @@
 
 
 mat-sidenav-container {
-    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 100px
 }
 
 mat-sidenav {
@@ -18,7 +22,9 @@ mat-sidenav {
     height: 100%;
 }
 
-mat-toolbar, mat-sidenav-container, mat-sidenav {
+mat-toolbar,
+mat-sidenav-container,
+mat-sidenav {
     background-color: #3F0E40;
     color: white;
 }
@@ -38,5 +44,36 @@ button {
 
 }
 
+.inactive {
+    animation: rotateUpwards90 0.5s ease-in-out forwards;
+}
 
 
+@keyframes rotateUpwards90 {
+    0% {
+        transform: rotate(0deg);
+        transform-origin: center center;
+    }
+
+    100% {
+        transform: rotate(180deg);
+        transform-origin: center center;
+    }
+}
+
+.active {
+    animation: rotateDownwards90 0.5s ease-in-out forwards;
+}
+
+
+@keyframes rotateDownwards90 {
+    0% {
+        transform: rotate(-180deg);
+        transform-origin: center center;
+    }
+
+    100% {
+        transform: rotate(0deg);
+        transform-origin: center center;
+    }
+}
