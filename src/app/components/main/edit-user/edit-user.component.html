@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Settings</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="name" placeholder="Channel name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="email" placeholder="Channel name">
+    </mat-form-field>
+    <div>
+    <label for="fileDialog" class="upload-file">
+        <mat-icon>cloud_upload</mat-icon>
+        Upload image</label>
+    <input type="file" id="fileDialog" accept=".png,.jpg,.jpeg,.svg" (change)="onFileSelected($event)">
+</div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancle</button>
+    <button mat-button mat-dialog-close (click)="editUser()" cdkFocusInitial>Save</button>
+</div>

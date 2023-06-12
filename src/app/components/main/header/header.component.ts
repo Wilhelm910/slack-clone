@@ -1,11 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { InputTextModule } from 'primeng/inputtext';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {NgIf} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { EditUserComponent } from '../edit-user/edit-user.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-header',
@@ -13,8 +9,19 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   styleUrls: ['./header.component.scss']
 
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
-value
+  ngOnInit(): void {
+      
+  }
+
+  constructor(
+    private firestore: AngularFirestore,
+    public dialog: MatDialog,
+  ) { }
+
+  openDialog() {
+    this.dialog.open(EditUserComponent);
+  }
 
 }

@@ -70,6 +70,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuillModule } from 'ngx-quill';
 import { TextEditorComponent } from './components/main/text-editor/text-editor.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditUserComponent } from './components/main/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DirectMessagesComponent,
     CreateChannelComponent,
     ChannelDetailComponent,
-    TextEditorComponent
+    TextEditorComponent,
+    EditUserComponent
   ],
   imports: [
     QuillModule.forRoot(),
