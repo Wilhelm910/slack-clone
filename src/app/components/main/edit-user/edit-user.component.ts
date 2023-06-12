@@ -7,4 +7,18 @@ import { Component } from '@angular/core';
 })
 export class EditUserComponent {
 
+  name;
+  email;
+
+  selectedFile = null;
+
+  onFileSelected(event) {
+    console.log(event)
+    this.selectedFile = event.target.files[0]
+  }
+
+  editUser() {
+
+  }
+
 }
