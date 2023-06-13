@@ -17,8 +17,8 @@ export class EditUserComponent {
     this.selectedFile = event.target.files[0]
   }
 
-  editUser() {
-
+  editUser(userData) {
+    console.log(userData.value)
   }
 
 }
