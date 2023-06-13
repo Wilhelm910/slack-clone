@@ -1,21 +1,33 @@
 <h1 mat-dialog-title>Settings</h1>
-<div mat-dialog-content>
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="name" placeholder="Channel name">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="email" placeholder="Channel name">
-    </mat-form-field>
-    <div>
-    <label for="fileDialog" class="upload-file">
-        <mat-icon>cloud_upload</mat-icon>
-        Upload image</label>
-    <input type="file" id="fileDialog" accept=".png,.jpg,.jpeg,.svg" (change)="onFileSelected($event)">
+
+<div mat-dialog-content class="content">
+
+    <div class="input-container">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="email">
+        </mat-form-field>
+    </div>
+
+    <div class="upload-container">
+        <div class="img-container">
+            <img src="./assets/gender.png">
+        </div>
+        <div class="upload-btn">
+            <label for="fileDialog" class="upload-file">
+                <mat-icon>cloud_upload</mat-icon>
+                <p>Upload image</p></label>
+            <input type="file" id="fileDialog" accept=".png,.jpg,.jpeg,.svg" (change)="onFileSelected($event)">
+        </div>
+    </div>
+
 </div>
-</div>
-<div mat-dialog-actions>
+
+<div mat-dialog-actions class="btn-container">
     <button mat-button mat-dialog-close>Cancle</button>
     <button mat-button mat-dialog-close (click)="editUser()" cdkFocusInitial>Save</button>
 </div>

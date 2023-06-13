@@ -1,0 +1,67 @@
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+
+    >div {
+        margin: 8px;
+    }
+}
+
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+img {
+    width: 80px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+p {
+    margin: 0 !important;
+}
+
+.upload-btn {
+    padding: 8px;
+    border-radius: 8px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba($color: #000000, $alpha: 0.1);
+    }
+
+    >label {
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        >mat-icon {
+            margin-right: 8px;
+        }
+    }
+}
+
+.img-container {
+    margin-bottom: 8px;
+}
