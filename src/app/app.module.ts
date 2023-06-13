@@ -8,6 +8,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideStorage, getStorage } from '@angular/fire/storage'
 
 //UI Library
 import { MenuModule } from 'primeng/menu';
@@ -137,6 +138,7 @@ import { EditUserComponent } from './components/main/edit-user/edit-user.compone
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideDatabase(() => getDatabase()),
+    provideStorage(() => getStorage()),
     BrowserAnimationsModule,
   ],
   providers: [AuthService],
