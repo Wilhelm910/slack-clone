@@ -26,7 +26,6 @@ export class ChannelDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.channelId = params['id'];
-      console.log(this.channelId)
       this.getChannel();
     })
   }
@@ -39,13 +38,11 @@ export class ChannelDetailComponent implements OnInit {
       .subscribe((data: any) => {
         this.channelData = new Channel(data);
         this.messages = this.channelData.messages;
-        console.log('MESSAGES', this.messages);
       })
   }
 
   changeDateFormat(timestamp: Timestamp) {
     let asDate = timestamp.toDate()
-    console.log('asDate', asDate);
 
     return this.datePipe.transform(asDate, 'yyyy-MM-dd | HH:mm U\'h\'r');
   };

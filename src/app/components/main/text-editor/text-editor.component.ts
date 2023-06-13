@@ -83,20 +83,23 @@ export class TextEditorComponent implements OnInit {
   }
 
   createNewMessage() {
-    let userId = JSON.parse(localStorage.getItem('user')).uid;
+    let user = JSON.parse(localStorage.getItem('user'));
+    let concatUserName = user.firstName + ' ' + user.lastName;
+    let messageId = this.channelData.nextMessageId
    
     let message = new Message(
       {
-        mId: 'in progress',
-        userId: userId,
-        userName: 'USER NAME',
+        mId: messageId,
+        userId: user.uid,
+        userName: concatUserName,
         messageText: this.editorForm.get('editor').value,
         creationTime: new Date(),
         answers: [],
       }
     )
-    console.log(message.toJSON());
-    this.subscribeUserName(message.userId);
+    messageId = messageId++;
+    console.log('new message id', messageId);
+    
     this.updateMessagesOfChannel(message.toJSON())
 
     return message;
@@ -107,17 +110,4 @@ export class TextEditorComponent implements OnInit {
       .update({ messages: arrayUnion(message) })
   }
 
-  subscribeUserName(userId: string) {
-    this.firestore
-      .collection('users')
-      .doc(userId)
-      .get()
-      .subscribe((user) => {
-        let userData = user.data()
-        let userName = userData;
-        console.log('userData from message', user.data());
-
-      })
-
-  }
 }

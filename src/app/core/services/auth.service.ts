@@ -147,6 +147,7 @@ export class AuthService {
       };      
 
       this.userData = userData;
+      localStorage.setItem('user', JSON.stringify(userData))
 
       return userRef.set(userData, {
         merge: true,
