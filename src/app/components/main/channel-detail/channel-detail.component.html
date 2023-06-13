@@ -3,20 +3,16 @@
     <h2>{{ channelData.name }}</h2>
     <!-- content -->
     <div class="channel-content">
-        <div class="message">
+        <div *ngFor="let message of messages, index as i" class="message">
             <div class="image">
                 <!-- <img src="" alt="profile-picture"> -->
                 <div><i class="pi pi-user" style="font-size: 2.5rem"></i></div>
             </div>
-            <div class="message-content">
+            <div class="message-content" >
                 <div class="head">
-                    <h3>Max Mustermann</h3><span>creation date and time</span>
+                    <h3>{{ message.userName }}</h3><span>{{ changeDateFormat(message.creationTime) }}</span>
                 </div>
-                <p>Dies ist irgendeine sinnlose Nachricht. Sie soll möglichst lang sein, um zu sehen wie sie aussieht
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore voluptatum quidem ad unde
-                    doloremque eum veritatis qui, voluptas nesciunt? Eaque dolore perspiciatis quaerat! Pariatur quaerat
-                    eaque veniam, nemo saepe rem.
-                </p>
+                <p [innerHTML]="message.messageText"></p>
             </div>
             <div class="message-icons">
                 <div><i class="pi pi-file-edit"></i></div>

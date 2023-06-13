@@ -29,8 +29,9 @@ export class ChannelsComponent implements OnInit {
       .collection('channels')
       .valueChanges({ idField: 'ID' })
       .subscribe((changes: any) => {
+        console.log('changes', changes);
         this.allChannels = changes;
-        console.log(this.allChannels);
+        console.log('all Channels', this.allChannels);
       })
   }
 

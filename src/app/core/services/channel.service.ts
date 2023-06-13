@@ -14,7 +14,6 @@ export class ChannelService implements OnInit {
     public afs: AngularFirestore,
   ) {
 
-    
   }
 
   ngOnInit(): void {
