@@ -6,8 +6,8 @@
         <div *ngFor="let message of messages, index as i" class="message">
             <div (mouseenter)="activeMessage = message.mId" class="hover-wrapper">
                 <div *ngIf="activeMessage == message.mId" class="options-overlay" id="overlay-{{message.mId}}">
-                    <i (click)="deleteMessage(message.mId)" class="pi pi-file-edit"></i>
-                    <i class="pi pi-trash"></i>
+                    <i class="pi pi-comment"></i>
+                    <i (click)="deleteMessage(message.mId)" class="pi pi-trash"></i>
                 </div>
                 <div class="image">
                     <div><i class="pi pi-user" style="font-size: 2.5rem"></i></div>

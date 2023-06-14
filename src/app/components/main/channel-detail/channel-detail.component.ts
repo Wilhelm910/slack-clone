@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Timestamp } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Channel } from 'src/app/core/models/channel.class';
@@ -14,6 +14,7 @@ import { Channel } from 'src/app/core/models/channel.class';
 export class ChannelDetailComponent implements OnInit {
   channelId: string = '';
   channelData: Channel = new Channel;
+  messagesCollection: AngularFirestoreCollection;
   messages: Array<any> = [];
   activeMessage: string;
 
@@ -38,17 +39,23 @@ export class ChannelDetailComponent implements OnInit {
       .valueChanges()
       .subscribe((channelData: any) => {
         this.channelData = new Channel(channelData);
-        console.log('channelData', channelData);
+        this.setMessagesCollection(this.channelId)
         this.getMessages();
+
 
       })
   }
 
-  getMessages() {
-    this.firestore
+  setMessagesCollection(channelId) {
+    this.messagesCollection = this.firestore
       .collection('channels')
-      .doc(this.channelId)
-      .collection('messages')
+      .doc(channelId)
+      .collection('messages');
+  }
+
+  getMessages() {
+
+    this.messagesCollection
       .valueChanges()
       .subscribe((messagesData: any) => {
         this.messages = messagesData;
@@ -57,19 +64,17 @@ export class ChannelDetailComponent implements OnInit {
   }
 
   changeDateFormat(timestamp: Timestamp) {
-    console.log('timestamp', timestamp);
-
     let asDate = timestamp.toDate()
     return this.datePipe.transform(asDate, 'yyyy-MM-dd | HH:mm') + ' Uhr';
   };
 
   mouseEnter() {
     console.log('mouse entered');
-    
+
   }
 
   deleteMessage(messageId) {
-    
+    this.messagesCollection.doc(messageId).delete()
   }
 
 }
