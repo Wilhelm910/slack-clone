@@ -67,6 +67,7 @@ import { DirectMessagesComponent } from './components/main/direct-messages/direc
 import { CreateChannelComponent } from './components/main/create-channel/create-channel.component';
 import { ChannelDetailComponent } from './components/main/channel-detail/channel-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ThreadComponent } from './components/main/thread/thread.component';
 
 
 import { QuillModule } from 'ngx-quill';
@@ -90,7 +91,8 @@ import { EditUserComponent } from './components/main/edit-user/edit-user.compone
     CreateChannelComponent,
     ChannelDetailComponent,
     TextEditorComponent,
-    EditUserComponent
+    EditUserComponent,
+    ThreadComponent
   ],
   imports: [
     QuillModule.forRoot(),
