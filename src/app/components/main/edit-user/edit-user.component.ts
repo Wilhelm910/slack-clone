@@ -1,20 +1,27 @@
-import { Component } from '@angular/core';
-import { Storage, ref, getDownloadURL, uploadBytesResumable } from '@angular/fire/storage'
+import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Storage, ref, getDownloadURL, uploadBytesResumable } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
-export class EditUserComponent {
+export class EditUserComponent implements OnInit {
 
-  constructor(public storage: Storage) { }
+  constructor(/*public storage: Storage,*/ private storage: AngularFireStorage) { }
 
   name;
   email;
   userData: string[] = [];
+  imgURL;
 
   selectedFile: any = {};
+
+  ngOnInit(): void {
+    
+  }
 
   onFileSelected(event) {
     console.log(event.target.files[0])
@@ -26,10 +33,23 @@ export class EditUserComponent {
     //this.userData.push(this.selectedFile)
     console.log(this.userData)
     console.log(this.selectedFile)
-    this.addData()
+   // this.addData()
+   this.addImg(this.userData)
   }
 
+  addImg(userData:any) {
+    const filePath = `${userData.name}/${this.selectedFile.name.split('.').slice(0,-1).join('.')}`;
+    const fileRef = this.storage.ref(filePath);
+    this.storage.upload(filePath,this.selectedFile).snapshotChanges().pipe(
+    finalize(() =>{
+      fileRef.getDownloadURL().subscribe((url) => {
+        this.imgURL = url;
+        console.log(this.imgURL)
+      })
+    })).subscribe();
+  }
 
+/*
   addData() {
     const storageRef = ref(this.storage, `user_name/${this.selectedFile.name}`);
     const uploadTask = uploadBytesResumable(storageRef, this.selectedFile);
@@ -44,7 +64,7 @@ export class EditUserComponent {
     }
     )
   }
-
+*/
 }
 
 
