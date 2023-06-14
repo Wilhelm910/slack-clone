@@ -1,7 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Timestamp } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Channel } from 'src/app/core/models/channel.class';
 import { ChannelService } from 'src/app/core/services/channel.service';
@@ -17,12 +16,10 @@ export class ChannelDetailComponent implements OnInit {
   channelData: Channel = new Channel;
   messagesCollection: AngularFirestoreCollection;
   messages: Array<any> = [];
-  activeMessage: string;
 
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
-    private datePipe: DatePipe,
     private channelService: ChannelService,
 
   ) { }
@@ -31,6 +28,8 @@ export class ChannelDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.channelId = params['id'];
       this.getChannel();
+      this.channelService.channelId.next(this.channelId);
+
     })
   }
 
@@ -43,8 +42,6 @@ export class ChannelDetailComponent implements OnInit {
         this.channelData = new Channel(channelData);
         this.setMessagesCollection(this.channelId)
         this.getMessages();
-
-
       })
   }
 
@@ -61,25 +58,19 @@ export class ChannelDetailComponent implements OnInit {
       .valueChanges()
       .subscribe((messagesData: any) => {
         this.messages = messagesData;
+        console.log('this messages', this.messages);
+        
+        this.channelService.messages.next(messagesData);
       })
   }
 
-  changeDateFormat(timestamp: Timestamp) {
-    let asDate = timestamp.toDate()
-    return this.datePipe.transform(asDate, 'yyyy-MM-dd | HH:mm') + ' Uhr';
-  };
-
-  mouseEnter() {
+    mouseEnter() {
     console.log('mouse entered');
 
   }
 
-  deleteMessage(messageId) {
-    this.messagesCollection.doc(messageId).delete()
-  }
-
-  openThread(messageId) {
-    this.channelService.channelId.next(this.channelId)
+   openThread(messageId) {
+    
   }
 
 }
