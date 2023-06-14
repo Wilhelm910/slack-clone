@@ -6,18 +6,18 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ChannelService implements OnInit {
-  collectionRef = this.afs.collection('channels');
+  collectionRef = this.firestore.collection('channels');
 
   channelId: Subject<string> = new Subject;
 
   constructor(
-    public afs: AngularFirestore,
+    public firestore: AngularFirestore,
   ) {
 
   }
 
   ngOnInit(): void {
- 
+    
   }
 
 }

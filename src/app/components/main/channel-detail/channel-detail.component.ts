@@ -4,6 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { Timestamp } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Channel } from 'src/app/core/models/channel.class';
+import { ChannelService } from 'src/app/core/services/channel.service';
 
 @Component({
   selector: 'app-channel-detail',
@@ -22,6 +23,7 @@ export class ChannelDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
     private datePipe: DatePipe,
+    private channelService: ChannelService,
 
   ) { }
 
@@ -77,7 +79,7 @@ export class ChannelDetailComponent implements OnInit {
   }
 
   openThread(messageId) {
-
+    this.channelService.channelId.next(this.channelId)
   }
 
 }
