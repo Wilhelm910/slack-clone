@@ -1,29 +1,29 @@
 <h1 mat-dialog-title>Settings</h1>
-<form #userData="ngForm" (ngSubmit)="editUser(userData)">
+<form [formGroup]="formTemplate" (submit)="submit(formTemplate.value)">
     <div mat-dialog-content class="content">
 
         <div class="input-container">
             <mat-form-field>
-                <mat-label for="name">Name</mat-label>
-                <input matInput name="name" #name="ngModel" ngModel>
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" [(ngModel)]="user.firstname">
+                <div *ngIf="isSubmitted">This field is required</div>
             </mat-form-field>
             <mat-form-field>
-                <mat-label for="email">Email</mat-label>
-                <input matInput name="email" #email="ngModel" ngModel>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" [(ngModel)]="user.email"> 
             </mat-form-field>
         </div>
 
         <div class="upload-container">
             <div class="img-container">
-                <img src="./assets/gender.png">
-                <img src="{{ this.selectedFile }}">
+                <img [src]="imgSrc" (click)="fileUploader.click()">
             </div>
             <div class="upload-btn">
                 <label for="fileDialog" class="upload-file">
                     <mat-icon>cloud_upload</mat-icon>
                     <p>Upload image</p>
                 </label>
-                <input type="file" id="fileDialog" accept="image/*" (change)="onFileSelected($event)">
+                <input type="file" id="fileDialog" accept="image/*" #fileUploader formControlName="imageUrl" (change)="onFileSelected($event)">
             </div>
         </div>
 
