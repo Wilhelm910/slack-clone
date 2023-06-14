@@ -23,7 +23,7 @@
                     <mat-icon>cloud_upload</mat-icon>
                     <p>Upload image</p>
                 </label>
-                <input type="file" id="fileDialog" accept=".png,.jpg,.jpeg,.svg" (change)="onFileSelected($event)">
+                <input type="file" id="fileDialog" accept="image/*" (change)="onFileSelected($event)">
             </div>
         </div>
 
