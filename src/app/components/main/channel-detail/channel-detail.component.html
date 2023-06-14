@@ -10,7 +10,7 @@
             </div>
             <div class="message-content">
                 <div class="head">
-                    <h3>{{ message.userName }}</h3><span></span>
+                    <h3>{{ message.userName }}</h3><span>{{ changeDateFormat(message.creationTime)}}</span>
                 </div>
                 <p [innerHTML]="message.messageText"></p>
             </div>

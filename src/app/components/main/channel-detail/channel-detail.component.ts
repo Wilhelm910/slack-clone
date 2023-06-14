@@ -38,10 +38,8 @@ export class ChannelDetailComponent implements OnInit {
       .subscribe((channelData: any) => {
         this.channelData = new Channel(channelData);
         console.log('channelData', channelData);
-        
-        this.getMessages()
-        console.log('messages', this.messages);
-        
+        this.getMessages();
+
       })
   }
 
@@ -52,15 +50,16 @@ export class ChannelDetailComponent implements OnInit {
       .collection('messages')
       .valueChanges()
       .subscribe((messagesData: any) => {
-        this.messages = [messagesData];
+        this.messages = messagesData;
+        console.log('messages', this.messages);
       })
   }
 
   changeDateFormat(timestamp: Timestamp) {
     console.log('timestamp', timestamp);
-    
+
     let asDate = timestamp.toDate()
-    return this.datePipe.transform(asDate, 'yyyy-MM-dd | HH:mm U\'h\'r');
+    return this.datePipe.transform(asDate, 'yyyy-MM-dd | HH:mm') + ' Uhr';
   };
 
 }
