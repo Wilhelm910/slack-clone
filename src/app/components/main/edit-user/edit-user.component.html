@@ -5,12 +5,12 @@
         <div class="input-container">
             <mat-form-field>
                 <mat-label>Name</mat-label>
-                <input matInput formControlName="name">
+                <input matInput formControlName="name" [(ngModel)]="user.firstname">
                 <div *ngIf="isSubmitted">This field is required</div>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input matInput formControlName="email">
+                <input matInput formControlName="email" [(ngModel)]="user.email"> 
             </mat-form-field>
         </div>
 

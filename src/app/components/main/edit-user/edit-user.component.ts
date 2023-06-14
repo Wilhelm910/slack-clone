@@ -12,6 +12,8 @@ import { ImagesService } from 'src/app/core/services/images.service';
 })
 export class EditUserComponent implements OnInit {
 
+  user;
+
   imgSrc: string = './assets/gender.png'
   selectedImage: any = null;
   isSubmitted: boolean = false;
@@ -22,10 +24,10 @@ export class EditUserComponent implements OnInit {
     imageUrl: new FormControl(''),
   })
 
-  constructor(/*public storage: Storage,*/ private storage: AngularFireStorage, private service: ImagesService) { }
+  constructor( private storage: AngularFireStorage, private service: ImagesService) { }
 
   ngOnInit(): void {
-
+    this.getInfoFromLocalStorage()
   }
 
   onFileSelected(event: any) {
@@ -38,11 +40,9 @@ export class EditUserComponent implements OnInit {
       this.imgSrc = './assets/gender.png';
       this.selectedImage = null;
     }
-    //console.log(event.target.files[0])
-    //this.selectedFile = event.target.files[0]
   }
 
-  submit(formValue) {
+  submit(formValue:any) {
     this.isSubmitted = true;
     if (this.formTemplate.valid) {
       const filePath = `${formValue.name}/${this.selectedImage.name.split('').slice(0, -1).join('.')}`;
@@ -51,59 +51,19 @@ export class EditUserComponent implements OnInit {
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             formValue['imageUrl'] = url;
+            console.log(formValue);
             this.service.insertImageDetails(formValue);
           })
         })).subscribe();
     }
   }
 
+  getInfoFromLocalStorage() {
+    this.user = JSON.parse(localStorage.getItem('user'))
+    console.log(this.user)
+  }
 
-  /*
-    name;
-    email;
-    userData: string[] = [];
-    imgURL;
-  
-    selectedFile: any = {};
-  */
-  /*
-    editUser(userData) {
-      this.userData = userData.value
-      //this.userData.push(this.selectedFile)
-      console.log(this.userData)
-      console.log(this.selectedFile)
-     // this.addData()
-     this.addImg(this.userData)
-    }
-  
-    addImg(userData:any) {
-      const filePath = `${userData.name}/${this.selectedFile.name.split('.').slice(0,-1).join('.')}`;
-      const fileRef = this.storage.ref(filePath);
-      this.storage.upload(filePath,this.selectedFile).snapshotChanges().pipe(
-      finalize(() =>{
-        fileRef.getDownloadURL().subscribe((url) => {
-          this.imgURL = url;
-          console.log(this.imgURL)
-        })
-      })).subscribe();
-    }
-  */
-  /*
-    addData() {
-      const storageRef = ref(this.storage, `user_name/${this.selectedFile.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, this.selectedFile);
-      uploadTask.on('state_changed', (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes);
-        console.log('Upload is ' + progress + '%done')
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL);
-        })
-      }
-      )
-    }
-  */
+
 }
 
 

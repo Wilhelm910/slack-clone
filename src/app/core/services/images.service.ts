@@ -15,6 +15,8 @@ export class ImagesService {
   }
 
   insertImageDetails(imageDetails) {
+    console.log(imageDetails)
+    console.log(this.imageDetailList)
     this.imageDetailList.push(imageDetails);
   }
 }
