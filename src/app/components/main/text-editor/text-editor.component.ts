@@ -85,11 +85,10 @@ export class TextEditorComponent implements OnInit {
   createNewMessage() {
     let user = JSON.parse(localStorage.getItem('user'));
     let concatUserName = user.firstName + ' ' + user.lastName;
-    let messageId = this.channelData.nextMessageId
    
     let message = new Message(
       {
-        mId: messageId,
+        mId: '',
         userId: user.uid,
         userName: concatUserName,
         messageText: this.editorForm.get('editor').value,
@@ -97,9 +96,7 @@ export class TextEditorComponent implements OnInit {
         answers: [],
       }
     )
-    messageId = messageId++;
-    console.log('new message id', messageId);
-    
+  
     this.updateMessagesOfChannel(message.toJSON())
 
     return message;
@@ -107,7 +104,10 @@ export class TextEditorComponent implements OnInit {
 
   updateMessagesOfChannel(message) {
     this.channelService.collectionRef.doc(this.channelId)
-      .update({ messages: arrayUnion(message) })
+      .collection('messages').add(message)
+      .then((docRef) => {
+        docRef.update({ mId: docRef.id })
+      })
   }
 
 }

@@ -8,9 +8,9 @@
                 <!-- <img src="" alt="profile-picture"> -->
                 <div><i class="pi pi-user" style="font-size: 2.5rem"></i></div>
             </div>
-            <div class="message-content" >
+            <div class="message-content">
                 <div class="head">
-                    <h3>{{ message.userName }}</h3><span>{{ changeDateFormat(message.creationTime) }}</span>
+                    <h3>{{ message.userName }}</h3><span></span>
                 </div>
                 <p [innerHTML]="message.messageText"></p>
             </div>
@@ -21,5 +21,5 @@
         </div>
     </div>
     <!-- footer -->
-        <app-text-editor></app-text-editor>
+    <app-text-editor></app-text-editor>
 </div>

@@ -35,15 +35,31 @@ export class ChannelDetailComponent implements OnInit {
       .collection('channels')
       .doc(this.channelId)
       .valueChanges()
-      .subscribe((data: any) => {
-        this.channelData = new Channel(data);
-        this.messages = this.channelData.messages;
+      .subscribe((channelData: any) => {
+        this.channelData = new Channel(channelData);
+        console.log('channelData', channelData);
+        
+        this.getMessages()
+        console.log('messages', this.messages);
+        
+      })
+  }
+
+  getMessages() {
+    this.firestore
+      .collection('channels')
+      .doc(this.channelId)
+      .collection('messages')
+      .valueChanges()
+      .subscribe((messagesData: any) => {
+        this.messages = [messagesData];
       })
   }
 
   changeDateFormat(timestamp: Timestamp) {
+    console.log('timestamp', timestamp);
+    
     let asDate = timestamp.toDate()
-
     return this.datePipe.transform(asDate, 'yyyy-MM-dd | HH:mm U\'h\'r');
   };
 
