@@ -4,8 +4,9 @@
     <!-- content -->
     <div class="channel-content">
         <div *ngFor="let message of messages, index as i" class="message">
-            <div (mouseenter)="activeMessage = message.mId" class="hover-wrapper">
+            <div (mouseenter)="activeMessage = message.mId" (mouseleave)="activeMessage = ''" class="hover-wrapper">
                 <div *ngIf="activeMessage == message.mId" class="options-overlay" id="overlay-{{message.mId}}">
+                    <i class="pi pi-file-edit"></i>
                     <i class="pi pi-comment"></i>
                     <i (click)="deleteMessage(message.mId)" class="pi pi-trash"></i>
                 </div>

@@ -59,7 +59,6 @@ export class ChannelDetailComponent implements OnInit {
       .valueChanges()
       .subscribe((messagesData: any) => {
         this.messages = messagesData;
-        console.log('messages', this.messages);
       })
   }
 
@@ -75,6 +74,10 @@ export class ChannelDetailComponent implements OnInit {
 
   deleteMessage(messageId) {
     this.messagesCollection.doc(messageId).delete()
+  }
+
+  openThread(messageId) {
+
   }
 
 }
