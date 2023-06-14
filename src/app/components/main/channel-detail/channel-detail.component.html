@@ -4,19 +4,22 @@
     <!-- content -->
     <div class="channel-content">
         <div *ngFor="let message of messages, index as i" class="message">
-            <div class="image">
-                <!-- <img src="" alt="profile-picture"> -->
-                <div><i class="pi pi-user" style="font-size: 2.5rem"></i></div>
-            </div>
-            <div class="message-content">
-                <div class="head">
-                    <h3>{{ message.userName }}</h3><span>{{ changeDateFormat(message.creationTime)}}</span>
+            <div (mouseenter)="activeMessage = message.mId" class="hover-wrapper">
+                <div *ngIf="activeMessage == message.mId" class="options-overlay" id="overlay-{{message.mId}}">
+                    <i (click)="deleteMessage(message.mId)" class="pi pi-file-edit"></i>
+                    <i class="pi pi-trash"></i>
                 </div>
-                <p [innerHTML]="message.messageText"></p>
-            </div>
-            <div class="message-icons">
-                <div><i class="pi pi-file-edit"></i></div>
-                <div><i class="pi pi-trash"></i></div>
+                <div class="image">
+                    <div><i class="pi pi-user" style="font-size: 2.5rem"></i></div>
+                </div>
+                <div class="message-content">
+                    <div class="head">
+                        <h3>{{ message.userName }}</h3><span>{{ changeDateFormat(message.creationTime)}}</span>
+                    </div>
+                    <p [innerHTML]="message.messageText"></p>
+                </div>
+                <div class="message-icons">
+                </div>
             </div>
         </div>
     </div>

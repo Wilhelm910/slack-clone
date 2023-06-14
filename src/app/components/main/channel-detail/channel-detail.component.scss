@@ -16,10 +16,42 @@ i {
 }
 
 .message {
-    display: flex;
     max-width: 800px;
     margin-bottom: 40px;
     width: 100%;
+
+    .hover-wrapper {
+        position: relative;
+        display: flex;
+
+
+        .options-overlay {
+            position: absolute;
+            display: flex;
+            top: 0;
+            left: 50%;
+            right: 50%;
+            width: 120px;
+            justify-content: space-around;
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 6px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+
+            i {
+                font-weight: 100;
+                z-index: 1;
+                color: rgba(0, 0, 0, 0.4);
+
+                &:hover {
+                    border-color: unset;
+                    color: rgba(0, 0, 0, 0.5);
+                    cursor: pointer;
+                }
+            }
+
+        }
+    }
 
     .image {
 
@@ -38,6 +70,7 @@ i {
 
     .message-content {
         width: 100%;
+
 
         .head {
             display: flex;
@@ -63,27 +96,5 @@ i {
         }
     }
 
-    .message-icons {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 8px;
-        margin: 0px 12px;
-        padding: 0px 12px;
-        border-left: 1px solid rgba(0, 0, 0, 0.2);
 
-        i {
-            border: 1px solid grey;
-            border-radius: 25%;
-            padding: 10px;
-            font-size: 1rem;
-
-            &:hover {
-                border-color: unset;
-                background-color: rgba(0, 0, 0, 0.3);
-                color: white;
-                cursor: pointer;
-            }
-        }
-    }
 }

@@ -28,6 +28,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AvatarModule } from 'primeng/avatar';
 import { DragDropModule } from 'primeng/dragdrop';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -128,6 +129,7 @@ import { EditUserComponent } from './components/main/edit-user/edit-user.compone
     DropdownModule,
     AvatarModule,
     DragDropModule,
+    OverlayPanelModule,
     SplitButtonModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

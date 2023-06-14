@@ -15,6 +15,7 @@ export class ChannelDetailComponent implements OnInit {
   channelId: string = '';
   channelData: Channel = new Channel;
   messages: Array<any> = [];
+  activeMessage: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -61,5 +62,14 @@ export class ChannelDetailComponent implements OnInit {
     let asDate = timestamp.toDate()
     return this.datePipe.transform(asDate, 'yyyy-MM-dd | HH:mm') + ' Uhr';
   };
+
+  mouseEnter() {
+    console.log('mouse entered');
+    
+  }
+
+  deleteMessage(messageId) {
+    
+  }
 
 }
