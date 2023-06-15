@@ -61,6 +61,7 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(formData.email, formData.password)
       .then((result) => {
+        this.router.navigate(['auth/login']);
         /* Call the SendVerificationMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();

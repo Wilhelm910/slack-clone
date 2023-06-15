@@ -1,5 +1,5 @@
-<div (mouseenter)="isActive = true" (mouseleave)="isActive = false" class="hover-wrapper">
-    <div *ngIf="isActive" class="options-overlay" id="overlay-{{msgObj.mId}}">
+<div class="wrapper" (mouseenter)="msgIsActive = true" (mouseleave)="!msgIsActive = false" >
+    <div *ngIf="msgIsActive" class="options-overlay" id="overlay-{{msgObj.mId}}">
         <i class="pi pi-file-edit"></i>
         <i class="pi pi-comment"></i>
         <i (click)="deleteMessage(msgObj.mId)" class="pi pi-trash"></i>

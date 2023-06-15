@@ -55,12 +55,5 @@
             <p-button [disabled]="signUpForm.invalid || !passwordsMatching || showMailVerifyHint" type="submit"
                 label="Sign up" styleClass="p-button-raised"></p-button>
         </div>
-        <div class="verify-mail">
-            <div *ngIf="showMailVerifyHint">
-                <span>Sent verification link.</span>
-                <span>Please check your emails.</span>
-            </div>
-        </div>
-
     </form>
 </div>

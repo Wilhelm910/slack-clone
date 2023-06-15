@@ -12,7 +12,7 @@ import { Timestamp } from '@angular/fire/firestore';
 })
 export class MessageComponent {
   @Input() msgObj: Message;
-  isActive: boolean;
+  msgIsActive: boolean;
 
   constructor(
     private channelService: ChannelService,
