@@ -34,16 +34,15 @@ export class AuthService {
     });
   }
 
-
   // Sign in with email/password
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.UpdateUserData(result.user);
-        this.afAuth.authState.subscribe((user) => {
-          if (user && this.isLoggedIn) {
 
+        this.afAuth.authState.subscribe((user) => {
+          if (user && user.emailVerified) {
             this.router.navigate(['main']);
           }
         });
@@ -77,12 +76,6 @@ export class AuthService {
       })
   }
 
-  getDisplayName(firstString, secondString): string {
-    console.log('get display name - names', firstString, secondString);
-
-    return firstString + ' ' + secondString;
-  }
-
   // Sign in with Google
   GoogleAuth() {
 
@@ -112,12 +105,7 @@ export class AuthService {
       });
   }
 
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
-  }
-
-
+  
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
@@ -137,7 +125,7 @@ export class AuthService {
       lastName: lastName,
       initials: initials,
       email: user.email,
-      displayName: this.getDisplayName(firstName, lastName),
+      displayName: `${firstName} ${lastName}`,
       emailVerified: user.emailVerified,
     };
 
@@ -151,7 +139,7 @@ export class AuthService {
 
   UpdateUserData(
     user: any
-    ) {
+  ) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -171,6 +159,8 @@ export class AuthService {
 
       this.userData = userData;
       localStorage.setItem('user', JSON.stringify(userData))
+
+      const lsUser = JSON.parse(localStorage.getItem('user')!);
 
       return userRef.set(userData, {
         merge: true,

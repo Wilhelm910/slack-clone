@@ -84,13 +84,12 @@ export class TextEditorComponent implements OnInit {
 
   createNewMessage() {
     let user = JSON.parse(localStorage.getItem('user'));
-    let concatUserName = user.firstName + ' ' + user.lastName;
    
     let message = new Message(
       {
         mId: '',
         userId: user.uid,
-        userName: concatUserName,
+        userName: user.displayName,
         messageText: this.editorForm.get('editor').value,
         creationTime: new Date(),
         answers: [],
@@ -102,12 +101,11 @@ export class TextEditorComponent implements OnInit {
     return message;
   }
 
-  updateMessagesOfChannel(message) {
+  updateMessagesOfChannel(message: any) {
     this.channelService.collectionRef.doc(this.channelId)
       .collection('messages').add(message)
       .then((docRef) => {
         docRef.update({ mId: docRef.id })
       })
   }
-
 }
