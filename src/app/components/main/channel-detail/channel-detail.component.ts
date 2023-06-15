@@ -57,20 +57,29 @@ export class ChannelDetailComponent implements OnInit {
     this.messagesCollection
       .valueChanges()
       .subscribe((messagesData: any) => {
+        this.sortMessagesData(messagesData)
         this.messages = messagesData;
-        console.log('this messages', this.messages);
-        
         this.channelService.messages.next(messagesData);
       })
   }
 
-    mouseEnter() {
-    console.log('mouse entered');
+  sortMessagesData(data: any) {
+    let sortedMessages = data.sort((a, b) => {
+      if (a.creationTime < b.creationTime) {
+        return -1;
+      }
+      if (a.creationTime > b.creationTime) {
+        return 1;
+      }
+      return 0;
 
+    });
+
+    return sortedMessages;
   }
 
-   openThread(messageId) {
-    
+  openThread(messageId) {
+
   }
 
 }
