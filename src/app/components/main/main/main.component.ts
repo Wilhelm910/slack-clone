@@ -15,9 +15,6 @@ export class MainComponent implements OnInit {
   opened:boolean = true;
 
   ngOnInit(): void {
-
-    
-
   }
 
   receiverSidebar(sidebar:boolean){
