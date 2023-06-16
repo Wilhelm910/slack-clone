@@ -21,7 +21,7 @@ export class EditUserComponent implements OnInit {
   imgStorage;
   imgRef;
 
-  imgUrl;
+  imgUrl:string = 'https://firebasestorage.googleapis.com/v0/b/slack-clone-8b87c.appspot.com/o/Mbg1TQ3ATyYpzd71lHxckYKimEI2%2F1?alt=media&token=481f4d37-2f8a-4a6a-a940-adcb751aab41'
 
   imgSrc: string = './assets/gender.png'
   selectedImage: any = null;
