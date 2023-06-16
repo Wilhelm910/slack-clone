@@ -21,6 +21,8 @@ export class EditUserComponent implements OnInit {
   imgStorage;
   imgRef;
 
+  imgUrl;
+
   imgSrc: string = './assets/gender.png'
   selectedImage: any = null;
   isSubmitted: boolean = false;
@@ -35,7 +37,7 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInfoFromLocalStorage();
-   // this.getUserFotoFromFireStorage();
+    this.getUserFotoFromFireStorage();
   }
 
   onFileSelected(event: any) {
@@ -73,16 +75,20 @@ export class EditUserComponent implements OnInit {
     console.log(this.uID)
   }
 
-  /*
+  
     getUserFotoFromFireStorage() {
+      this.imgUrl = this.service.showImg()
+      console.log(this.imgUrl)
+      /*
       this.imgStorage = getStorage();
       this.imgRef = ref(this.imgStorage, `${this.uID}`);
       getDownloadURL(this.imgRef)
       .then((url) => {
         console.log(url)
       })
+       */
     }
-  */
+ 
 /*
   getUserFotoFromFireStorage() {
     let storageRef = firebase.storage().ref().child('images/image.png');

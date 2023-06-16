@@ -16,6 +16,7 @@
 
         <div class="upload-container">
             <div class="img-container">
+                <img [src]="imgUrl" (click)="fileUploader.click()">
                 <img [src]="imgSrc" (click)="fileUploader.click()">
             </div>
             <div class="upload-btn">
