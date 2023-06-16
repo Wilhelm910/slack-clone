@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Storage, ref, getDownloadURL, uploadBytesResumable } from '@angular/fire/storage';
+import { getStorage, Storage, ref, getDownloadURL, uploadBytesResumable } from '@angular/fire/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { ImagesService } from 'src/app/core/services/images.service';
+import * as firebase from 'firebase/app';
+import 'firebase/storage';
+
 
 @Component({
   selector: 'app-edit-user',
@@ -13,6 +16,10 @@ import { ImagesService } from 'src/app/core/services/images.service';
 export class EditUserComponent implements OnInit {
 
   user;
+  uID;
+
+  imgStorage;
+  imgRef;
 
   imgSrc: string = './assets/gender.png'
   selectedImage: any = null;
@@ -24,10 +31,11 @@ export class EditUserComponent implements OnInit {
     imageUrl: new FormControl(''),
   })
 
-  constructor( private storage: AngularFireStorage, private service: ImagesService) { }
+  constructor(private storage: AngularFireStorage, private service: ImagesService) { }
 
   ngOnInit(): void {
-    this.getInfoFromLocalStorage()
+    this.getInfoFromLocalStorage();
+   // this.getUserFotoFromFireStorage();
   }
 
   onFileSelected(event: any) {
@@ -42,10 +50,10 @@ export class EditUserComponent implements OnInit {
     }
   }
 
-  submit(formValue:any) {
+  submit(formValue: any) {
     this.isSubmitted = true;
     if (this.formTemplate.valid) {
-      const filePath = `${formValue.name}/${this.selectedImage.name.split('').slice(0, -1).join('.')}`;
+      const filePath = `${this.uID}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}`;
       const fileRef = this.storage.ref(filePath);
       this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
@@ -61,9 +69,27 @@ export class EditUserComponent implements OnInit {
   getInfoFromLocalStorage() {
     this.user = JSON.parse(localStorage.getItem('user'))
     console.log(this.user)
+    this.uID = this.user.uid
+    console.log(this.uID)
   }
 
+  /*
+    getUserFotoFromFireStorage() {
+      this.imgStorage = getStorage();
+      this.imgRef = ref(this.imgStorage, `${this.uID}`);
+      getDownloadURL(this.imgRef)
+      .then((url) => {
+        console.log(url)
+      })
+    }
+  */
+/*
+  getUserFotoFromFireStorage() {
+    let storageRef = firebase.storage().ref().child('images/image.png');
+    storageRef.getDownloadURL().then(url => console.log(url) );
 
+  }
+*/
 }
 
 
