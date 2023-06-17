@@ -24,7 +24,7 @@ export class Thread {
             mId: this.tId,
             userId: this.userId,
             userName: this.userName,
-            messageText: this.message,
+            message: this.message,
             creationTime: this.creationTime,
             answers: this.answers,
         };
