@@ -4,19 +4,19 @@
 
         <div class="input-container">
             <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput formControlName="name" [(ngModel)]="user.firstName">
+                <mat-label>First name</mat-label>
+                <input matInput formControlName="firstname" [(ngModel)]="user.firstName">
                 <div *ngIf="isSubmitted">This field is required</div>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email" [(ngModel)]="user.email"> 
+                <mat-label>Last name</mat-label>
+                <input matInput formControlName="lastname" [(ngModel)]="user.lastName"> 
             </mat-form-field>
         </div>
 
         <div class="upload-container">
             <div class="img-container">
-                <img src="{{ imgUrl ?? imgSrc}}" (click)="fileUploader.click()">
+                <img src="{{ imgSrc }}" (click)="fileUploader.click()">
             </div>
             <div class="upload-btn">
                 <label for="fileDialog" class="upload-file">

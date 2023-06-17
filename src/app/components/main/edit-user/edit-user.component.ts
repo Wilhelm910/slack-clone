@@ -6,6 +6,8 @@ import { finalize } from 'rxjs/operators';
 import { ImagesService } from 'src/app/core/services/images.service';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
+import { updateCurrentUser } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Component({
@@ -21,23 +23,23 @@ export class EditUserComponent implements OnInit {
   imgStorage;
   imgRef;
 
-  imgUrl: string = 'https://firebasestorage.googleapis.com/v0/b/slack-clone-8b87c.appspot.com/o/Mbg1TQ3ATyYpzd71lHxckYKimEI2%2F1?alt=media&token=481f4d37-2f8a-4a6a-a940-adcb751aab41'
+  imgUrl: string // = 'https://firebasestorage.googleapis.com/v0/b/slack-clone-8b87c.appspot.com/o/Mbg1TQ3ATyYpzd71lHxckYKimEI2%2F1?alt=media&token=481f4d37-2f8a-4a6a-a940-adcb751aab41'
 
-  imgSrc: string = './assets/gender.png'
+  imgSrc: string //= './assets/gender.png'
   selectedImage: any = null;
   isSubmitted: boolean = false;
 
   formTemplate = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl(''),
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
     imageUrl: new FormControl(''),
   })
 
-  constructor(private storage: AngularFireStorage, private service: ImagesService) { }
+  constructor(private storage: AngularFireStorage, private service: ImagesService, private firestore: AngularFirestore) { }
 
   async ngOnInit() {
     this.getInfoFromLocalStorage();
-    this.getUserFotoFromFireStorage();
+    //this.getUserFotoFromFireStorage();
   }
 
   onFileSelected(event: any) {
@@ -46,64 +48,68 @@ export class EditUserComponent implements OnInit {
       reader.onload = (e: any) => this.imgSrc = e.target.result;
       reader.readAsDataURL(event.target.files[0])
       this.selectedImage = event.target.files[0]
+      console.log(this.selectedImage)
     } else {
       this.imgSrc = './assets/gender.png';
       this.selectedImage = null;
     }
   }
 
-  async submit(formValue: any) {
+  submit(formValue: any) {
+    
     this.isSubmitted = true;
     if (this.formTemplate.valid) {
       const filePath = `${this.uID}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}`;
       const fileRef = this.storage.ref(filePath);
-     await this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+      console.log("t3st")
+      this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
+          console.log("test")
           fileRef.getDownloadURL().subscribe((url) => {
             formValue['imageUrl'] = url;
             console.log(formValue);
-            this.service.insertImageDetails(formValue);
+            console.log(url)
+            this.updateLocalStorage(formValue)
+            this.updateFirebase(formValue)
+            //this.service.insertImageDetails(formValue);
           })
         })).subscribe();
     }
+
   }
 
+  updateLocalStorage(formValue) {
+    let currentUserInfo = JSON.parse(localStorage.getItem('user'))
+    currentUserInfo.firstName = formValue.firstname;
+    currentUserInfo.lastName = formValue.lastname;
+    currentUserInfo.userImgUrl = formValue.imageUrl
+    localStorage.setItem('user', JSON.stringify(currentUserInfo));
+  }
+
+
+  updateFirebase(formValue) {
+    this.firestore
+      .collection('users')
+      .doc(this.uID)
+      .update({userImgUrl: formValue.imageUrl, firstName: formValue.firstname, lastName: formValue.lastname})
+  }
+    
+
+  
   getInfoFromLocalStorage() {
     this.user = JSON.parse(localStorage.getItem('user'))
-    console.log(this.user)
     this.uID = this.user.uid
-    console.log(this.uID)
+    this.imgSrc = this.user.userImgUrl
   }
 
 
-  async getUserFotoFromFireStorage() {
-    /* this.imgUrl = this.service.showImg()
-     console.log(this.imgUrl)
-     
-     this.imgStorage = getStorage();
-     this.imgRef = ref(this.imgStorage, `${this.uID}`);
-     getDownloadURL(this.imgRef)
-     .then((url) => {
-       console.log(url)
-     })
-      */
- 
-    const storage = getStorage();
-    const storageRef = ref(storage, `${this.uID}`);
-    await getDownloadURL(storageRef).then((url => {
-      console.log(url)
-    }))
-
-
-  }
-
-  /*
-    getUserFotoFromFireStorage() {
-      let storageRef = firebase.storage().ref().child('images/image.png');
-      storageRef.getDownloadURL().then(url => console.log(url) );
-  
+  getUserFotoFromFireStorage() {
+      const storage = getStorage();
+      getDownloadURL(ref(storage, `${this.uID}/1`)).then((url) => {
+        console.log(url)
+        this.imgUrl = url;
+      })
     }
-  */
 }
 
 
