@@ -128,7 +128,7 @@ export class AuthService {
       email: user.email,
       displayName: `${firstName} ${lastName}`,
       emailVerified: user.emailVerified,
-      userImgUrl: '',
+      userImgUrl: './assets/gender.png',
     };
 
     this.userData = userData;
