@@ -60,7 +60,6 @@ export class TextEditorComponent implements OnInit {
     })
   }
 
-
   getChannelData() {
     this.firestore
       .collection('channels')

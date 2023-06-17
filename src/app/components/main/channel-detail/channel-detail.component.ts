@@ -40,31 +40,30 @@ export class ChannelDetailComponent implements OnInit {
       .valueChanges()
       .subscribe((channelData: any) => {
         this.channelData = new Channel(channelData);
-        this.setMessagesCollection(this.channelId)
-        this.getMessages();
+        this.setThreadsCollection(this.channelId)
+        this.getThreads();
       })
   }
 
-  setMessagesCollection(channelId) {
+  setThreadsCollection(channelId) {
     this.threadsCollection = this.firestore
       .collection('channels')
       .doc(channelId)
       .collection('threads');
   }
 
-  getMessages() {
-
+  getThreads() {
     this.threadsCollection
       .valueChanges()
       .subscribe((threadsData: any) => {
-        this.sortMessagesData(threadsData)
+        this.sortThreadsData(threadsData)
         this.threads = threadsData;
         this.channelService.threads.next(threadsData);
       })
   }
 
-  sortMessagesData(data: any) {
-    let sortedMessages = data.sort((a, b) => {
+  sortThreadsData(data: any) {
+    let sortedThreads = data.sort((a, b) => {
       if (a.creationTime < b.creationTime) {
         return -1;
       }
@@ -75,7 +74,7 @@ export class ChannelDetailComponent implements OnInit {
 
     });
 
-    return sortedMessages;
+    return sortedThreads;
   }
 
   openThread(threadId) {
