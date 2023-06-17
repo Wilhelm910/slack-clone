@@ -3,7 +3,7 @@
     <h2>{{ channelData.name }}</h2>
     <!-- content -->
     <div class="channel-content">
-        <div *ngFor="let thread of threads, index as i" class="message">
+        <div *ngFor="let thread of threads, index as i" class="thread">
             <app-thread [thrdObj]="thread"></app-thread>
         </div>
     </div>

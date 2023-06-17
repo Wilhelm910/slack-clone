@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ChannelService } from 'src/app/core/services/channel.service';
 
 @Component({
-  selector: 'app-thread',
+  selector: 'app-thread-details',
   templateUrl: './thread-details.component.html',
   styleUrls: ['./thread-details.component.scss']
 })

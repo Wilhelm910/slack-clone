@@ -97,16 +97,18 @@ export class TextEditorComponent implements OnInit {
       }
     )
   
-    this.updateMessagesOfChannel(thread.toJSON())
+    this.updateThreadsOfChannel(thread.toJSON())
 
     return thread;
   }
 
-  updateMessagesOfChannel(message: any) {
+  updateThreadsOfChannel(thread: any) {
+    console.log(thread);
+    
     this.channelService.collectionRef.doc(this.channelId)
-      .collection('messages').add(message)
+      .collection('threads').add(thread)
       .then((docRef) => {
-        docRef.update({ mId: docRef.id })
+        docRef.update({ tId: docRef.id })
       })
   }
 }
