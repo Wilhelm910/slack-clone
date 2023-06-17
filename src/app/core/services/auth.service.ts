@@ -128,6 +128,7 @@ export class AuthService {
       email: user.email,
       displayName: `${firstName} ${lastName}`,
       emailVerified: user.emailVerified,
+      userImgUrl: '',
     };
 
     this.userData = userData;
@@ -140,7 +141,8 @@ export class AuthService {
 
   UpdateUserData(
     user: any,
-    displayName?: string
+    displayName?: string,
+    userImgUrl?: string,
   ) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
@@ -157,6 +159,7 @@ export class AuthService {
         email: userDocData.email,
         displayName: displayName || userDocData.displayName,
         emailVerified: user.emailVerified,
+        userImgUrl: userImgUrl || userDocData.userImgUrl
       };
 
       this.userData = userData;

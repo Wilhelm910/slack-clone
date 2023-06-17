@@ -6,6 +6,7 @@ export class User {
     email: string;
     displayName: string;
     emailVerified: boolean;
+    userImgUrl: string;
 
     constructor(obj?: any) {
         this.uid = obj ? obj.uid : '';
@@ -15,5 +16,6 @@ export class User {
         this.email = obj ? obj.email : '';
         this.displayName = obj ? obj.displayName : '';
         this.emailVerified = obj ? obj.emailVerified : '';
+        this.userImgUrl = obj ? obj.userImgUrl: ''
     }
 }
