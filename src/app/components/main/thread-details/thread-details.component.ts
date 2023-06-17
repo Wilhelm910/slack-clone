@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Thread } from 'src/app/core/models/thread.class';
 import { ChannelService } from 'src/app/core/services/channel.service';
+import { ThreadService } from 'src/app/core/services/thread.service';
 
 @Component({
   selector: 'app-thread-details',
@@ -10,13 +12,20 @@ import { ChannelService } from 'src/app/core/services/channel.service';
 export class ThreadDetailsComponent implements OnInit {
   channelId: string = '';
   currentMessage: string = '';
+  threadId: string;
+  thrdObj: Thread;
 
   constructor(
     public firestore: AngularFirestore,
-    private channelService: ChannelService
+    private channelService: ChannelService,
+    private threadService: ThreadService,
   ) {
-    channelService.channelId.subscribe((value) => {
+    this.channelService.channelId.subscribe((value) => {
       this.channelId = value;
+    })
+
+    this.threadService.activeThread.subscribe((object) => {      
+      this.thrdObj = object;
     })
   }
 

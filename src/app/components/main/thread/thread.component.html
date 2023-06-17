@@ -1,5 +1,5 @@
-<div class="wrapper" (click)="openThread(thrdObj.tId)" (mouseenter)="isActive = true" (mouseleave)="isActive = false" >
-    <div *ngIf="isActive" class="options-overlay" id="overlay-{{thrdObj.tId}}">
+<div class="wrapper" (click)="showDetails(thrdObj)" (mouseenter)="onFocus = true" (mouseleave)="onFocus = false" >
+    <div *ngIf="onFocus" class="options-overlay" id="overlay-{{thrdObj.tId}}">
         <i class="pi pi-file-edit"></i>
         <i class="pi pi-comment"></i>
         <i (click)="deleteThread(thrdObj.tId)" class="pi pi-trash"></i>

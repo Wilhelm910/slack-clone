@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { Thread } from 'src/app/core/models/thread.class';
 import { ChannelService } from 'src/app/core/services/channel.service';
 import { Timestamp } from '@angular/fire/firestore';
+import { ThreadService } from 'src/app/core/services/thread.service';
 
 @Component({
   selector: 'app-thread',
@@ -12,10 +13,11 @@ import { Timestamp } from '@angular/fire/firestore';
 })
 export class ThreadComponent {
   @Input() thrdObj: Thread;
-  isActive: boolean;
+  onFocus: boolean;
 
   constructor(
     private channelService: ChannelService,
+    private threadService: ThreadService,
     private datePipe: DatePipe,
   ) {
 
@@ -31,7 +33,7 @@ export class ThreadComponent {
     return formattedDate;
   }
 
-  openThread(threadId) {
-
+  showDetails(threadObject) {
+    this.threadService.activeThread.next(threadObject)
   }
 }

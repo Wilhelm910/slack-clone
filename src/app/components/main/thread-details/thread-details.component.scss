@@ -1,0 +1,22 @@
+i {
+    // color: grey;
+}
+
+.content-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.thread-content {
+    height: 100%;
+    width: 100%;
+
+}
+
+.thread {
+    max-width: 800px;
+    margin-bottom: 40px;
+    width: 100%;
+}

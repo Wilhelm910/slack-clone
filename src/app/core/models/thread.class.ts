@@ -1,6 +1,7 @@
 import { DatePipe } from "@angular/common";
 
 export class Thread {
+    channelId: string;
     tId: string;
     userId: string;
     userName: string;
@@ -10,6 +11,7 @@ export class Thread {
 
 
     constructor(obj?: any, private datePipe?: DatePipe) {
+        this.channelId = obj ? obj.channelId : '';
         this.tId = obj ? obj.tId : '';
         this.userId = obj ? obj.userId : '';
         this.userName = obj ? obj.userName : '';
@@ -21,7 +23,8 @@ export class Thread {
     toJSON() {
 
         return {
-            mId: this.tId,
+            channelId: this.channelId,
+            tId: this.tId,
             userId: this.userId,
             userName: this.userName,
             message: this.message,

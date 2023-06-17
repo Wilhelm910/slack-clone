@@ -1,4 +1,4 @@
 <div class="content">
     <router-outlet></router-outlet>
-    
+    <app-thread-details *ngIf="showDetails" (opened)="openDetails($event)"></app-thread-details>
 </div>

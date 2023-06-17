@@ -88,6 +88,7 @@ export class TextEditorComponent implements OnInit {
    
     let thread = new Thread(
       {
+        channelId: this.channelId,
         tId: '',
         userId: user.uid,
         userName: user.displayName,
