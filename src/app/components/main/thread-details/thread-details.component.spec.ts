@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThreadComponent } from './thread.component';
+import { ThreadComponent } from './thread-details.component';
 
 describe('ThreadComponent', () => {
   let component: ThreadComponent;

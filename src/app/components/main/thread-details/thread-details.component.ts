@@ -4,12 +4,12 @@ import { ChannelService } from 'src/app/core/services/channel.service';
 
 @Component({
   selector: 'app-thread',
-  templateUrl: './thread.component.html',
-  styleUrls: ['./thread.component.scss']
+  templateUrl: './thread-details.component.html',
+  styleUrls: ['./thread-details.component.scss']
 })
-export class ThreadComponent implements OnInit {
+export class ThreadDetailsComponent implements OnInit {
   channelId: string = '';
-  currentMessage: string = ''
+  currentMessage: string = '';
 
   constructor(
     public firestore: AngularFirestore,
