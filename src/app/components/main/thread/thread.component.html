@@ -1,0 +1,18 @@
+<div class="wrapper" (click)="openThread(thrdObj.tId)" (mouseenter)="msgIsActive = true" (mouseleave)="!msgIsActive = false" >
+    <div *ngIf="msgIsActive" class="options-overlay" id="overlay-{{thrdObj.tId}}">
+        <i class="pi pi-file-edit"></i>
+        <i class="pi pi-comment"></i>
+        <i (click)="deleteThread(thrdObj.tId)" class="pi pi-trash"></i>
+    </div>
+    <div class="avatar">
+        <div><i class="pi pi-user" style="font-size: 2.5rem"></i></div>
+    </div>
+    <div class="message-content">
+        <div class="head">
+            <h3>{{ thrdObj.userName }}</h3><span>{{ transformTimestamp(thrdObj.creationTime) }}</span>
+        </div>
+        <p [innerHTML]="thrdObj.message"></p>
+    </div>
+    <div class="message-icons">
+    </div>
+</div>

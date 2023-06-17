@@ -73,7 +73,8 @@ import { QuillModule } from 'ngx-quill';
 import { TextEditorComponent } from './components/main/text-editor/text-editor.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditUserComponent } from './components/main/edit-user/edit-user.component';
-import { MessageComponent } from './components/main/message/message.component';
+import { ThreadComponent } from './components/main/thread/thread.component';
+
 
 @NgModule({
   declarations: [
@@ -92,8 +93,9 @@ import { MessageComponent } from './components/main/message/message.component';
     ChannelDetailComponent,
     TextEditorComponent,
     EditUserComponent,
+    ThreadComponent,
     ThreadDetailsComponent,
-    MessageComponent
+    
   ],
   imports: [
     QuillModule.forRoot(),

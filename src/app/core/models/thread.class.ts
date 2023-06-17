@@ -1,19 +1,19 @@
 import { DatePipe } from "@angular/common";
 
-export class Message {
-    mId: string;
+export class Thread {
+    tId: string;
     userId: string;
     userName: string;
-    messageText: string;
+    message: string;
     creationTime: Date;
     answers: any[];
 
 
     constructor(obj?: any, private datePipe?: DatePipe) {
-        this.mId = obj ? obj.mId : '';
+        this.tId = obj ? obj.tId : '';
         this.userId = obj ? obj.userId : '';
         this.userName = obj ? obj.userName : '';
-        this.messageText = obj ? obj.messageText : '';
+        this.message = obj ? obj.message : '';
         this.creationTime = obj ? obj.creationTime : '';
         this.answers = obj ? obj.answers : [];
     }
@@ -21,10 +21,10 @@ export class Message {
     toJSON() {
 
         return {
-            mId: this.mId,
+            mId: this.tId,
             userId: this.userId,
             userName: this.userName,
-            messageText: this.messageText,
+            messageText: this.message,
             creationTime: this.creationTime,
             answers: this.answers,
         };

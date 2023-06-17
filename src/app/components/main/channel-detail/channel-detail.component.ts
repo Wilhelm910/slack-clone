@@ -14,8 +14,8 @@ import { ChannelService } from 'src/app/core/services/channel.service';
 export class ChannelDetailComponent implements OnInit {
   channelId: string = '';
   channelData: Channel = new Channel;
-  messagesCollection: AngularFirestoreCollection;
-  messages: Array<any> = [];
+  threadsCollection: AngularFirestoreCollection;
+  threads: Array<any> = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -46,20 +46,20 @@ export class ChannelDetailComponent implements OnInit {
   }
 
   setMessagesCollection(channelId) {
-    this.messagesCollection = this.firestore
+    this.threadsCollection = this.firestore
       .collection('channels')
       .doc(channelId)
-      .collection('messages');
+      .collection('threads');
   }
 
   getMessages() {
 
-    this.messagesCollection
+    this.threadsCollection
       .valueChanges()
-      .subscribe((messagesData: any) => {
-        this.sortMessagesData(messagesData)
-        this.messages = messagesData;
-        this.channelService.messages.next(messagesData);
+      .subscribe((threadsData: any) => {
+        this.sortMessagesData(threadsData)
+        this.threads = threadsData;
+        this.channelService.threads.next(threadsData);
       })
   }
 
@@ -78,7 +78,7 @@ export class ChannelDetailComponent implements OnInit {
     return sortedMessages;
   }
 
-  openThread(messageId) {
+  openThread(threadId) {
 
   }
 

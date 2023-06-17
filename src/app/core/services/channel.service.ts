@@ -8,10 +8,10 @@ import { Subject } from 'rxjs';
 export class ChannelService implements OnInit {
   collectionRef: AngularFirestoreCollection = this.firestore.collection('channels');
   channelDoc: AngularFirestoreDocument;
-  messagesCollection: AngularFirestoreCollection;
+  threadsCollection: AngularFirestoreCollection;
 
   channelId: Subject<string> = new Subject;
-  messages: Subject<[]> = new Subject;
+  threads: Subject<[]> = new Subject;
 
   constructor(
     public firestore: AngularFirestore,
@@ -19,7 +19,7 @@ export class ChannelService implements OnInit {
   ) {
     this.channelId.subscribe((channelId) => {
       this.channelDoc = this.collectionRef.doc(channelId);
-      this.messagesCollection = this.channelDoc.collection('messages')
+      this.threadsCollection = this.channelDoc.collection('threads')
     })
   }
 

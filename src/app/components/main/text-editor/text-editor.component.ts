@@ -5,7 +5,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { Channel } from 'src/app/core/models/channel.class';
-import { Message } from 'src/app/core/models/message.class';
+import { Thread } from 'src/app/core/models/thread.class';
+
 import { ChannelService } from 'src/app/core/services/channel.service';
 
 @Component({
@@ -77,28 +78,28 @@ export class TextEditorComponent implements OnInit {
   }
 
   onSubmit() {
-    this.createNewMessage();
+    this.createNewThread();
     this.editorForm.reset();
 
   }
 
-  createNewMessage() {
+  createNewThread() {
     let user = JSON.parse(localStorage.getItem('user'));
    
-    let message = new Message(
+    let thread = new Thread(
       {
-        mId: '',
+        tId: '',
         userId: user.uid,
         userName: user.displayName,
-        messageText: this.editorForm.get('editor').value,
+        message: this.editorForm.get('editor').value,
         creationTime: new Date(),
         answers: [],
       }
     )
   
-    this.updateMessagesOfChannel(message.toJSON())
+    this.updateMessagesOfChannel(thread.toJSON())
 
-    return message;
+    return thread;
   }
 
   updateMessagesOfChannel(message: any) {
