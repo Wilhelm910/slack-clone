@@ -1,12 +1,11 @@
-<h1 mat-dialog-title>Settings</h1>
-<form [formGroup]="formTemplate" (submit)="submit(formTemplate.value)">
+<h1 class="title" mat-dialog-title>Settings</h1>
+<form class="form-container" [formGroup]="formTemplate" (submit)="submit(formTemplate.value)">
     <div mat-dialog-content class="content">
 
         <div class="input-container">
-            <mat-form-field>
+            <mat-form-field appearance="fill" class="bg">
                 <mat-label>First name</mat-label>
                 <input matInput formControlName="firstname" [(ngModel)]="user.firstName">
-                <div *ngIf="isSubmitted">This field is required</div>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Last name</mat-label>

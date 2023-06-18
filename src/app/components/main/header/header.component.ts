@@ -3,6 +3,7 @@ import { EditUserComponent } from '../edit-user/edit-user.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { LegalComponent } from '../legal/legal.component';
 
 @Component({
   selector: 'app-header',
@@ -25,5 +26,7 @@ export class HeaderComponent implements OnInit {
   openDialog() {
     this.dialog.open(EditUserComponent);
   }
+
+
 
 }

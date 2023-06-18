@@ -74,6 +74,8 @@ import { TextEditorComponent } from './components/main/text-editor/text-editor.c
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditUserComponent } from './components/main/edit-user/edit-user.component';
 import { ThreadComponent } from './components/main/thread/thread.component';
+import { LegalComponent } from './components/main/legal/legal.component';
+import { CreateChatComponent } from './components/main/create-chat/create-chat.component';
 
 
 @NgModule({
@@ -95,6 +97,8 @@ import { ThreadComponent } from './components/main/thread/thread.component';
     EditUserComponent,
     ThreadComponent,
     ThreadDetailsComponent,
+    LegalComponent,
+    CreateChatComponent,
     
   ],
   imports: [
