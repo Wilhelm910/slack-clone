@@ -10,6 +10,8 @@ import { User } from 'src/app/core/models/user.class';
 export class CreateChatComponent implements OnInit {
 
   allUsers = [];
+  allDisplayNames = [];
+  selectedUser = []
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -17,10 +19,21 @@ export class CreateChatComponent implements OnInit {
     this.firestore
       .collection('users')
       .valueChanges()
-      .subscribe((changes:any) => {
+      .subscribe((changes: any) => {
         this.allUsers = changes;
-        console.log(this.allUsers)
+        this.generateSearchArray();
       })
-}
+  }
+
+  generateSearchArray() {
+    this.allUsers.forEach(element => {
+      this.allDisplayNames.push(element.displayName)
+    });
+    console.log(this.allDisplayNames)
+  }
+
+  selectUser() {
+    
+  }
 
 }

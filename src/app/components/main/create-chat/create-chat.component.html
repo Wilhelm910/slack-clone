@@ -9,8 +9,13 @@
     <button mat-button>Create new chat</button>
 </div>
 <div>
-    <div *ngFor="let user of allUsers; let i = index">
-        <p>{{ user.firstName }}</p>
-        <p>{{ user.lastName }}</p>
+    <div matTooltip="Start a conversation" *ngFor="let user of allUsers" class="users-container" (click)="selectUser()">
+        <div class="img-container">
+            <img class="userImg" src="{{ user.userImgUrl }}">
+        </div>
+        <div>
+            <p>{{ user.displayName }}</p>
+            <p>{{ user.email }}</p>
+        </div>
     </div>
 </div>
