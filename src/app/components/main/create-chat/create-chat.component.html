@@ -1,1 +1,16 @@
-<p>create-chat works!</p>
+<div class="header">
+    <h2>To:</h2>
+    <div></div>
+    <mat-form-field>
+        <mat-label>Search users..</mat-label>
+        <input matInput>
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <button mat-button>Create new chat</button>
+</div>
+<div>
+    <div *ngFor="let user of allUsers; let i = index">
+        <p>{{ user.firstName }}</p>
+        <p>{{ user.lastName }}</p>
+    </div>
+</div>
