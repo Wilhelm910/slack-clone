@@ -11,7 +11,7 @@ export class CreateChatComponent implements OnInit {
 
   allUsers = [];
   allDisplayNames = [];
-  selectedUser = []
+  selectedUsers = []
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -32,8 +32,23 @@ export class CreateChatComponent implements OnInit {
     console.log(this.allDisplayNames)
   }
 
-  selectUser() {
-    
+  selectUser(i:any) {
+    this.selectedUsers.push(this.allUsers[i])
+    console.log(this.selectedUsers)
+  }
+
+  removeUserFromSelection(uId:any) {
+    this.selectedUsers.forEach(element => {
+      if (uId == element.uid) {
+        this.selectedUsers.splice(this.selectedUsers.indexOf(element), 1)
+      }
+    });
+  }
+
+  createChat() {
+    if(this.selectedUsers.length > 0) {
+      
+    }
   }
 
 }

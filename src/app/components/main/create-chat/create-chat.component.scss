@@ -2,6 +2,12 @@
     border-bottom: 1px solid black;
 }
 
+.header-action-elements {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .userImg {
     width: 50px;
 }
@@ -27,4 +33,49 @@
         cursor: pointer;
         background-color: rgba($color: #000000, $alpha: 0.05);
     }
+}
+
+.selected-users {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+
+    div {
+        display: flex;
+        align-items: center;
+        background-color: rgba($color: #000000, $alpha: 0.15);
+        padding: 4px 8px;
+        border-radius: 8px;
+
+        mat-icon {
+            &:hover {
+                cursor: pointer;
+                background-color: rgba($color: #000000, $alpha: 0.25);
+                border-radius: 8px;
+                scale: 1.1;
+            }
+        }
+      
+    }
+}
+
+h2,p {
+    margin: 0;
+    margin-right: 16px;
+}
+
+.btn {
+    padding: 8px 16px;
+    background-color: rgba($color: #000000, $alpha: 0.05);
+    border-radius: 8px;
+}
+
+.active {
+    &:hover {
+        cursor: pointer;
+        background-color: rgba($color: #000000, $alpha: 0.25);
+        border-radius: 8px;
+        scale: 1.05;
+    }
+
 }

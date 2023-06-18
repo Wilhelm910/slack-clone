@@ -1,15 +1,23 @@
 <div class="header">
-    <h2>To:</h2>
-    <div></div>
-    <mat-form-field>
-        <mat-label>Search users..</mat-label>
-        <input matInput>
-        <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-    <button mat-button>Create new chat</button>
+    <div class="selected-users">
+        <h2>To:</h2>
+        <div *ngFor="let selectedU of selectedUsers">
+            <p>{{ selectedU.displayName }}</p>
+            <mat-icon matSuffix (click)="removeUserFromSelection(selectedU.uid)">close</mat-icon>
+        </div>
+    </div>
+    <div class="header-action-elements">
+        <mat-form-field>
+            <mat-label>Search users..</mat-label>
+            <input matInput>
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <div (click)="createChat()" class="btn" [ngClass]="selectedUsers.length > 0 ? 'active': 'inactive'">Create new chat</div>
+    </div>
 </div>
 <div>
-    <div matTooltip="Start a conversation" *ngFor="let user of allUsers" class="users-container" (click)="selectUser()">
+    <div matTooltip="Start a conversation" *ngFor="let user of allUsers; let i = index" class="users-container"
+        (click)="selectUser(i)">
         <div class="img-container">
             <img class="userImg" src="{{ user.userImgUrl }}">
         </div>
