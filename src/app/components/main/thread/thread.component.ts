@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Thread } from 'src/app/core/models/thread.class';
 import { ChannelService } from 'src/app/core/services/channel.service';
@@ -48,7 +48,7 @@ export class ThreadComponent implements OnInit {
     return formattedDate;
   }
 
-  showDetails(threadObject) {    
-    this.threadService.activeThread.next(threadObject);
+  showDetails(threadObject) { 
+    this.threadService.activeThread.next(threadObject);   
   }
 }

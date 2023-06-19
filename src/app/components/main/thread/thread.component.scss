@@ -34,13 +34,13 @@
 }
 
 .avatar {
-        width: 56px;
+        min-width: 56px;
         height: 56px;
         display: flex;
         text-align: center;
         justify-content: center;
         align-items: center;
-        border-radius: 50%;
+        border-radius:100%;
         margin-right: 12px;
     
         img {

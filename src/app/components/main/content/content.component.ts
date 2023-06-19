@@ -14,17 +14,21 @@ export class ContentComponent implements OnInit {
   constructor(
     private threadService: ThreadService
   ) {
+    this.showDetails = false;
   }
 
   ngOnInit(): void {
+    this.showDetails = false;
     this.threadService.activeThread.subscribe((value) => {
-      if (value) {
-        console.log('value', value);
-        this.openDetails();
+      if (value.tId != "") {
+        console.log('was here', value);
+        this.showDetails = true;
         this.thrdObj = value;
       }
-
     })
+  }
+
+  ngOnDestroy() {
   }
 
   openDetails() {
@@ -32,7 +36,6 @@ export class ContentComponent implements OnInit {
   }
 
   closeDetails() {
-    this.threadService.activeThread.next(null);
     this.showDetails = false;
   }
 }

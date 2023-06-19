@@ -1,13 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Thread } from '../models/thread.class';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThreadService implements OnInit {
-  activeThread: Subject<Thread> = new Subject;
+  activeThread = new BehaviorSubject(new Thread)
 
 
   constructor(
@@ -15,6 +15,7 @@ export class ThreadService implements OnInit {
       
   ) {
    this.activeThread.subscribe((object) => {
+    
    })
   }
 
@@ -26,9 +27,9 @@ export class ThreadService implements OnInit {
     const channelCollection = this.firestore.collection('channels');
     const channelDoc = channelCollection.doc(threadObject.channelId);
     const threadsCollection = channelDoc.collection('threads');
-    const threadsDoc = threadsCollection.doc(threadObject.tId);
+    const threadDoc = threadsCollection.doc(threadObject.tId);
     
-    threadsDoc.delete()
+    threadDoc.delete()
 
   }
 }
