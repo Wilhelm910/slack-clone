@@ -27,9 +27,7 @@ export class ThreadDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.threadService.activeThread.subscribe((object) => {
-      this.thrdObj = object;
-    })
+    
   }
 
 

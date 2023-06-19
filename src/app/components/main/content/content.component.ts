@@ -8,9 +8,9 @@ import { ThreadService } from 'src/app/core/services/thread.service';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit {
-  showDetails: boolean = true;
+  showDetails: boolean = false;
   thrdObj: Thread = new Thread;
-  
+
   constructor(
     private threadService: ThreadService
   ) {
@@ -18,12 +18,21 @@ export class ContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.threadService.activeThread.subscribe((value) => {
-      this.showDetails = true;
-      this.thrdObj = value;
+      if (value) {
+        console.log('value', value);
+        this.openDetails();
+        this.thrdObj = value;
+      }
+
     })
   }
 
-  openDetails(value) {
+  openDetails() {
     this.showDetails = true;
+  }
+
+  closeDetails() {
+    this.threadService.activeThread.next(null);
+    this.showDetails = false;
   }
 }

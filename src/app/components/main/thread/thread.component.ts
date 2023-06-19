@@ -22,7 +22,7 @@ export class ThreadComponent implements OnInit {
 
   constructor(
     private channelService: ChannelService,
-    private threadService: ThreadService,
+    public threadService: ThreadService,
     private datePipe: DatePipe,
     private firestore: AngularFirestore,
   ) {
@@ -32,7 +32,7 @@ export class ThreadComponent implements OnInit {
     this.firestore.collection('users')
       .doc(this.thrdObj.userId)
       .valueChanges()
-      .subscribe((userData) => {        
+      .subscribe((userData) => {
         let user = new User(userData)
         this.avatarImgPath = user.userImgUrl;
       })
@@ -48,7 +48,7 @@ export class ThreadComponent implements OnInit {
     return formattedDate;
   }
 
-  showDetails(threadObject) {
+  showDetails(threadObject) {    
     this.threadService.activeThread.next(threadObject);
   }
 }

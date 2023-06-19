@@ -1,6 +1,9 @@
 <div class="content">
-    <div class="outlet">
+    <section class="outlet-section">
         <router-outlet></router-outlet>
-    </div>
-    <!-- <app-thread-details *ngIf="showDetails" (opened)="openDetails($event)"></app-thread-details> -->
+    </section>
+    <section *ngIf="showDetails" class="detail-section">
+        <i (click)="closeDetails()" class="pi pi-times-circle" style="font-size: 1.5rem"></i>
+        <app-thread-details (opened)="openDetails()"></app-thread-details>
+    </section>
 </div>
