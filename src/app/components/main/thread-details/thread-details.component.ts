@@ -24,13 +24,12 @@ export class ThreadDetailsComponent implements OnInit {
       this.channelId = value;
     })
 
-    this.threadService.activeThread.subscribe((object) => {      
-      this.thrdObj = object;
-    })
   }
 
   ngOnInit(): void {
-    
+    this.threadService.activeThread.subscribe((object) => {
+      this.thrdObj = object;
+    })
   }
 
 

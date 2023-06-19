@@ -3,6 +3,7 @@ i {
 }
 
 .content-wrapper {
+    background-color: red;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -16,7 +17,6 @@ i {
 }
 
 .thread {
-    max-width: 800px;
     margin-bottom: 40px;
     width: 100%;
 }

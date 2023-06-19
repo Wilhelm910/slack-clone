@@ -8,7 +8,7 @@ import { ThreadService } from 'src/app/core/services/thread.service';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit {
-  showDetails: boolean = false;
+  showDetails: boolean = true;
   thrdObj: Thread = new Thread;
   
   constructor(

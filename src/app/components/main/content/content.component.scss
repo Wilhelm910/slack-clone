@@ -1,6 +1,12 @@
 .content {
+    display: flex;
     color: black;
     background-color: white;
     padding: 16px 0px 0px 16px;
     height: 100%;
+
+    .outlet {
+        width: 100%;
+    }
+
 }

@@ -49,6 +49,6 @@ export class ThreadComponent implements OnInit {
   }
 
   showDetails(threadObject) {
-    this.threadService.activeThread.next(threadObject)
+    this.threadService.activeThread.next(threadObject);
   }
 }
