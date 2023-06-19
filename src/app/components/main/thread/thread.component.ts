@@ -18,7 +18,7 @@ import { User } from 'src/app/core/models/user.class';
 export class ThreadComponent implements OnInit {
   @Input() thrdObj: Thread;
   onFocus: boolean;
-  avatarImgPath: string;
+  @Input() avatarImgPath: string;
 
   constructor(
     private channelService: ChannelService,
@@ -26,6 +26,7 @@ export class ThreadComponent implements OnInit {
     private datePipe: DatePipe,
     private firestore: AngularFirestore,
   ) {
+  
   }
 
   ngOnInit(): void {
@@ -48,7 +49,7 @@ export class ThreadComponent implements OnInit {
     return formattedDate;
   }
 
-  showDetails(threadObject) { 
-    this.threadService.activeThread.next(threadObject);   
+  showDetails(threadObject) {
+    this.threadService.activeThread.next(threadObject);
   }
 }

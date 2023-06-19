@@ -18,10 +18,9 @@ export class ThreadService implements OnInit {
     
    })
   }
-
   ngOnInit(): void {  
-
   }
+  
 
   deleteThread(threadObject) {   
     const channelCollection = this.firestore.collection('channels');

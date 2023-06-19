@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { getLocaleCurrencyCode } from '@angular/common';
+import { Component, OnInit, Output } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { map } from 'rxjs';
 import { Thread } from 'src/app/core/models/thread.class';
+import { User } from 'src/app/core/models/user.class';
 import { ThreadService } from 'src/app/core/services/thread.service';
 
 @Component({
@@ -8,23 +12,40 @@ import { ThreadService } from 'src/app/core/services/thread.service';
   styleUrls: ['./thread-details.component.scss'],
 })
 export class ThreadDetailsComponent implements OnInit {
-  thrdObj: Thread = new Thread;
-  avatarImgPath: string;
-  textEditorContext: string = 'reply';
+  @Output() avatarImgPath: string;
 
+  thrdObj: Thread = new Thread;
+  textEditorContext: string = 'reply';
+  answersCollection: AngularFirestoreCollection;
+  answers: Array<any> = [];
 
   constructor(
     public threadService: ThreadService,
+    private firestore: AngularFirestore,
 
   ) {
     this.thrdObj = threadService.activeThread.getValue();
   }
 
   ngOnInit(): void {
-    
-    this.threadService.activeThread.subscribe((threadObject) => {      
+    this.threadService.activeThread.subscribe((threadObject) => {
       this.thrdObj = threadObject;
+      this.updateAvatar(threadObject.userId);
     })
+  }
+
+  updateAvatar(userId: string) {
+    this.firestore.collection('users')
+      .doc(userId)
+      .get()
+      .pipe(map((user) => {
+        return user.data();
+      }))
+      .subscribe((userData: User) => {
+        this.avatarImgPath = userData.userImgUrl
+      })
+
+
   }
 }
 

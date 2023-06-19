@@ -21,7 +21,6 @@ export class ChannelDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
     private channelService: ChannelService,
-
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +28,6 @@ export class ChannelDetailComponent implements OnInit {
       this.channelId = params['id'];
       this.getChannel();
       this.channelService.channelId.next(this.channelId);
-
     })
   }
 
@@ -76,9 +74,4 @@ export class ChannelDetailComponent implements OnInit {
 
     return sortedThreads;
   }
-
-  openThread(threadId) {
-
-  }
-
 }
