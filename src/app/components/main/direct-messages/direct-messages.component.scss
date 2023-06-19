@@ -15,3 +15,36 @@
         border-radius: 8px;
     }
 }
+
+
+.chat-container {
+
+    div {
+        margin: 8px 24px;
+        padding: 0px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+
+
+        &:hover {
+            cursor: pointer;
+            background-color: #6e1470;
+            border-radius: 8px;
+        }
+    }
+}
+
+p {
+    margin: 0px;
+}
+
+button {
+    color: white !important;
+    padding: 0px !important;
+}
+
+mat-icon {
+    margin-right: 12px;
+}

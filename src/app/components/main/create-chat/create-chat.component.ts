@@ -58,16 +58,21 @@ export class CreateChatComponent implements OnInit {
       this.selectedUsers.forEach(element => {
         this.chat.users.push(element.uid)
       });
-      this.selectedUsers = [];
+      this.createChatName();
       this.addChatToFirestore();
+      this.selectedUsers = [];
     }
 
   }
 
   addChatToFirestore() {
     this.firestore
-    .collection('chats')
-    .add(this.chat.toJson())
+      .collection('chats')
+      .add(this.chat.toJson())
+  }
+
+  createChatName() {
+    this.chat.name = this.selectedUsers[0].displayName
   }
 
 }

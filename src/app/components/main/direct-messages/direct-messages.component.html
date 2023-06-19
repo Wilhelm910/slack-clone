@@ -1,3 +1,9 @@
+<div class="chat-container">
+    <div *ngFor="let chat of allChats; let i = index" routerLink="{{ '/chat/' + chat.ID }}" class="chat">
+        <mat-icon>tag</mat-icon>
+        <p id="{{ chat.ID }}">{{ chat.name }}</p>
+    </div>
+</div>
 <div class="create-chat-container">
     <mat-icon>add</mat-icon>
     <button mat-button routerLink="/createChat">Create new Chat</button>

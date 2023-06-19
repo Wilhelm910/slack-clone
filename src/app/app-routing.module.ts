@@ -9,6 +9,7 @@ import { ChannelDetailComponent } from './components/main/channel-detail/channel
 import { LegalComponent } from './components/main/legal/legal.component';
 import { CreateChannelComponent } from './components/main/create-channel/create-channel.component';
 import { CreateChatComponent } from './components/main/create-chat/create-chat.component';
+import { ChatDetailComponent } from './components/main/chat-detail/chat-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -26,6 +27,7 @@ const routes: Routes = [
     path: '', component: MainComponent, children: [
       { path: 'channel/:id', component: ChannelDetailComponent },
       { path: 'createChat', component: CreateChatComponent },
+      { path: 'chat/:id', component: ChatDetailComponent },
     ]
   },
 ];
