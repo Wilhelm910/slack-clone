@@ -10,6 +10,7 @@ import { ThreadService } from 'src/app/core/services/thread.service';
 export class ThreadDetailsComponent implements OnInit {
   thrdObj: Thread = new Thread;
   avatarImgPath: string;
+  textEditorContext: string = 'reply';
 
 
   constructor(

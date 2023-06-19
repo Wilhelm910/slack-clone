@@ -1,8 +1,8 @@
 <div class="wrapper" (mouseenter)="onFocus = true" (mouseleave)="onFocus = false" >
     <div *ngIf="onFocus" class="options-overlay" id="overlay-{{thrdObj.tId}}">
         <i class="pi pi-file-edit"></i>
-        <i (click)="showDetails(thrdObj)" class="pi pi-comment"></i>
-        <i (click)="threadService.deleteThread(thrdObj)" class="pi pi-trash"></i>
+        <i pTooltip="View Thread" (click)="showDetails(thrdObj)" class="pi pi-comment"></i>
+        <i pTooltip="delete" (click)="threadService.deleteThread(thrdObj)" class="pi pi-trash"></i>
     </div>
     <div class="avatar">
         <img src="{{avatarImgPath}}" alt="Avatar">

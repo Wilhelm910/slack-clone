@@ -21,7 +21,6 @@ export class ContentComponent implements OnInit {
     this.showDetails = false;
     this.threadService.activeThread.subscribe((value) => {
       if (value.tId != "") {
-        console.log('was here', value);
         this.showDetails = true;
         this.thrdObj = value;
       }

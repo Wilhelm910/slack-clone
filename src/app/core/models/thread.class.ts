@@ -7,7 +7,6 @@ export class Thread {
     userName: string;
     message: string;
     creationTime: Date;
-    answers: any[];
 
 
     constructor(obj?: any, private datePipe?: DatePipe) {
@@ -17,11 +16,9 @@ export class Thread {
         this.userName = obj ? obj.userName : '';
         this.message = obj ? obj.message : '';
         this.creationTime = obj ? obj.creationTime : '';
-        this.answers = obj ? obj.answers : [];
     }
 
     toJSON() {
-
         return {
             channelId: this.channelId,
             tId: this.tId,
@@ -29,7 +26,6 @@ export class Thread {
             userName: this.userName,
             message: this.message,
             creationTime: this.creationTime,
-            answers: this.answers,
         };
     }
 }
