@@ -76,6 +76,7 @@ import { EditUserComponent } from './components/main/edit-user/edit-user.compone
 import { ThreadComponent } from './components/main/thread/thread.component';
 import { LegalComponent } from './components/main/legal/legal.component';
 import { CreateChatComponent } from './components/main/create-chat/create-chat.component';
+import { ChatDetailComponent } from './components/main/chat-detail/chat-detail.component';
 
 
 @NgModule({
@@ -99,6 +100,7 @@ import { CreateChatComponent } from './components/main/create-chat/create-chat.c
     ThreadDetailsComponent,
     LegalComponent,
     CreateChatComponent,
+    ChatDetailComponent,
     
   ],
   imports: [
