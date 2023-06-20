@@ -16,6 +16,7 @@ export class ThreadDetailsComponent implements OnInit {
   thrdObj: Thread = new Thread;
   textEditorContext: string = 'reply';
   answers: Array<any> = [];
+  answersText: string;
 
   constructor(
     public threadService: ThreadService,
@@ -41,6 +42,11 @@ export class ThreadDetailsComponent implements OnInit {
       .valueChanges()
       .subscribe((data) => {
         this.answers = data;
+        switch (data.length) {
+          case 0: this.answersText = 'no answers'; break;
+          case 1: this.answersText = `1 answer`; break;
+          default: this.answersText = `${data.length} answers`
+        }
       })
   }
 

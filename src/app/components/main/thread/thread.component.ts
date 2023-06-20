@@ -21,7 +21,7 @@ export class ThreadComponent implements OnInit {
   onFocus: boolean;
   userIsCreator: boolean = false;
   answersAmount: number = 0;
-  answersAmountText: string;
+  answersText: string;
 
   constructor(
     private channelService: ChannelService,
@@ -70,7 +70,11 @@ export class ThreadComponent implements OnInit {
       .get()
       .subscribe((answers) => {
         this.answersAmount = answers.size;
-        this.answersAmountText = answers.size > 1 ? 'answers' : 'answer'  
+        switch (answers.size) {
+          case 0: this.answersText = 'no answers'; break;
+          case 1: this.answersText = `1 answer`; break;
+          default: this.answersText = `${answers.size} answers`
+        }
       })  
   }
 

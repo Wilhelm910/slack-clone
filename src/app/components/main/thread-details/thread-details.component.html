@@ -5,7 +5,7 @@
     <div class="thread-content">
         <app-thread [avatarImgPath]="avatarImgPath" [thrdObj]="thrdObj"></app-thread>
        <div class="answers-section">
-        <p class="amount"><span >{{ answers.length }} answers</span></p>
+        <p class="amount"><span >{{ answersText }}</span></p>
         <div *ngFor="let answer of answers, index as i" class="answer">
             <app-thread [thrdObj]="answer"></app-thread>
         </div>
