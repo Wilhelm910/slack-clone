@@ -21,6 +21,7 @@ export class ChatDetailComponent implements OnInit {
   messageData = [];
   message = [];
   allMessages = [];
+  userImgUrl = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -63,15 +64,16 @@ export class ChatDetailComponent implements OnInit {
         this.messageData.forEach(element => {
           this.message.push(element.message)
         });
-        this.cleanChatMessages();
+        this.prepareChatMessages();
+        this.getUserImgUrl();
       })
   }
 
 
-  cleanChatMessages() {
+  prepareChatMessages() {
     this.message.forEach(element => {
       console.log(element)
-      this.message = element.slice(3,-4)
+      this.message = element.slice(3, -4)
       this.allMessages.push(this.message)
     });
     console.log(this.allMessages)
@@ -91,6 +93,23 @@ export class ChatDetailComponent implements OnInit {
       this.userNames.push(element.displayName)
     });
     console.log(this.userNames)
+  }
+
+
+  getUserImgUrl() {
+    const userIds = [];
+    this.messageData.forEach(element => {
+      userIds.push(element.userId)
+    });
+    userIds.forEach(element => {
+      this.firestore
+        .collection('users')
+        .doc(element)
+        .valueChanges()
+        .subscribe((changes: any) => {
+          this.userImgUrl.push(changes.userImgUrl)
+        })
+    });
   }
 
 
