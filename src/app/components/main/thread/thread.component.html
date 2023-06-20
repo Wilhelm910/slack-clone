@@ -12,5 +12,6 @@
             <h3>{{ thrdObj.userName }}</h3><span>{{ transformTimestamp(thrdObj.creationTime) }}</span>
         </div>
         <p [innerHTML]="thrdObj.message"></p>
+        <a (click)="showDetails(thrdObj)" *ngIf="answersAmount > 0">{{ answersAmount }} answers</a>
     </div>
 </div>

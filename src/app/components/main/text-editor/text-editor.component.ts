@@ -102,6 +102,7 @@ export class TextEditorComponent implements OnInit {
         userName: user.displayName,
         message: this.editorForm.get('editor').value,
         creationTime: new Date(),
+        isReply: false
       }
     )
   
@@ -129,6 +130,7 @@ export class TextEditorComponent implements OnInit {
         userName: user.displayName,
         message: this.editorForm.get('editor').value,
         creationTime: new Date(),
+        isReply: true
       }
     )
   

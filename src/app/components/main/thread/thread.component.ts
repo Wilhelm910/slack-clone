@@ -6,6 +6,7 @@ import { Timestamp } from '@angular/fire/firestore';
 import { ThreadService } from 'src/app/core/services/thread.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User } from 'src/app/core/models/user.class';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-thread',
@@ -18,6 +19,7 @@ export class ThreadComponent implements OnInit {
   onFocus: boolean;
   @Input() avatarImgPath: string;
   userIsCreator: boolean = false;
+  answersAmount: number = 0;
 
   constructor(
     private channelService: ChannelService,
@@ -29,16 +31,20 @@ export class ThreadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(!this.thrdObj.isReply) {
+          this.getAnswersAmount()
+    }
+
     this.firestore.collection('users')
       .doc(this.thrdObj.userId)
       .valueChanges()
       .subscribe((userData) => {
         let user = new User(userData)
         this.avatarImgPath = user.userImgUrl;
-        
-        if(this.thrdObj.userId == JSON.parse(localStorage.getItem('user')).uid) {
+
+        if (this.thrdObj.userId == JSON.parse(localStorage.getItem('user')).uid) {
           this.userIsCreator = true;
-      }
+        }
       })
   }
 
@@ -55,4 +61,14 @@ export class ThreadComponent implements OnInit {
   showDetails(threadObject) {
     this.threadService.activeThread.next(threadObject);
   }
+
+  getAnswersAmount() {
+    this.threadService.getFirebaseDoc(this.thrdObj)
+      .collection('answers')
+      .get()
+      .subscribe((answers) => {
+        this.answersAmount = answers.size
+      })  
+  }
 }
+
