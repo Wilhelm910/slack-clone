@@ -14,27 +14,25 @@ export class DirectMessagesComponent implements OnInit {
   imgUrls = [];
   userInfo = [];
 
-  constructor(private firestore: AngularFirestore){}
+  constructor(private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
     this.firestore
-    .collection('chats')
-    .valueChanges({idField: 'ID'})
-    .subscribe((changes:any) => {
-      this.allChats = changes;
-      console.log(this.allChats)
-      this.getUserImgUrl()
-    })
+      .collection('chats')
+      .valueChanges({ idField: 'ID' })
+      .subscribe((changes: any) => {
+        this.allChats = changes;
+        this.getUserImgUrl()
+      })
   }
 
   getUserImgUrl() {
     this.allChats.forEach(element => {
-      this.userInfo = element.userInfo
-      console.log(this.userInfo)
+      this.userInfo.push(element.userInfo)
     });
-    this.imgUrls.push(this.userInfo[0].userImgUrl);
-    console.log(this.imgUrls)
-    
+    this.userInfo.forEach(element => {
+      this.imgUrls.push(element[0].userImgUrl)
+    });
   }
 
 

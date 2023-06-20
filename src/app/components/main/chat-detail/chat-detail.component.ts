@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ChatMessage } from 'src/app/core/models/chat-message.class';
 import { Chat } from 'src/app/core/models/chats.class';
 
 @Component({
@@ -43,6 +44,7 @@ export class ChatDetailComponent implements OnInit {
   }
 
   getUserNames() {
+    this.userNames = [];
     this.chatData.userInfo.forEach(element => {
       this.userNames.push(element.displayName)
     });
@@ -67,7 +69,23 @@ export class ChatDetailComponent implements OnInit {
   }
 
   onSubmit() {
+    let user = JSON.parse(localStorage.getItem('user'));
+    let reply = new ChatMessage({
+      userName: user.displayName,
+      userId: user.uid,
+      message: this.editorForm.get('editor').value,
+      date: new Date
+    })
+    this.updateChatMessages(reply.toJson())
+  }
 
+
+  updateChatMessages(reply: any) {
+    this.firestore
+      .collection('chats')
+      .doc(this.chatId)
+      .collection('messages')
+      .add(reply)
   }
 
   maxLength(event) {

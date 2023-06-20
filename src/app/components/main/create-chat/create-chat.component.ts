@@ -24,13 +24,16 @@ export class CreateChatComponent implements OnInit {
       .valueChanges()
       .subscribe((changes: any) => {
         this.allUsers = changes;
+        console.log("test")
         this.generateSearchArray();
       })
   }
 
   generateSearchArray() {
     this.allUsers.forEach(element => {
-      this.allDisplayNames.push(element.displayName)
+      if (!this.allDisplayNames.includes(element.displayName)) {
+        this.allDisplayNames.push(element.displayName)
+      }
     });
     console.log(this.allDisplayNames)
   }
