@@ -5,8 +5,6 @@ import { ChannelService } from 'src/app/core/services/channel.service';
 import { Timestamp } from '@angular/fire/firestore';
 import { ThreadService } from 'src/app/core/services/thread.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs';
-import { user } from '@angular/fire/auth';
 import { User } from 'src/app/core/models/user.class';
 
 @Component({
@@ -19,6 +17,7 @@ export class ThreadComponent implements OnInit {
   @Input() thrdObj: Thread;
   onFocus: boolean;
   @Input() avatarImgPath: string;
+  userIsCreator: boolean = false;
 
   constructor(
     private channelService: ChannelService,
@@ -26,7 +25,7 @@ export class ThreadComponent implements OnInit {
     private datePipe: DatePipe,
     private firestore: AngularFirestore,
   ) {
-  
+
   }
 
   ngOnInit(): void {
@@ -36,6 +35,10 @@ export class ThreadComponent implements OnInit {
       .subscribe((userData) => {
         let user = new User(userData)
         this.avatarImgPath = user.userImgUrl;
+        
+        if(this.thrdObj.userId == JSON.parse(localStorage.getItem('user')).uid) {
+          this.userIsCreator = true;
+      }
       })
   }
 

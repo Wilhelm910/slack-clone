@@ -13,10 +13,8 @@ import { ThreadService } from 'src/app/core/services/thread.service';
 })
 export class ThreadDetailsComponent implements OnInit {
   @Output() avatarImgPath: string;
-
   thrdObj: Thread = new Thread;
   textEditorContext: string = 'reply';
-  answersCollection: AngularFirestoreCollection;
   answers: Array<any> = [];
 
   constructor(
@@ -30,9 +28,22 @@ export class ThreadDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.threadService.activeThread.subscribe((threadObject) => {
       this.thrdObj = threadObject;
+      this.getAnswers(threadObject)
       this.updateAvatar(threadObject.userId);
     })
+
   }
+
+  getAnswers(threadObject) {
+    this.threadService
+      .getFirebaseDoc(threadObject)
+      .collection('answers')
+      .valueChanges()
+      .subscribe((data) => {
+        this.answers = data;
+      })
+  }
+
 
   updateAvatar(userId: string) {
     this.firestore.collection('users')
