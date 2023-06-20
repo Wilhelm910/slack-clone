@@ -11,6 +11,8 @@ export class DirectMessagesComponent implements OnInit {
 
   chat = new Chat;
   allChats = [];
+  imgUrls = [];
+  userInfo = [];
 
   constructor(private firestore: AngularFirestore){}
 
@@ -20,7 +22,19 @@ export class DirectMessagesComponent implements OnInit {
     .valueChanges({idField: 'ID'})
     .subscribe((changes:any) => {
       this.allChats = changes;
+      console.log(this.allChats)
+      this.getUserImgUrl()
     })
+  }
+
+  getUserImgUrl() {
+    this.allChats.forEach(element => {
+      this.userInfo = element.userInfo
+      console.log(this.userInfo)
+    });
+    this.imgUrls.push(this.userInfo[0].userImgUrl);
+    console.log(this.imgUrls)
+    
   }
 
 

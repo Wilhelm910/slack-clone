@@ -1,1 +1,14 @@
-<h2>{{ chatData.name }}</h2>
+<div class="header">
+    <h2 *ngFor="let name of userNames">{{ name }}</h2>
+</div>
+<form [formGroup]="editorForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="editor">
+            <h3>Editor</h3>
+        </label>
+        <quill-editor [style]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)"
+            formControlName="editor"></quill-editor>
+        <span *ngIf="editorForm.get('editor').value != null">{{ 1000 - editorForm.get('editor').value.length }}</span>
+    </div>
+    <button mat-button>Submit</button>
+</form>
