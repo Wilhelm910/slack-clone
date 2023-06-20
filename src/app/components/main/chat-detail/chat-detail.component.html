@@ -1,6 +1,17 @@
 <div class="header">
     <h2 *ngFor="let name of userNames">{{ name }}</h2>
 </div>
+
+<div>
+    <div *ngFor="let message of allMessages; let i = index">
+        <div>
+            <p>{{ messageData[i].userName }}</p>
+            <p>{{ transformTimestamp(messageData[i].date) }}</p>
+        </div>
+        <p>{{ message }}</p> 
+    </div>
+</div>
+
 <form [formGroup]="editorForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="editor">

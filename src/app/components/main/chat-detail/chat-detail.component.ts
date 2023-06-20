@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Timestamp } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ChatMessage } from 'src/app/core/models/chat-message.class';
@@ -8,17 +10,22 @@ import { Chat } from 'src/app/core/models/chats.class';
 @Component({
   selector: 'app-chat-detail',
   templateUrl: './chat-detail.component.html',
-  styleUrls: ['./chat-detail.component.scss']
+  styleUrls: ['./chat-detail.component.scss'],
+  providers: [DatePipe],
 })
 export class ChatDetailComponent implements OnInit {
 
   chatId: string = '';
   chatData: Chat = new Chat;
   userNames = [];
+  messageData = [];
+  message = [];
+  allMessages = [];
 
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
+    private datePipe: DatePipe,
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +35,7 @@ export class ChatDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.chatId = params['id'];
       this.getChat();
+      this.getChatMessages();
     })
   }
 
@@ -42,6 +50,40 @@ export class ChatDetailComponent implements OnInit {
         this.getUserNames();
       })
   }
+
+  getChatMessages() {
+    this.firestore
+      .collection('chats')
+      .doc(this.chatId)
+      .collection('messages')
+      .valueChanges()
+      .subscribe((messageData: any) => {
+        console.log(messageData);
+        this.messageData = messageData;
+        this.messageData.forEach(element => {
+          this.message.push(element.message)
+        });
+        this.cleanChatMessages();
+      })
+  }
+
+
+  cleanChatMessages() {
+    this.message.forEach(element => {
+      console.log(element)
+      this.message = element.slice(3,-4)
+      this.allMessages.push(this.message)
+    });
+    console.log(this.allMessages)
+  }
+
+
+  transformTimestamp(timestamp: Date | Timestamp) {
+    const asDate = timestamp instanceof Timestamp ? timestamp.toDate() : timestamp;
+    const formattedDate = this.datePipe.transform(asDate, 'yyyy-MM-dd | HH:mm') + ' Uhr';
+    return formattedDate;
+  }
+
 
   getUserNames() {
     this.userNames = [];
