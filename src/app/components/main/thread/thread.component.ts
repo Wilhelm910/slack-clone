@@ -6,7 +6,6 @@ import { Timestamp } from '@angular/fire/firestore';
 import { ThreadService } from 'src/app/core/services/thread.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User } from 'src/app/core/models/user.class';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'app-thread',
@@ -16,10 +15,13 @@ import { take } from 'rxjs';
 })
 export class ThreadComponent implements OnInit {
   @Input() thrdObj: Thread;
-  onFocus: boolean;
   @Input() avatarImgPath: string;
+  @Input() showAnswersAmount: boolean;
+
+  onFocus: boolean;
   userIsCreator: boolean = false;
   answersAmount: number = 0;
+  answersAmountText: string;
 
   constructor(
     private channelService: ChannelService,
@@ -67,8 +69,10 @@ export class ThreadComponent implements OnInit {
       .collection('answers')
       .get()
       .subscribe((answers) => {
-        this.answersAmount = answers.size
+        this.answersAmount = answers.size;
+        this.answersAmountText = answers.size > 1 ? 'answers' : 'answer'  
       })  
   }
+
 }
 
