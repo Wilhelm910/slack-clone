@@ -3,22 +3,31 @@
 </div>
 
 <div>
-    <div *ngFor="let message of messageData; let i = index">
-        <img src="{{ message.userImgUrl }}">
-        <p>{{ message.userName }}</p>
-        <p>{{ transformTimestamp(message.date) }}</p>
-        <p>{{ message.message }}</p>
+    <div *ngFor="let message of messageData; let i = index" class="content">
+        <div class="message-info">
+            <img src="{{ message.userImgUrl }}">
+            <div>
+                <div style="display: flex;">
+                    <p style="font-weight: bold;" class="name">{{ message.userName }}</p>
+                    <p class="date">{{ transformTimestamp(message.date) }}</p>
+                </div>
+                <div class="message-container">
+                    <p>{{ message.message }}</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
 <form [formGroup]="editorForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <label for="editor">
-            <h3>Editor</h3>
-        </label>
         <quill-editor [style]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)"
-            formControlName="editor"></quill-editor>
+            formControlName="editor">
+            <button mat-button>Submit</button>
+        </quill-editor>
         <span *ngIf="editorForm.get('editor').value != null">{{ 1000 - editorForm.get('editor').value.length }}</span>
+        <button mat-button>Submit</button>
     </div>
-    <button mat-button>Submit</button>
+
 </form>
