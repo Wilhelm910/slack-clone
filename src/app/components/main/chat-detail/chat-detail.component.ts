@@ -19,9 +19,8 @@ export class ChatDetailComponent implements OnInit {
   chatData: Chat = new Chat;
   userNames = [];
   messageData = [];
-  message = [];
-  allMessages = [];
-  userImgUrl = [];
+ // message = [];
+ // allMessages = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -37,8 +36,10 @@ export class ChatDetailComponent implements OnInit {
       this.chatId = params['id'];
       this.getChat();
       this.getChatMessages();
+
     })
   }
+
 
   getChat() {
     this.firestore
@@ -47,10 +48,10 @@ export class ChatDetailComponent implements OnInit {
       .valueChanges()
       .subscribe((chatData: any) => {
         this.chatData = new Chat(chatData)
-        console.log(this.chatData)
         this.getUserNames();
       })
   }
+
 
   getChatMessages() {
     this.firestore
@@ -59,24 +60,33 @@ export class ChatDetailComponent implements OnInit {
       .collection('messages')
       .valueChanges()
       .subscribe((messageData: any) => {
-        console.log(messageData);
         this.messageData = messageData;
-        this.messageData.forEach(element => {
-          this.message.push(element.message)
-        });
+        this.sortMessageData(this.messageData)
         this.prepareChatMessages();
-        this.getUserImgUrl();
       })
   }
 
 
-  prepareChatMessages() {
-    this.message.forEach(element => {
-      console.log(element)
-      this.message = element.slice(3, -4)
-      this.allMessages.push(this.message)
+  sortMessageData(data: any) {
+    let sortedMessages = data.sort((a, b) => {
+      if (a.date < b.date) {
+        return -1;
+      }
+      if (a.date > b.date) {
+        return 1;
+      }
+      return 0;
     });
-    console.log(this.allMessages)
+    return sortedMessages;
+  }
+
+
+  prepareChatMessages() {
+    this.messageData.forEach(element => {
+      let message = element.message.slice(3, -4)
+      element.message = message;
+      //this.allMessages.push(message)
+    });
   }
 
 
@@ -92,10 +102,9 @@ export class ChatDetailComponent implements OnInit {
     this.chatData.userInfo.forEach(element => {
       this.userNames.push(element.displayName)
     });
-    console.log(this.userNames)
   }
 
-
+/*
   getUserImgUrl() {
     const userIds = [];
     this.messageData.forEach(element => {
@@ -111,7 +120,7 @@ export class ChatDetailComponent implements OnInit {
         })
     });
   }
-
+*/
 
   editorContent: string;
   editorForm: FormGroup;
@@ -135,8 +144,10 @@ export class ChatDetailComponent implements OnInit {
       userName: user.displayName,
       userId: user.uid,
       message: this.editorForm.get('editor').value,
-      date: new Date
+      date: new Date,
+      userImgUrl: user.userImgUrl
     })
+    this.editorForm.reset();
     this.updateChatMessages(reply.toJson())
   }
 

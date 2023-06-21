@@ -24,7 +24,6 @@ export class CreateChatComponent implements OnInit {
       .valueChanges()
       .subscribe((changes: any) => {
         this.allUsers = changes;
-        console.log("test")
         this.generateSearchArray();
       })
   }
@@ -59,7 +58,7 @@ export class CreateChatComponent implements OnInit {
   createChat() {
     if (this.selectedUsers.length > 0) {
       this.selectedUsers.forEach(element => {
-        this.chat.users.push(element.uid)
+        this.chat.userImgUrl.push(element.userImgUrl)
       });
       this.chat.userInfo = this.selectedUsers;
       this.createChatName();

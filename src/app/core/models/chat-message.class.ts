@@ -3,6 +3,7 @@ export class ChatMessage {
     public userId: string;
     public message: string;
     public date: Date;
+    public userImgUrl: string;
 
 
     constructor(obj?: any) {
@@ -10,6 +11,7 @@ export class ChatMessage {
         this.userId = obj ? obj.userId : '';
         this.message = obj ? obj.message : '';
         this.date = obj ? obj.date : '';
+        this.userImgUrl = obj ? obj.userImgUrl : '';
     }
 
     toJson() {
@@ -17,7 +19,8 @@ export class ChatMessage {
             userName: this.userName,
             userId: this.userId,
             message: this.message,
-            date: this.date
+            date: this.date,
+            userImgUrl: this.userImgUrl
         }
     }
 

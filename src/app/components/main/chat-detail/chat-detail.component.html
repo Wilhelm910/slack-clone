@@ -3,13 +3,11 @@
 </div>
 
 <div>
-    <div *ngFor="let message of allMessages; let i = index">
-        <img src="{{ userImgUrl[i] }}">
-        <div>
-            <p>{{ messageData[i].userName }}</p>
-            <p>{{ transformTimestamp(messageData[i].date) }}</p>
-        </div>
-        <p>{{ message }}</p> 
+    <div *ngFor="let message of messageData; let i = index">
+        <img src="{{ message.userImgUrl }}">
+        <p>{{ message.userName }}</p>
+        <p>{{ transformTimestamp(message.date) }}</p>
+        <p>{{ message.message }}</p>
     </div>
 </div>
 
