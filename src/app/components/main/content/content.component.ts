@@ -14,7 +14,11 @@ export class ContentComponent implements OnInit {
   constructor(
     private threadService: ThreadService
   ) {
-    this.showDetails = false;
+    let threadJSON = JSON.parse(localStorage.getItem('activeThread'));
+    if(threadJSON != null) {
+      this.threadService.showThreadDetailsFromJSON(threadJSON);
+    }
+    
   }
 
   ngOnInit(): void {
@@ -27,14 +31,13 @@ export class ContentComponent implements OnInit {
     })
   }
 
-  ngOnDestroy() {
-  }
 
   openDetails() {
     this.showDetails = true;
   }
 
   closeDetails() {
+    localStorage.removeItem('activeThread');
     this.showDetails = false;
   }
 }

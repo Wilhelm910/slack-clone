@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Thread } from 'src/app/core/models/thread.class';
 import { ChannelService } from 'src/app/core/services/channel.service';
@@ -56,12 +56,14 @@ export class ThreadComponent implements OnInit {
   }
 
   transformTimestamp(timestamp: Date | Timestamp) {
+   
     const asDate = timestamp instanceof Timestamp ? timestamp.toDate() : timestamp;
     const formattedDate = this.datePipe.transform(asDate, 'yyyy-MM-dd | HH:mm') + ' Uhr';
     return formattedDate;
   }
 
   showDetails(threadObject) {
+    localStorage.setItem('activeThread', JSON.stringify(threadObject));
     this.threadService.activeThread.next(threadObject);
   }
 

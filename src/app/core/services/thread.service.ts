@@ -11,10 +11,9 @@ export class ThreadService implements OnInit {
 
   constructor(
     private firestore: AngularFirestore,
-      
+    
   ) {
-   this.activeThread.subscribe((threadObject) => {
-   })
+
   }
   
   ngOnInit(): void {  
@@ -24,6 +23,14 @@ export class ThreadService implements OnInit {
     this.getFirebaseDoc(threadObject).delete()
   }
 
+  showThreadDetailsFromJSON(JSON) {
+    this.getFirebaseDoc(JSON)
+    .get()
+    .subscribe((data) => {
+      let thrdObj: Thread = new Thread(data.data());
+      this.activeThread.next(thrdObj)
+    })
+  }
 
   getFirebaseDoc(object: any) {
     const channelCollection = this.firestore.collection('channels');

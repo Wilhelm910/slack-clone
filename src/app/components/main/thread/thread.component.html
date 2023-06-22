@@ -1,6 +1,6 @@
 <div class="wrapper" (mouseenter)="onFocus = true" (mouseleave)="onFocus = false; confirmDelete = false">
     <div *ngIf="onFocus" class="options-overlay" id="overlay-{{thrdObj.tId}}">
-        <i *ngIf="!confirmDelete" class="pi pi-file-edit"></i>
+        <!-- <i *ngIf="!confirmDelete" class="pi pi-file-edit"></i> -->
         <i *ngIf="!confirmDelete" matTooltip="View Thread" (click)="showDetails(thrdObj)" class="pi pi-comment"></i>
         <!-- confirm deletion -->
         <div *ngIf="confirmDelete" class="confirm-del">
