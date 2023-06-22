@@ -22,6 +22,7 @@ export class ThreadComponent implements OnInit {
   userIsCreator: boolean = false;
   answersAmount: number = 0;
   answersText: string;
+  confirmDelete: boolean = false;
 
   constructor(
     private channelService: ChannelService,

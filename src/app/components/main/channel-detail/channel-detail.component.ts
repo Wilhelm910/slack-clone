@@ -16,7 +16,6 @@ export class ChannelDetailComponent implements OnInit {
   channelData: Channel = new Channel;
   threadsCollection: AngularFirestoreCollection;
   threads: Array<any> = [];
-  showAnswerAmount: boolean;
 
   constructor(
     private route: ActivatedRoute,

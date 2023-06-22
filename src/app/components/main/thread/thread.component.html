@@ -1,8 +1,15 @@
-<div class="wrapper" (mouseenter)="onFocus = true" (mouseleave)="onFocus = false" >
+<div class="wrapper" (mouseenter)="onFocus = true" (mouseleave)="onFocus = false; confirmDelete = false">
     <div *ngIf="onFocus" class="options-overlay" id="overlay-{{thrdObj.tId}}">
-        <i class="pi pi-file-edit"></i>
-        <i matTooltip="View Thread" (click)="showDetails(thrdObj)" class="pi pi-comment"></i>
-        <i *ngIf="userIsCreator" matTooltip="Delete" (click)="threadService.deleteThread(thrdObj)" class="pi pi-trash"></i>
+        <i *ngIf="!confirmDelete" class="pi pi-file-edit"></i>
+        <i *ngIf="!confirmDelete" matTooltip="View Thread" (click)="showDetails(thrdObj)" class="pi pi-comment"></i>
+        <!-- confirm deletion -->
+        <div *ngIf="confirmDelete" class="confirm-del">
+            <i class="pi pi-check" (click)="threadService.deleteThread(thrdObj)"></i>
+            <i class="pi pi-times" (click)="confirmDelete = false"></i>
+        </div>
+        <!--  -->
+        <i *ngIf="userIsCreator" (click)="confirmDelete = true" matTooltip="Delete" class="pi pi-trash"></i>
+
     </div>
     <div class="avatar">
         <img src="{{avatarImgPath}}" alt="Avatar">
