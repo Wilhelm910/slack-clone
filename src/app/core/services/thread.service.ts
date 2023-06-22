@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class ThreadService implements OnInit {
   activeThread = new BehaviorSubject(new Thread);
+  newThread = new BehaviorSubject(new Thread);
 
   constructor(
     private firestore: AngularFirestore,

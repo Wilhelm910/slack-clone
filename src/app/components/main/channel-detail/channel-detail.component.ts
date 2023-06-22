@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Channel } from 'src/app/core/models/channel.class';
+import { Thread } from 'src/app/core/models/thread.class';
 import { ChannelService } from 'src/app/core/services/channel.service';
+import { ThreadService } from 'src/app/core/services/thread.service';
 
 @Component({
   selector: 'app-channel-detail',
@@ -16,11 +18,13 @@ export class ChannelDetailComponent implements OnInit {
   channelData: Channel = new Channel;
   threadsCollection: AngularFirestoreCollection;
   threads: Array<any> = [];
+  newThread: Thread = new Thread;
 
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
     private channelService: ChannelService,
+    private ThreadService: ThreadService,
   ) { }
 
   ngOnInit(): void {
@@ -31,8 +35,8 @@ export class ChannelDetailComponent implements OnInit {
     })
   }
 
-  getChannel() {
-    this.firestore
+ getChannel() {
+  const channelSubscription = this.firestore
       .collection('channels')
       .doc(this.channelId)
       .valueChanges()
@@ -51,12 +55,13 @@ export class ChannelDetailComponent implements OnInit {
   }
 
   getThreads() {
-    this.threadsCollection
+    const threadSubscription = this.threadsCollection
       .valueChanges()
       .subscribe((threadsData: any) => {
         this.sortThreadsData(threadsData)
         this.threads = threadsData;
         this.channelService.threads.next(threadsData);
+        threadSubscription.unsubscribe()
       })
   }
 

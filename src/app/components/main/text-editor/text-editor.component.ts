@@ -113,7 +113,8 @@ export class TextEditorComponent implements OnInit {
 
   updateThreadsOfChannel(thread: any) {
     this.channelService.collectionRef.doc(this.channelId)
-      .collection('threads').add(thread)
+      .collection('threads')
+      .add(thread)
       .then((docRef) => {
         docRef.update({ tId: docRef.id })
       })
