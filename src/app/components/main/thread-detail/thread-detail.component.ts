@@ -7,11 +7,11 @@ import { User } from 'src/app/core/models/user.class';
 import { ThreadService } from 'src/app/core/services/thread.service';
 
 @Component({
-  selector: 'app-thread-details',
-  templateUrl: './thread-details.component.html',
-  styleUrls: ['./thread-details.component.scss'],
+  selector: 'app-thread-detail',
+  templateUrl: './thread-detail.component.html',
+  styleUrls: ['./thread-detail.component.scss'],
 })
-export class ThreadDetailsComponent implements OnInit {
+export class ThreadDetailComponent implements OnInit {
   @Output() avatarImgPath: string;
   thrdObj: Thread = new Thread;
   textEditorContext: string = 'reply';

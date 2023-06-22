@@ -5,6 +5,7 @@
     max-width: 600px;
 
     .options-overlay {
+        align-self: right;
         position: absolute;
         display: flex;
         gap: 12px;
@@ -19,6 +20,7 @@
         padding: 6px 12px;
         border-radius: 12px;
         border: 1px solid rgba(0, 0, 0, 0.2);
+        transition: transform 2000ms ease-in-out;
 
         i {
             font-weight: 100;
@@ -37,7 +39,6 @@
             gap: 8px;
             padding-right: 8px;
             border-right: 1px solid rgba(0, 0, 0, 0.4);
-
         }
 
     }
