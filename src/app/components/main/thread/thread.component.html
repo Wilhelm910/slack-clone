@@ -16,7 +16,14 @@
     </div>
     <div class="thread-content">
         <div class="head">
-            <h3>{{ thrdObj.userName }}</h3><span>{{ transformTimestamp(thrdObj.creationTime) }}</span>
+            <h3>{{ thrdObj.userName }}</h3>
+            <div class="timestamp">
+                <span>{{ dayAsString }}</span>
+                <span>
+                    <span class="pipe-placeholder">|</span>
+                    {{ timeAsString }}
+                </span>
+            </div>
         </div>
         <p [innerHTML]="thrdObj.message"></p>
         <a (click)="showDetails(thrdObj)" *ngIf="showAnswersAmount">{{ answersText }}</a>

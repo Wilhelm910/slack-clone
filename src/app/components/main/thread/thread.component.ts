@@ -24,19 +24,23 @@ export class ThreadComponent implements OnInit {
   answersText: string;
   confirmDelete: boolean = false;
 
+  dayAsString: string;
+  timeAsString: string;
+
   constructor(
     private channelService: ChannelService,
     public threadService: ThreadService,
     private datePipe: DatePipe,
     private firestore: AngularFirestore,
   ) {
-
   }
 
   ngOnInit(): void {
     if(!this.thrdObj.isReply) {
           this.getAnswersAmount()
     }
+
+    this.transformTimestamp(this.thrdObj.creationTime)
 
     this.firestore.collection('users')
       .doc(this.thrdObj.userId)
@@ -56,10 +60,11 @@ export class ThreadComponent implements OnInit {
   }
 
   transformTimestamp(timestamp: Date | Timestamp) {
+   console.log('timestamp', timestamp);
    
     const asDate = timestamp instanceof Timestamp ? timestamp.toDate() : timestamp;
-    const formattedDate = this.datePipe.transform(asDate, 'yyyy-MM-dd | HH:mm') + ' Uhr';
-    return formattedDate;
+    this.dayAsString = this.datePipe.transform(asDate, 'yyyy-MM-dd');
+    this.timeAsString = this.datePipe.transform(asDate, 'HH:mm') + ' Uhr';
   }
 
   showDetails(threadObject) {

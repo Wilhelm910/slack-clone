@@ -4,12 +4,20 @@
     <!-- content -->
     <div class="thread-content">
         <app-thread [avatarImgPath]="avatarImgPath" [thrdObj]="thrdObj"></app-thread>
-       <div class="answers-section">
-        <p class="amount"><span >{{ answersText }}</span></p>
-        <div *ngFor="let answer of answers, index as i" class="answer">
-            <app-thread [thrdObj]="answer"></app-thread>
+        <div class="answers-section">
+
+            <div class="amount-indicator">
+                <div class="amount">{{ answersText }}</div>
+                <div class="fill-line-wrapper">
+                    <div class="top"></div>
+                    <div class="bottom"></div>
+                </div>
+            </div>
+
+            <div *ngFor="let answer of answers, index as i" class="answer">
+                <app-thread [thrdObj]="answer"></app-thread>
+            </div>
         </div>
-       </div>
     </div>
     <!-- footer -->
     <app-text-editor [usageContext]="textEditorContext"></app-text-editor>

@@ -9,9 +9,8 @@
         position: absolute;
         display: flex;
         gap: 12px;
-        top: 0;
-        left: 50%;
-        right: 50%;
+        bottom: 0px;
+        right: 16px;
         width: fit-content;
         max-width: 120px;
         justify-content: space-around;
@@ -67,22 +66,28 @@
 .thread-content {
     width: 100%;
 
-
     .head {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px;
+        align-items: flex-start;
+        margin-bottom: 8px;
         gap: 40px;
 
         h3 {
+            min-width: 120px;
             display: inline-block;
             font-weight: 500;
             margin-bottom: unset;
+            flex-wrap: nowrap;
         }
 
-        span {
+        .timestamp {
+            display: flex;
+            gap: 4px;
+            justify-content: flex-end;
+            align-items: flex-end;
             color: grey;
+
         }
     }
 
@@ -96,5 +101,12 @@
         &:hover {
             cursor: pointer;
         }
+    }
+
+    @media only screen and (max-width: 1300px) {
+        .timestamp {
+            flex-wrap: wrap;
+        }
+
     }
 }

@@ -20,32 +20,36 @@
     padding-top: 16px;
     margin-top: 24px;
 
-    .amount {
-        color: rgba(0, 0, 0, 0.6);
+    .amount-indicator {
+        display: flex;
         margin-bottom: 24px;
 
-        span {
-            display: block;
+        .amount {
+            white-space: nowrap;
+            color: rgba(0, 0, 0, 0.6);
+            display: inline;
             position: relative;
-
-            &:after {
-                content: '';
-                position: absolute;
-                margin-left: 12px;
-                top: 50%;
-                bottom: 50%;
-                height: 1px;
-                width: 100%;
-                background-color: rgba(0, 0, 0, 0.4);
-
-            }
-
         }
 
-        ;
+        .fill-line-wrapper {
+            display: flex;
+            flex-direction: column;
+            margin-left: 8px;
+            width: 100%;
 
+            div {
+                box-sizing: content-box;
+                height: 100%;
+                width: 100%;
+            }
 
+            .top {
+                border-bottom: 1px solid rgba(0,0,0,0.4);
+
+            }
+        }
     }
+
 
     .answer {
         margin-bottom: 40px;
