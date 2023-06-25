@@ -28,6 +28,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AvatarModule } from 'primeng/avatar';
 import { DragDropModule } from 'primeng/dragdrop';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -66,12 +67,17 @@ import { DirectMessagesComponent } from './components/main/direct-messages/direc
 import { CreateChannelComponent } from './components/main/create-channel/create-channel.component';
 import { ChannelDetailComponent } from './components/main/channel-detail/channel-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ThreadDetailComponent } from './components/main/thread-detail/thread-detail.component';
 
 import { QuillModule } from 'ngx-quill';
 import { TextEditorComponent } from './components/main/text-editor/text-editor.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditUserComponent } from './components/main/edit-user/edit-user.component';
+import { ThreadComponent } from './components/main/thread/thread.component';
+import { LegalComponent } from './components/main/legal/legal.component';
+import { CreateChatComponent } from './components/main/create-chat/create-chat.component';
+import { ChatDetailComponent } from './components/main/chat-detail/chat-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -89,7 +95,13 @@ import { EditUserComponent } from './components/main/edit-user/edit-user.compone
     CreateChannelComponent,
     ChannelDetailComponent,
     TextEditorComponent,
-    EditUserComponent
+    EditUserComponent,
+    ThreadComponent,
+    ThreadDetailComponent,
+    LegalComponent,
+    CreateChatComponent,
+    ChatDetailComponent,
+    
   ],
   imports: [
     QuillModule.forRoot(),
@@ -128,6 +140,7 @@ import { EditUserComponent } from './components/main/edit-user/edit-user.compone
     DropdownModule,
     AvatarModule,
     DragDropModule,
+    OverlayPanelModule,
     SplitButtonModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

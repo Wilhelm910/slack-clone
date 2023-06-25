@@ -9,10 +9,8 @@
         <app-sidebar></app-sidebar>
     </mat-sidenav>
 
-  
-        <button mat-button (click)="opened=!opened"><mat-icon [ngClass]="opened ? 'active':'inactive'">arrow_back_ios</mat-icon></button>
-   
+        <button mat-button (click)="opened=!opened"><mat-icon
+                [ngClass]="opened ? 'active':'inactive'">arrow_back_ios</mat-icon></button>
 
-    <app-content></app-content>
-
+        <app-content (showSideNav)="opened"></app-content>
 </mat-sidenav-container>

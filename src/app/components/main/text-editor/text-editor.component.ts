@@ -1,12 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { arrayUnion } from '@angular/fire/firestore';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
 import { Channel } from 'src/app/core/models/channel.class';
-import { Message } from 'src/app/core/models/message.class';
+import { Thread } from 'src/app/core/models/thread.class';
+
 import { ChannelService } from 'src/app/core/services/channel.service';
+import { ThreadService } from 'src/app/core/services/thread.service';
 
 @Component({
   selector: 'app-text-editor',
@@ -15,14 +15,15 @@ import { ChannelService } from 'src/app/core/services/channel.service';
 })
 export class TextEditorComponent implements OnInit {
   userDataSubscription: any;
+  @Input() usageContext: string;
+  thrdObj: Thread;
 
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
     public channelService: ChannelService,
-  ) {
-  }
-
+    private threadService: ThreadService,
+  ) {}
 
   ngOnInit(): void {
     this.editorForm = new FormGroup({
@@ -30,7 +31,11 @@ export class TextEditorComponent implements OnInit {
     });
     this.getChannelId();
     this.getChannelData();
-
+    this.threadService.activeThread.subscribe((threadObject) => {
+      if(this.usageContext == 'reply') {
+        this.thrdObj = threadObject;
+      }
+    })
   }
 
   channelId: string = '';
@@ -59,7 +64,6 @@ export class TextEditorComponent implements OnInit {
     })
   }
 
-
   getChannelData() {
     this.firestore
       .collection('channels')
@@ -77,37 +81,76 @@ export class TextEditorComponent implements OnInit {
   }
 
   onSubmit() {
-    this.createNewMessage();
+    if(this.usageContext == 'reply') {
+      this.createNewReply();
+    } else {
+      this.createNewThread()
+    }
+
     this.editorForm.reset();
 
   }
 
-  createNewMessage() {
+  createNewThread() {
     let user = JSON.parse(localStorage.getItem('user'));
-    let concatUserName = user.firstName + ' ' + user.lastName;
-    let messageId = this.channelData.nextMessageId
    
-    let message = new Message(
+    let thread = new Thread(
       {
-        mId: messageId,
+        channelId: this.channelId,
+        tId: '',
         userId: user.uid,
-        userName: concatUserName,
-        messageText: this.editorForm.get('editor').value,
+        userName: user.displayName,
+        message: this.editorForm.get('editor').value,
         creationTime: new Date(),
-        answers: [],
+        isReply: false
       }
     )
-    messageId = messageId++;
-    console.log('new message id', messageId);
-    
-    this.updateMessagesOfChannel(message.toJSON())
+  
+    this.updateThreadsOfChannel(thread.toJSON())
 
-    return message;
+    return thread;
   }
 
-  updateMessagesOfChannel(message) {
+  updateThreadsOfChannel(thread: any) {
     this.channelService.collectionRef.doc(this.channelId)
-      .update({ messages: arrayUnion(message) })
+      .collection('threads').add(thread)
+      .then((docRef) => {
+        docRef.update({ tId: docRef.id })
+        thread.tId = docRef.id;
+        this.threadService.newThread.next(thread)
+      })
   }
 
+  createNewReply() {
+    let user = JSON.parse(localStorage.getItem('user'));
+   
+    let reply = new Thread(
+      {
+        channelId: this.thrdObj.tId,
+        tId: '',
+        userId: user.uid,
+        userName: user.displayName,
+        message: this.editorForm.get('editor').value,
+        creationTime: new Date(),
+        isReply: true
+      }
+    )
+  
+    this.updateRepliesOfThread(reply.toJSON())
+
+    return reply;
+  }
+
+  updateRepliesOfThread(reply: any) {
+
+    console.log('reply obj', reply);
+      this.channelService.collectionRef.doc(this.thrdObj.channelId)
+      .collection('threads')
+      .doc(reply.channelId)
+      .collection('answers')
+      .add(reply)
+      .then((docRef) => {
+        docRef.update({ tId: docRef.id })
+      })
+  }
 }

@@ -1,32 +1,34 @@
 import { DatePipe } from "@angular/common";
 
-export class Message {
-    mId: string;
+export class Thread {
+    channelId: string;
+    tId: string;
     userId: string;
     userName: string;
-    messageText: string;
+    message: string;
     creationTime: Date;
-    answers: any[];
+    isReply: boolean;
 
 
     constructor(obj?: any, private datePipe?: DatePipe) {
-        this.mId = obj ? obj.mId : '';
+        this.channelId = obj ? obj.channelId : '';
+        this.tId = obj ? obj.tId : '';
         this.userId = obj ? obj.userId : '';
         this.userName = obj ? obj.userName : '';
-        this.messageText = obj ? obj.messageText : '';
+        this.message = obj ? obj.message : '';
         this.creationTime = obj ? obj.creationTime : '';
-        this.answers = obj ? obj.answers : [];
+        this.isReply = obj ? obj.isReply: ''
     }
 
     toJSON() {
-
         return {
-            mId: this.mId,
+            channelId: this.channelId,
+            tId: this.tId,
             userId: this.userId,
             userName: this.userName,
-            messageText: this.messageText,
+            message: this.message,
             creationTime: this.creationTime,
-            answers: this.answers,
+            isReply: this.isReply,
         };
     }
 }

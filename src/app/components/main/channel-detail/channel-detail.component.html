@@ -3,23 +3,10 @@
     <h2>{{ channelData.name }}</h2>
     <!-- content -->
     <div class="channel-content">
-        <div *ngFor="let message of messages, index as i" class="message">
-            <div class="image">
-                <!-- <img src="" alt="profile-picture"> -->
-                <div><i class="pi pi-user" style="font-size: 2.5rem"></i></div>
-            </div>
-            <div class="message-content" >
-                <div class="head">
-                    <h3>{{ message.userName }}</h3><span>{{ changeDateFormat(message.creationTime) }}</span>
-                </div>
-                <p [innerHTML]="message.messageText"></p>
-            </div>
-            <div class="message-icons">
-                <div><i class="pi pi-file-edit"></i></div>
-                <div><i class="pi pi-trash"></i></div>
-            </div>
+        <div *ngFor="let thread of threads, index as i" class="thread">
+            <app-thread [showAnswersAmount]="true" [viewId]="i" [thrdObj]="thread" (removeIdFromView)="removeIdFromView($event)"></app-thread>
         </div>
     </div>
     <!-- footer -->
-        <app-text-editor></app-text-editor>
+    <app-text-editor></app-text-editor>
 </div>

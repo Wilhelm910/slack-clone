@@ -1,6 +1,7 @@
 .input-container {
     display: flex;
     flex-direction: column;
+    background-color: #6e1470;
 }
 
 .content {
@@ -65,3 +66,38 @@ p {
 .img-container {
     margin-bottom: 8px;
 }
+
+.form-container {
+    background-color: #6e1470;
+}
+
+.title {
+    background-color: #6e1470;
+    color: white;
+    margin: 0px !important;
+}
+button {
+    color: white !important;
+}
+
+.upload-btn {
+
+    p {
+        color: white !important;
+    }
+
+}
+
+
+
+mat-form-field {
+    background-color: #6e1470 !important;
+}
+
+::ng-deep .bg {
+    background-color: #6e1470 !important;
+}
+
+::ng-deep .mat-form-field-appearance-fill  {
+    background-color: #6e1470 !important;
+  }

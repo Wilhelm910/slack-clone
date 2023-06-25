@@ -26,8 +26,7 @@ export class AuthService {
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        localStorage.setItem('user', JSON.stringify(user));
-        JSON.parse(localStorage.getItem('user')!);
+        this.UpdateUserData(user);
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -35,16 +34,15 @@ export class AuthService {
     });
   }
 
-
   // Sign in with email/password
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SetUserData(result.user);
-        this.afAuth.authState.subscribe((user) => {
-          if (user && this.isLoggedIn == true) {
+        this.UpdateUserData(result.user);
 
+        this.afAuth.authState.subscribe((user) => {
+          if (user && user.emailVerified) {
             this.router.navigate(['main']);
           }
         });
@@ -63,6 +61,7 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(formData.email, formData.password)
       .then((result) => {
+        this.router.navigate(['auth/login']);
         /* Call the SendVerificationMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();
@@ -71,16 +70,11 @@ export class AuthService {
           formData.firstName,
           formData.lastName,
           formData.initials,
-          this.getDisplayName(formData.firstname, formData.lastName),
         );
       })
       .catch((error) => {
         window.alert(error.message);
       })
-  }
-
-  getDisplayName(firstString, secondString): string {
-       return firstString + '' + secondString;
   }
 
   // Sign in with Google
@@ -96,14 +90,14 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.router.navigate(['dashboard']);
-        this.SetUserData(result.user);
+        this.UpdateUserData(result.user);
       })
       .catch((error) => {
         window.alert(error);
       });
   }
 
-  // Send email verificaiton when new user sign up
+  // Send email verification when new user signs up
   SendVerificationMail() {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
@@ -112,39 +106,61 @@ export class AuthService {
       });
   }
 
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
-  }
-
-
+  
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(
     user: any,
-    firstName?: string,
-    lastName?: string,
-    initials?: string,
-    displayName?: string,
+    firstName: string,
+    lastName: string,
+    initials: string,
+  ) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
 
+    const userData: User = {
+      uid: user.uid,
+      firstName: firstName,
+      lastName: lastName,
+      initials: initials,
+      email: user.email,
+      displayName: `${firstName} ${lastName}`,
+      emailVerified: user.emailVerified,
+      userImgUrl: './assets/gender.png',
+    };
+
+    this.userData = userData;
+    localStorage.setItem('user', JSON.stringify(userData))
+
+    return userRef.set(userData, {
+      merge: true,
+    });
+  }
+
+  UpdateUserData(
+    user: any,
+    displayName?: string,
+    userImgUrl?: string,
   ) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
 
     userRef.get().subscribe(ref => {
-      const userDocData: any = ref.data();      
+      const userDocData: any = ref.data();
 
       const userData: User = {
         uid: user.uid,
-        firstName: firstName || userDocData.firstName,
-        lastName: lastName || userDocData.lastName,
-        initials: initials || userDocData.initials,
-        email: user.email,
-        displayName: displayName || user.displayName,
+        firstName: userDocData.firstName,
+        lastName: userDocData.lastName,
+        initials: userDocData.initials,
+        email: userDocData.email,
+        displayName: displayName || userDocData.displayName,
         emailVerified: user.emailVerified,
-      };      
+        userImgUrl: userImgUrl || userDocData.userImgUrl
+      };
 
       this.userData = userData;
       localStorage.setItem('user', JSON.stringify(userData))
@@ -158,7 +174,7 @@ export class AuthService {
   // Sign out
   SignOut() {
     return this.afAuth.signOut().then(() => {
-      
+
       localStorage.removeItem('user');
       this.router.navigate(['auth/login']);
     });

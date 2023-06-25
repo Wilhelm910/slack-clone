@@ -13,23 +13,16 @@ export class SignUpDialogComponent {
   showMailVerifyHint: boolean = false;
 
   constructor(
-    public authService: AuthService,
-    public router: Router
+    public router: Router,
+    private authService: AuthService,
   ) {
-    this.authService.verificationMailSent.subscribe((value) => {
-      console.log(value);
-      if(value) {
-        this.showMailVerifyHint = true;
-        setTimeout(() => {
-          this.router.navigate(['auth/login']);
-        }, 5000)
-      }
-    })
+
   }
 
   @ViewChild('signUpForm') signUpForm?: NgForm;
 
   formData = {
+    displayName: '',
     firstName: '',
     lastName: '',
     initials: '',
@@ -43,12 +36,12 @@ export class SignUpDialogComponent {
     this.passwordsMatching = (this.formData.password == this.formData.passwordCheck)
   }
 
-  submitForm() {    
+  submitForm() {
     this.formData.initials = (this.formData.firstName.charAt(0) + this.formData.lastName.charAt(0))
+    this.formData.displayName = this.formData.firstName + ' ' + this.formData.lastName
     this.authService.SignUp(this.formData);
-    
+
     console.log('Form data', this.formData);
     console.log('initials', this.formData.initials);
-    
   }
 }

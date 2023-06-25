@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
+import { Component, Input, OnInit } from '@angular/core';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 
 @Component({
@@ -9,14 +10,22 @@ import { ButtonModule } from 'primeng/button';
 })
 export class MainComponent implements OnInit {
 
+  constructor(
+    private router: Router
+  ) {
+    router.events.pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe(() => {
+      if(window.innerWidth <= 700) {
+        this.opened = false;      
+    }})
+  }
+ 
   public createChannelDialog: boolean;
   public sidebar: boolean = false;
 
-  opened:boolean = true;
+  @Input() opened: boolean = true;
 
   ngOnInit(): void {
-
-    
 
   }
 

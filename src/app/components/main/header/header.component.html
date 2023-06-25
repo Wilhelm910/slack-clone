@@ -3,15 +3,17 @@
     <mat-card>
         <form class="example-form">
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Search...">
+                <mat-label>Search...</mat-label>
+                <input matInput>
+                <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
         </form>
     </mat-card>
     <button mat-button [matMenuTriggerFor]="menu"><mat-icon>settings_accessibility</mat-icon></button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="openDialog()">Settings</button>
-        <button mat-menu-item>Legal</button>
-        <button mat-menu-item>Logout</button>
+        <button mat-menu-item routerLink="/legal">Legal</button>
+        <button (click)="authService.SignOut()" mat-menu-item>Logout</button>
     </mat-menu>
 
 </div>

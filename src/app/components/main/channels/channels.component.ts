@@ -25,6 +25,8 @@ export class ChannelsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('was here');
+    
     this.firestore
       .collection('channels')
       .valueChanges({ idField: 'ID' })
