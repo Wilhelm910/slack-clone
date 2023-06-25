@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Thread } from 'src/app/core/models/thread.class';
 import { ThreadService } from 'src/app/core/services/thread.service';
 
@@ -8,6 +9,7 @@ import { ThreadService } from 'src/app/core/services/thread.service';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit {
+  @Output() showSideNav: EventEmitter<true> = new EventEmitter
   showDetails: boolean = false;
   thrdObj: Thread = new Thread;
 
@@ -18,7 +20,6 @@ export class ContentComponent implements OnInit {
     if(threadJSON != null) {
       this.threadService.showThreadDetailsFromJSON(threadJSON);
     }
-    
   }
 
   ngOnInit(): void {
