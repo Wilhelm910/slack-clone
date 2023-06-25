@@ -15,6 +15,7 @@ import { User } from 'src/app/core/models/user.class';
 })
 export class ThreadComponent implements OnInit {
   @Input() thrdObj: Thread;
+  @Input() viewId: number;
   @Input() avatarImgPath: string;
   @Input() showAnswersAmount: boolean;
 
@@ -36,6 +37,8 @@ export class ThreadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.viewId);
+    
     if(!this.thrdObj.isReply) {
           this.getAnswersAmount()
     }
@@ -85,6 +88,5 @@ export class ThreadComponent implements OnInit {
         }
       })  
   }
-
 }
 

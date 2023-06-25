@@ -116,6 +116,8 @@ export class TextEditorComponent implements OnInit {
       .collection('threads').add(thread)
       .then((docRef) => {
         docRef.update({ tId: docRef.id })
+        thread.tId = docRef.id;
+        this.threadService.newThread.next(thread)
       })
   }
 

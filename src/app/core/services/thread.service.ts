@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Thread } from '../models/thread.class';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class ThreadService implements OnInit {
   activeThread = new BehaviorSubject(new Thread);
+  newThread: Subject<Thread> = new Subject;
 
   constructor(
     private firestore: AngularFirestore,
