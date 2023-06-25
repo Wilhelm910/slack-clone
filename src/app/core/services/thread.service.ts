@@ -9,6 +9,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class ThreadService implements OnInit {
   activeThread = new BehaviorSubject(new Thread);
   newThread: Subject<Thread> = new Subject;
+  deletedThreadId: Subject<number> = new Subject; 
 
   constructor(
     private firestore: AngularFirestore,
@@ -21,6 +22,7 @@ export class ThreadService implements OnInit {
   }
 
   deleteThread(threadObject) {   
+    
     this.getFirebaseDoc(threadObject).delete()
   }
 

@@ -4,7 +4,7 @@
     <!-- content -->
     <div class="channel-content">
         <div *ngFor="let thread of threads, index as i" class="thread">
-            <app-thread [showAnswersAmount]="true" [thrdObj]="thread"></app-thread>
+            <app-thread [showAnswersAmount]="true" [viewId]="i" [thrdObj]="thread" (removeIdFromView)="removeIdFromView($event)"></app-thread>
         </div>
     </div>
     <!-- footer -->

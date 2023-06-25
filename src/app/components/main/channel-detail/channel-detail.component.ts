@@ -21,6 +21,7 @@ export class ChannelDetailComponent implements OnInit {
   threads: Array<any> = [];
   fullViewUpdate: boolean = false;
 
+
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
@@ -89,5 +90,11 @@ export class ChannelDetailComponent implements OnInit {
     });
 
     return sortedThreads;
+  }
+
+  removeIdFromView(i) {
+    console.log(i);
+    
+    this.threads.splice(i, 1)
   }
 }

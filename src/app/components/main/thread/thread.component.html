@@ -4,7 +4,7 @@
         <i *ngIf="!confirmDelete" matTooltip="View Thread" (click)="showDetails(thrdObj)" class="pi pi-comment"></i>
         <!-- confirm deletion -->
         <div *ngIf="confirmDelete" class="confirm-del">
-            <i class="pi pi-check" (click)="threadService.deleteThread(thrdObj)"></i>
+            <i class="pi pi-check" (click)="deleteThis()"></i>
             <i class="pi pi-times" (click)="confirmDelete = false"></i>
         </div>
         <!--  -->

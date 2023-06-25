@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Thread } from 'src/app/core/models/thread.class';
 import { ChannelService } from 'src/app/core/services/channel.service';
@@ -6,6 +6,7 @@ import { Timestamp } from '@angular/fire/firestore';
 import { ThreadService } from 'src/app/core/services/thread.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User } from 'src/app/core/models/user.class';
+import { remove } from '@angular/fire/database';
 
 @Component({
   selector: 'app-thread',
@@ -18,6 +19,7 @@ export class ThreadComponent implements OnInit {
   @Input() viewId: number;
   @Input() avatarImgPath: string;
   @Input() showAnswersAmount: boolean;
+  @Output() removeIdFromView: EventEmitter<number> = new EventEmitter;
 
   onFocus: boolean;
   userIsCreator: boolean = false;
@@ -36,9 +38,7 @@ export class ThreadComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-    console.log(this.viewId);
-    
+  ngOnInit(): void {    
     if(!this.thrdObj.isReply) {
           this.getAnswersAmount()
     }
@@ -58,10 +58,6 @@ export class ThreadComponent implements OnInit {
       })
   }
 
-  deleteThread(threadId: string) {
-    this.channelService.threadsCollection.doc(threadId).delete()
-  }
-
   transformTimestamp(timestamp: Date | Timestamp) {
    console.log('timestamp', timestamp);
    
@@ -73,6 +69,12 @@ export class ThreadComponent implements OnInit {
   showDetails(threadObject) {
     localStorage.setItem('activeThread', JSON.stringify(threadObject));
     this.threadService.activeThread.next(threadObject);
+  }
+
+  deleteThis() {
+    this.removeIdFromView.emit(this.viewId);
+    this.threadService.deleteThread(this.thrdObj)
+
   }
 
   getAnswersAmount() {
