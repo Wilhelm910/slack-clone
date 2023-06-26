@@ -76,6 +76,7 @@ p {
     color: white;
     margin: 0px !important;
 }
+
 button {
     color: white !important;
 }
@@ -98,6 +99,22 @@ mat-form-field {
     background-color: #6e1470 !important;
 }
 
-::ng-deep .mat-form-field-appearance-fill  {
+::ng-deep .mat-form-field-appearance-fill {
     background-color: #6e1470 !important;
-  }
+}
+
+
+.mat-focused .mat-form-field-label {
+    /*change color of label*/
+    background-color: #6e1470 !important;
+}
+
+.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: #6e1470 !important;
+}
+
+.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: #6e1470 !important;
+}

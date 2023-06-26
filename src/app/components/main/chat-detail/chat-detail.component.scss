@@ -1,3 +1,9 @@
+.wrapper {
+    background-color: #3F0E40;
+    width: 100%;
+    color: white;
+}
+
 .header {
     display: flex;
 }
@@ -10,6 +16,10 @@ img {
 
 p {
     margin: 0;
+}
+
+button {
+    color: white !important;
 }
 
 .content {
@@ -38,6 +48,10 @@ p {
 
 .message-container {
     margin: 8px 0;
+}
+
+.editor {
+    color: white !important;
 }
 
 quill-editor {

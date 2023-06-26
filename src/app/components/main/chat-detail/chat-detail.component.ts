@@ -126,6 +126,7 @@ export class ChatDetailComponent implements OnInit {
   editorForm: FormGroup;
   editorStyle = {
     height: '200px',
+    color: 'white'
   }
 
   config = {

@@ -10,6 +10,7 @@
 
 
 mat-sidenav-container {
+    background-color: #3F0E40;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -17,13 +18,17 @@ mat-sidenav-container {
     top: 100px;
 }
 
-mat-sidenav-content {
-    height: 100%;
-}
-
 mat-sidenav {
     width: 270px;
     height: 100%;
+    border: 1px solid white;
+ 
+}
+
+mat-sidenav-content {
+    border-radius: 1px solid white;
+    height: 100%;
+    overflow: hidden !important;
 }
 
 mat-toolbar,
@@ -78,4 +83,14 @@ button {
     mat-sidenav {
         width: 100vw;
     }
+}
+
+
+mat-icon {
+    color: white;
+    margin: 0px !important;
+}
+
+button {
+    border: 1px solid white;
 }
