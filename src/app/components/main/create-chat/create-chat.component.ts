@@ -15,6 +15,7 @@ export class CreateChatComponent implements OnInit {
   selectedUsers = []
   chat = new Chat;
   allChats = [];
+  enteredSearchValue: string = ''
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -77,5 +78,6 @@ export class CreateChatComponent implements OnInit {
   createChatName() {
     this.chat.name = this.selectedUsers[0].displayName
   }
+
 
 }
