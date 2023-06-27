@@ -73,7 +73,7 @@ export class ChannelDetailComponent implements OnInit {
       console.log('THREADS_BEFORE', this.threads);
               
         // this.sortThreadsData(threadsData);
-        if (this.threads.length == 0 || this.fullViewUpdate) { this.threads = threadsData, this.fullViewUpdate = false };
+        if (this.fullViewUpdate) { this.threads = threadsData, this.fullViewUpdate = false };
        
         if (this.newThread !== null) { this.threads.push(this.newThread), this.newThread = null}
       console.log('THREADS', this.threads);
