@@ -30,7 +30,7 @@ export class ChannelDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {      
+    this.route.params.subscribe(params => {
       this.channelId = params['id'];
       this.getChannel();
       this.channelService.channelId.next(this.channelId);
@@ -50,8 +50,8 @@ export class ChannelDetailComponent implements OnInit {
       .doc(this.channelId)
       .valueChanges()
       .subscribe((channelData: any) => {
-        
-       this.channelData = new Channel(channelData);
+
+        this.channelData = new Channel(channelData);
         this.setThreadsCollection(this.channelId);
         this.fullViewUpdate = true;
         this.getThreads();
@@ -59,7 +59,7 @@ export class ChannelDetailComponent implements OnInit {
   }
 
   setThreadsCollection(channelId) {
-    
+
     this.threadsCollection = this.firestore
       .collection('channels')
       .doc(channelId)
@@ -70,14 +70,10 @@ export class ChannelDetailComponent implements OnInit {
     this.threadsCollection
       .valueChanges()
       .subscribe((threadsData: any) => {
-      console.log('THREADS_BEFORE', this.threads);
-              
         // this.sortThreadsData(threadsData);
         if (this.fullViewUpdate) { this.threads = threadsData, this.fullViewUpdate = false };
-       
-        if (this.newThread !== null) { this.threads.push(this.newThread), this.newThread = null}
-      console.log('THREADS', this.threads);
-      
+        if (this.newThread !== null) { this.threads.push(this.newThread), this.newThread = null }
+
       })
   }
 

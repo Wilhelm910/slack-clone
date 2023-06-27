@@ -3,7 +3,7 @@
         <router-outlet></router-outlet>
     </section>
     <section *ngIf="showDetails" class="detail-section">
-        <i (click)="closeDetails()" class="pi pi-times-circle" style="font-size: 1.5rem"></i>
+        <i (click)="closeDetails()" class="pi pi-times-circle"></i>
         <app-thread-detail></app-thread-detail>
     </section>
 </div>

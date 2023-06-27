@@ -1,8 +1,6 @@
 .content {
     position: relative;
     display: flex;
-    color: black;
-    background-color: white;
     height: 100%;
     background-color: #3F0E40;
     border: 1px solid white;
@@ -16,19 +14,18 @@
     }
 
     .detail-section {
-        background-color: white;
-        border-left: 1px solid rgba(0, 0, 0, 0.2);
+        border-left: 1px solid white;
         width: 100%;
         position: relative;
 
         i { 
-            color: rgba(0, 0, 0, 0.4);
             position: absolute;
             top: 12px;
             right: 8px;
+            font-size: 1.5rem;
             
             &:hover {
-                color: rgba(0, 0, 0, 0.6);
+                color: rgba(255, 255, 255, 0.7);
                 cursor: pointer;
             }
         }
