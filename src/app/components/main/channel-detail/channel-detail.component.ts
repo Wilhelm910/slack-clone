@@ -69,11 +69,15 @@ export class ChannelDetailComponent implements OnInit {
   getThreads() {
     this.threadsCollection
       .valueChanges()
-      .subscribe((threadsData: any) => {        
+      .subscribe((threadsData: any) => {
+      console.log('THREADS_BEFORE', this.threads);
+              
         // this.sortThreadsData(threadsData);
         if (this.threads.length == 0 || this.fullViewUpdate) { this.threads = threadsData, this.fullViewUpdate = false };
+       
         if (this.newThread !== null) { this.threads.push(this.newThread), this.newThread = null}
-        this.ngOnInit
+      console.log('THREADS', this.threads);
+      
       })
   }
 
@@ -94,7 +98,6 @@ export class ChannelDetailComponent implements OnInit {
 
   removeIdFromView(i) {
     console.log(i);
-    
     this.threads.splice(i, 1)
   }
 }

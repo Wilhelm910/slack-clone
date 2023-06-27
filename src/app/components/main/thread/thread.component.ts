@@ -31,7 +31,6 @@ export class ThreadComponent implements OnInit {
   timeAsString: string;
 
   constructor(
-    private channelService: ChannelService,
     public threadService: ThreadService,
     private datePipe: DatePipe,
     private firestore: AngularFirestore,
@@ -59,8 +58,6 @@ export class ThreadComponent implements OnInit {
   }
 
   transformTimestamp(timestamp: Date | Timestamp) {
-   console.log('timestamp', timestamp);
-   
     const asDate = timestamp instanceof Timestamp ? timestamp.toDate() : timestamp;
     this.dayAsString = this.datePipe.transform(asDate, 'yyyy-MM-dd');
     this.timeAsString = this.datePipe.transform(asDate, 'HH:mm') + ' Uhr';

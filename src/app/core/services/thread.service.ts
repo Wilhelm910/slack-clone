@@ -22,7 +22,6 @@ export class ThreadService implements OnInit {
   }
 
   deleteThread(threadObject) {   
-    
     this.getFirebaseDoc(threadObject).delete()
   }
 
