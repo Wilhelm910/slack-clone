@@ -32,7 +32,11 @@ export class LoginDialogComponent {
   submitForm() {
     this.authService.SignIn(this.formData.usermail, this.formData.password)
     this.loginForm?.reset();
+  }
 
+  loginAsGuest() {
+    this.authService.SignIn('john.doe@existiert.net', '123456jd')
+    this.loginForm?.reset();
   }
 }
 

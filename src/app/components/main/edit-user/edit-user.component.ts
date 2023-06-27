@@ -16,6 +16,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
+  userIsGuest: boolean;
 
   user;
   uID;
@@ -39,6 +40,8 @@ export class EditUserComponent implements OnInit {
 
   async ngOnInit() {
     this.getInfoFromLocalStorage();
+    this.userIsGuest = this.uID == 'cvbncetIG8Tdbm01uT18jBoIYSI2' ? true : false;
+    
     //this.getUserFotoFromFireStorage();
   }
 

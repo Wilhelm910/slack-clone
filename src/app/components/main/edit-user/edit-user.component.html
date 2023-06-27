@@ -13,7 +13,7 @@
             </mat-form-field>
         </div>
 
-        <div class="upload-container">
+        <div [class.inactive]="userIsGuest" class="upload-container">
             <div class="img-container">
                 <img src="{{ imgSrc }}" (click)="fileUploader.click()">
             </div>

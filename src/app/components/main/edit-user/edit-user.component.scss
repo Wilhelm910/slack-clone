@@ -13,12 +13,17 @@
     }
 }
 
+// image change not available as guest
+.inactive {
+    pointer-events: none;
+}    
+
 .upload-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    div {
+         div {
         display: flex;
         flex-direction: column;
     }
@@ -44,6 +49,7 @@ p {
 .upload-btn {
     padding: 8px;
     border-radius: 8px;
+
 
     &:hover {
         cursor: pointer;
