@@ -95,4 +95,6 @@ mat-icon {
 
 button {
     border: 1px solid white;
+    position: relative;
+    z-index: 5;
 }

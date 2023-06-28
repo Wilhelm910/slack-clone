@@ -23,6 +23,21 @@ export class HeaderComponent implements OnInit {
     public authService: AuthService,
   ) { }
 
+opened: boolean = true;
+openMenu: boolean = false;
+
+  @Output()
+  sidenavToggled: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  onSidenavToggled() {
+    if(this.opened == true) {
+      this.opened = false;
+    } else {
+      this.opened = true;
+    }
+    this.sidenavToggled.emit(this.opened)
+  }
+
   openDialog() {
     this.dialog.open(EditUserComponent);
   }

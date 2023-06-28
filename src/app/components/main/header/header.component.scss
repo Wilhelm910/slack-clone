@@ -8,6 +8,30 @@
   justify-content: space-between;
   padding-top: 8px;
   padding-bottom: 8px;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.menu {
+  z-index: 3;
+  position: absolute;
+  right: 0px;
+  top: 75px;
+
+  >div {
+    display: flex;
+    flex-direction: column;
+
+    >button {
+      margin: 4px 0 !important;
+      padding: 20px;
+      background-color: #3F0E40;
+
+      &:hover {
+        background-color: #6e1470;
+      }
+    }
+  }
 }
 
 
@@ -19,3 +43,57 @@ mat-icon {
   margin-right: 24px;
 }
 
+
+
+button {
+  border: 1px solid white;
+
+  mat-icon {
+    margin: 0 !important;
+  }
+
+  &:hover {
+    background-color: #6e1470;
+  }
+}
+
+
+.inactive {
+  animation: rotateUpwards90 0.5s ease-in-out forwards;
+}
+
+
+@keyframes rotateUpwards90 {
+  0% {
+    transform: rotate(0deg);
+    transform-origin: center center;
+  }
+
+  100% {
+    transform: rotate(180deg);
+    transform-origin: center center;
+  }
+}
+
+.active {
+  animation: rotateDownwards90 0.5s ease-in-out forwards;
+}
+
+
+@keyframes rotateDownwards90 {
+  0% {
+    transform: rotate(-180deg);
+    transform-origin: center center;
+  }
+
+  100% {
+    transform: rotate(0deg);
+    transform-origin: center center;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  mat-sidenav {
+    width: 100vw;
+  }
+}

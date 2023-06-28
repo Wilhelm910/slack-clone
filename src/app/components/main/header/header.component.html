@@ -1,5 +1,9 @@
 <div class="header-container">
-    <h1>Slack Clone</h1>
+
+    <div>
+        <button mat-button (click)="onSidenavToggled()"><mat-icon
+                [ngClass]="opened ? 'active':'inactive'">arrow_back_ios</mat-icon></button>
+    </div>
     <mat-card>
         <form class="example-form">
             <mat-form-field class="example-full-width">
@@ -9,11 +13,25 @@
             </mat-form-field>
         </form>
     </mat-card>
-    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>settings_accessibility</mat-icon></button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="openDialog()">Settings</button>
-        <button mat-menu-item routerLink="/legal">Legal</button>
-        <button (click)="authService.SignOut()" mat-menu-item>Logout</button>
-    </mat-menu>
+
+    <!-- <button mat-button [matMenuTriggerFor]="menu"><mat-icon>settings_accessibility</mat-icon></button> -->
+
+    <button mat-button (click)="openMenu=!openMenu">
+        <mat-icon>settings_accessibility</mat-icon>
+    </button>
+
+    <div *ngIf="openMenu" class="menu">
+        <div>
+            <button mat-button (click)="openDialog()">Settings</button>
+            <button mat-button routerLink="/legal">Legal</button>
+            <button mat-button (click)="authService.SignOut()">Logout</button>
+        </div>
+    </div>
+
+    <!-- <mat-menu #menu="matMenu" class="menu">
+        <button class="menu-btn" mat-menu-item  (click)="openDialog()">Settings</button>
+        <button class="menu-btn" mat-menu-item routerLink="/legal">Legal</button>
+        <button class="menu-btn" (click)="authService.SignOut()" mat-menu-item>Logout</button>
+    </mat-menu> -->
 
 </div>

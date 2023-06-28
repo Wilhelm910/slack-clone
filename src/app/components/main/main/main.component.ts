@@ -42,4 +42,8 @@ export class MainComponent implements OnInit {
     console.log(this.createChannelDialog)
   }
 
+  OnSidenavToggled(event) {
+    this.opened = event
+  }
+
 }
