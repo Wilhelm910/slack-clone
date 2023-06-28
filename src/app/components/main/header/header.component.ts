@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/core/services/auth.service';
