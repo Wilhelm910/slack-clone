@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { MatDialog } from '@angular/material/dialog';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { LegalComponent } from '../legal/legal.component';
+import { SearchFilterService } from 'src/app/core/services/search-filter.service';
 
 @Component({
   selector: 'app-header',
@@ -12,15 +11,16 @@ import { LegalComponent } from '../legal/legal.component';
 
 })
 export class HeaderComponent implements OnInit {
+  inputValue: string;
 
   ngOnInit(): void {
-      
+
   }
 
   constructor(
-    private firestore: AngularFirestore,
     public dialog: MatDialog,
     public authService: AuthService,
+    public searchService: SearchFilterService,
   ) { }
 
   openDialog() {
@@ -28,5 +28,8 @@ export class HeaderComponent implements OnInit {
   }
 
 
-
+  onSearch(value) {
+    this.searchService.searchValue.next(value)
+  }
 }
+
