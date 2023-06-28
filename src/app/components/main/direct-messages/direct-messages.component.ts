@@ -13,6 +13,7 @@ export class DirectMessagesComponent implements OnInit {
   allChats = [];
   imgUrls = [];
   userInfo = [];
+  users = [];
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -22,17 +23,45 @@ export class DirectMessagesComponent implements OnInit {
       .valueChanges({ idField: 'ID' })
       .subscribe((changes: any) => {
         this.allChats = changes;
-        this.getUserImgUrl()
+        this.getUser()
+      })
+  }
+
+  getUser() {
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'ID' })
+      .subscribe((changes: any) => {
+        this.users = changes;
+        console.log(this.users)
+       // this.updateChatData()
       })
   }
 
   getUserImgUrl() {
+    /*
     this.allChats.forEach(element => {
       this.userInfo.push(element.userInfo)
     });
     this.userInfo.forEach(element => {
       this.imgUrls.push(element[0].userImgUrl)
+    }); 
+    */
+    this.users.forEach(element => {
+      this.userInfo.push(element.userImgUrl)
     });
+    console.log(this.userInfo)
+  }
+// IDs vergleichen. und dann imgUrl updaten
+  updateChatData() {
+    this.allChats.forEach(element => {
+      for (let i = 0; i < this.users.length; i++) {
+        if (element.ID == this.users[i].userImgUrl) {
+          element.userImgUrl = this.users[i].userImgUrl
+        }
+      }
+    });
+    console.log(this.allChats)
   }
 
 

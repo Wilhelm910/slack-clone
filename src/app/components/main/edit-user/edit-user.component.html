@@ -4,14 +4,13 @@
     <div mat-dialog-content class="content">
 
         <div class="input-container">
-            <mat-form-field appearance="fill" class="bg">
+         
                 <label>First name</label>
                 <input class="form-input" formControlName="firstname" [(ngModel)]="user.firstName">
-            </mat-form-field>
-            <mat-form-field>
+          
                 <label>Last name</label>
                 <input class="form-input" formControlName="lastname" [(ngModel)]="user.lastName">
-            </mat-form-field>
+     
         </div>
 
         <div class="upload-container" [class.inactive]="userIsGuest">
