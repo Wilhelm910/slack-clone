@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Channel } from 'src/app/core/models/channel.class';
 import { Thread } from 'src/app/core/models/thread.class';
-
+import 'quill-emoji/dist/quill-emoji.js';
 import { ChannelService } from 'src/app/core/services/channel.service';
 import { ThreadService } from 'src/app/core/services/thread.service';
 
@@ -54,7 +54,25 @@ export class TextEditorComponent implements OnInit {
       [{ list: 'ordered' }, { list: 'bullet' }],
       ['emoji'],
       ['link']
-    ]
+    ],
+    'emoji-toolbar': true,
+    'emoji-textarea': false,
+    'emoji-shortname': true,
+    keyboard: {
+      bindings: {
+        ctrl_enter: {
+          key: 13,
+          ctrlKey: true,
+          handler: () => {
+            this.sendMessage();
+          },
+        },
+      },
+    },
+  }
+
+  sendMessage() {
+    console.log("test")
   }
 
   getChannelId() {
@@ -153,4 +171,7 @@ export class TextEditorComponent implements OnInit {
         docRef.update({ tId: docRef.id })
       })
   }
+
+
+  
 }
