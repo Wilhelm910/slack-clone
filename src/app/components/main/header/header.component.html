@@ -5,11 +5,11 @@
                 [ngClass]="opened ? 'active':'inactive'">arrow_back_ios</mat-icon></button>
     </div>
     <mat-card>
-        <form class="example-form">
-            <mat-form-field class="example-full-width">
+        <form>
+            <mat-form-field>
                 <mat-label>Search...</mat-label>
                 <input (keyup)="onSearch(inputValue)" [(ngModel)]="inputValue" name="searchInput" matInput>
-                <mat-icon matSuffix>search</mat-icon>
+                <mat-icon style="color: black;" matSuffix>search</mat-icon>
             </mat-form-field>
         </form>
     </mat-card>

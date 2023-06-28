@@ -1,15 +1,16 @@
-<h1 class="title" mat-dialog-title>Settings</h1>
 <form class="form-container" [formGroup]="formTemplate" (submit)="submit(formTemplate.value)">
+    <h1 class="title" mat-dialog-title>Settings</h1>
+
     <div mat-dialog-content class="content">
 
         <div class="input-container">
             <mat-form-field appearance="fill" class="bg">
-                <mat-label>First name</mat-label>
-                <input matInput formControlName="firstname" [(ngModel)]="user.firstName">
+                <label>First name</label>
+                <input class="form-input" formControlName="firstname" [(ngModel)]="user.firstName">
             </mat-form-field>
-            <mat-form-field >
-                <mat-label>Last name</mat-label>
-                <input  matInput formControlName="lastname" [(ngModel)]="user.lastName"> 
+            <mat-form-field>
+                <label>Last name</label>
+                <input class="form-input" formControlName="lastname" [(ngModel)]="user.lastName">
             </mat-form-field>
         </div>
 
@@ -22,7 +23,8 @@
                     <mat-icon>cloud_upload</mat-icon>
                     <p>Upload image</p>
                 </label>
-                <input type="file" id="fileDialog" accept="image/*" #fileUploader formControlName="imageUrl" (change)="onFileSelected($event)">
+                <input type="file" id="fileDialog" accept="image/*" #fileUploader formControlName="imageUrl"
+                    (change)="onFileSelected($event)">
             </div>
         </div>
 

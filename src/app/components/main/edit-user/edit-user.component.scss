@@ -1,7 +1,7 @@
 .input-container {
     display: flex;
     flex-direction: column;
-    background-color: #6e1470;
+    background-color: #3F0E40;
 }
 
 .content {
@@ -22,6 +22,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
          div {
         display: flex;
@@ -49,7 +50,7 @@ p {
 .upload-btn {
     padding: 8px;
     border-radius: 8px;
-
+    border: 1px solid white;
 
     &:hover {
         cursor: pointer;
@@ -74,17 +75,24 @@ p {
 }
 
 .form-container {
-    background-color: #6e1470;
+    background-color: #3F0E40;
+    border-radius: 8px;
+    border: 1px solid white;
+
 }
 
 .title {
-    background-color: #6e1470;
+    background-color: #3F0E40;
     color: white;
     margin: 0px !important;
 }
 
 button {
     color: white !important;
+
+    &:hover {
+        background-color: #6e1470;
+    }
 }
 
 .upload-btn {
@@ -92,35 +100,16 @@ button {
     p {
         color: white !important;
     }
-
 }
 
-
-
-mat-form-field {
-    background-color: #6e1470 !important;
+.form-input {
+    padding: 12px 8px;
+    border: 1px solid white;
+    border-radius: 8px;
+    background-color: #3F0E40;
+    color: white;
 }
 
-::ng-deep .bg {
-    background-color: #6e1470 !important;
-}
-
-::ng-deep .mat-form-field-appearance-fill {
-    background-color: #6e1470 !important;
-}
-
-
-.mat-focused .mat-form-field-label {
-    /*change color of label*/
-    background-color: #6e1470 !important;
-}
-
-.mat-form-field-underline {
-    /*change color of underline*/
-    background-color: #6e1470 !important;
-}
-
-.mat-form-field-ripple {
-    /*change color of underline when focused*/
-    background-color: #6e1470 !important;
+label {
+    color: white;
 }
