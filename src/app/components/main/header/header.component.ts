@@ -23,14 +23,14 @@ export class HeaderComponent implements OnInit {
     public searchService: SearchFilterService,
   ) { }
 
-opened: boolean = true;
-openMenu: boolean = false;
+  opened: boolean = true;
+  openMenu: boolean = false;
 
   @Output()
   sidenavToggled: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   onSidenavToggled() {
-    if(this.opened == true) {
+    if (this.opened == true) {
       this.opened = false;
     } else {
       this.opened = true;
@@ -42,9 +42,5 @@ openMenu: boolean = false;
     this.dialog.open(EditUserComponent);
   }
 
-
-  onSearch(value) {
-    this.searchService.searchValue.next(value)
-  }
 }
 

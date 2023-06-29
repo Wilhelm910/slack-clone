@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Channel } from 'src/app/core/models/channel.class';
@@ -23,12 +23,13 @@ export class ChannelDetailComponent implements OnInit {
   fullViewUpdate: boolean = false;
 
 
+
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
     private channelService: ChannelService,
     private threadService: ThreadService,
-    private searchService: SearchFilterService,
+    public searchService: SearchFilterService,
   ) { }
 
   ngOnInit(): void {
@@ -97,5 +98,18 @@ export class ChannelDetailComponent implements OnInit {
   removeIdFromView(i) {
     console.log(i);
     this.threads.splice(i, 1)
+  }
+
+  includesSearchValue(thread) {
+    const inputValue = this.searchService.searchValue;
+    if (inputValue != null && (
+      (JSON.stringify(thread.userName)).toLowerCase().includes(inputValue.toLowerCase().trim()) ||
+      (JSON.stringify(thread.message)).toLowerCase().includes(inputValue.toLowerCase().trim()))
+      )
+    {
+      return true 
+    } else {
+      return false
+    }
   }
 }

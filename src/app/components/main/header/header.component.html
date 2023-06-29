@@ -8,7 +8,7 @@
         <form>
             <mat-form-field>
                 <mat-label>Search...</mat-label>
-                <input (keyup)="onSearch(inputValue)" [(ngModel)]="inputValue" name="searchInput" matInput>
+                <input [(ngModel)]="searchService.searchValue" name="searchInput" matInput>
                 <mat-icon style="color: black;" matSuffix>search</mat-icon>
             </mat-form-field>
         </form>
