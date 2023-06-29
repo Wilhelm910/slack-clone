@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Channel } from 'src/app/core/models/channel.class';
 import { Thread } from 'src/app/core/models/thread.class';
 import { ChannelService } from 'src/app/core/services/channel.service';
+import { SearchFilterService } from 'src/app/core/services/search-filter.service';
 import { ThreadService } from 'src/app/core/services/thread.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class ChannelDetailComponent implements OnInit {
     private firestore: AngularFirestore,
     private channelService: ChannelService,
     private threadService: ThreadService,
+    private searchService: SearchFilterService,
   ) { }
 
   ngOnInit(): void {
@@ -70,7 +72,7 @@ export class ChannelDetailComponent implements OnInit {
     this.threadsCollection
       .valueChanges()
       .subscribe((threadsData: any) => {
-        // this.sortThreadsData(threadsData);
+        this.sortThreadsData(threadsData);
         if (this.fullViewUpdate) { this.threads = threadsData, this.fullViewUpdate = false };
         if (this.newThread !== null) { this.threads.push(this.newThread), this.newThread = null }
 

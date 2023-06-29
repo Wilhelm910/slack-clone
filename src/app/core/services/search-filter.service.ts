@@ -9,10 +9,5 @@ export class SearchFilterService {
 
   constructor(
 
-  ) {
-    this.searchValue.subscribe((value) => {
-    console.log('Subscription:', value);
-    
-    })
-   }
+  ) { }
 }
