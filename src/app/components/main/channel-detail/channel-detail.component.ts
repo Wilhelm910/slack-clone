@@ -18,8 +18,6 @@ export class ChannelDetailComponent implements OnInit {
   channelId: string = '';
   channelData: Channel = new Channel;
   newThread: Thread = null;
-  threadsCollection: AngularFirestoreCollection;
-  threads: Array<any> = [];
   fullViewUpdate: boolean = false;
 
 
@@ -38,12 +36,6 @@ export class ChannelDetailComponent implements OnInit {
       this.getChannel();
       this.channelService.channelId.next(this.channelId);
     })
-
-    this.threadService.newThread.subscribe((threadObject) => {
-      if (threadObject != null) {
-        this.newThread = threadObject;
-      }
-    })
   }
 
   getChannel() {
@@ -55,30 +47,10 @@ export class ChannelDetailComponent implements OnInit {
       .subscribe((channelData: any) => {
 
         this.channelData = new Channel(channelData);
-        this.setThreadsCollection(this.channelId);
-        this.fullViewUpdate = true;
-        this.getThreads();
       })
   }
 
-  setThreadsCollection(channelId) {
 
-    this.threadsCollection = this.firestore
-      .collection('channels')
-      .doc(channelId)
-      .collection('threads');
-  }
-
-  getThreads() {
-    this.threadsCollection
-      .valueChanges()
-      .subscribe((threadsData: any) => {
-        this.sortThreadsData(threadsData);
-        if (this.fullViewUpdate) { this.threads = threadsData, this.fullViewUpdate = false };
-        if (this.newThread !== null) { this.threads.push(this.newThread), this.newThread = null }
-
-      })
-  }
 
   sortThreadsData(data: any) {
     let sortedThreads = data.sort((a, b) => {
@@ -95,21 +67,16 @@ export class ChannelDetailComponent implements OnInit {
     return sortedThreads;
   }
 
-  removeIdFromView(i) {
-    console.log(i);
-    this.threads.splice(i, 1)
-  }
-
-  includesSearchValue(thread) {
-    const inputValue = this.searchService.searchValue;
-    if (inputValue != null && (
-      (JSON.stringify(thread.userName)).toLowerCase().includes(inputValue.toLowerCase().trim()) ||
-      (JSON.stringify(thread.message)).toLowerCase().includes(inputValue.toLowerCase().trim()))
-      )
-    {
-      return true 
-    } else {
-      return false
-    }
-  }
+  // includesSearchValue(thread) {
+  //   const inputValue = this.searchService.searchValue;
+  //   if (inputValue != null && (
+  //     (JSON.stringify(thread.userName)).toLowerCase().includes(inputValue.toLowerCase().trim()) ||
+  //     (JSON.stringify(thread.message)).toLowerCase().includes(inputValue.toLowerCase().trim()))
+  //     )
+  //   {
+  //     return true 
+  //   } else {
+  //     return false
+  //   }
+  // }
 }

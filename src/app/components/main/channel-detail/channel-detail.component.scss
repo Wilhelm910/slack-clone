@@ -10,14 +10,7 @@
         margin-bottom: 28px;
     }
 
-    .channel-content {
-        display: flex;
-        flex-direction: column;
-        gap: 48px;
-        height: 100%;
-        width: 100%;
-        max-width: 640px;
+    article {
         overflow-y: auto;
-
     }
 }

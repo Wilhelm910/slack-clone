@@ -1,0 +1,10 @@
+.thread-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    height: 100%;
+    width: 100%;
+    max-width: 640px;
+    overflow-y: auto;
+
+}

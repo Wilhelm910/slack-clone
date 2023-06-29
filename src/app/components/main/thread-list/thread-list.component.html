@@ -1,0 +1,6 @@
+<div class="thread-list-wrapper">
+    <ng-container *ngFor="let thread of threads, index as i">
+        <app-thread *ngIf="includesSearchValue(thread)" [showAnswersAmount]="true" [viewId]="i" [thrdObj]="thread"
+            (removeIdFromView)="removeIdFromView($event)"></app-thread>
+    </ng-container>
+</div>

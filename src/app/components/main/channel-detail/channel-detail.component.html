@@ -2,11 +2,9 @@
     <!-- header -->
     <h2>{{ channelData.name }}</h2>
     <!-- content -->
-    <div class="channel-content">
-        <ng-container *ngFor="let thread of threads, index as i" class="thread">
-            <app-thread *ngIf="includesSearchValue(thread)" [showAnswersAmount]="true" [viewId]="i" [thrdObj]="thread" (removeIdFromView)="removeIdFromView($event)"></app-thread>
-        </ng-container>
-    </div>
+    <article class="channel-content">
+        <app-thread-list></app-thread-list>
+    </article>
     <!-- footer -->
     <app-text-editor></app-text-editor>
 </div>
