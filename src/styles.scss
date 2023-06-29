@@ -10,6 +10,19 @@
     box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+    overflow-y: scroll;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: inset 0 0 4px #707070;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 10px;
+}
+
 
 quill-editor {
     height: 120px !important;
