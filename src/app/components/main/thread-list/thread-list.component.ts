@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { from, map, mergeMap } from 'rxjs';
 import { Thread } from 'src/app/core/models/thread.class';
 import { ChannelService } from 'src/app/core/services/channel.service';
 import { SearchFilterService } from 'src/app/core/services/search-filter.service';
@@ -88,10 +89,14 @@ export class ThreadListComponent implements OnInit {
 
 
   hasSearchMatch(thread) {
+    console.log(thread);
+    
     const inputValue = this.searchService.searchValue;
-    if (inputValue != null && (
-      (JSON.stringify(thread.userName)).toLowerCase().includes(inputValue.toLowerCase().trim()) ||
-      (JSON.stringify(thread.message)).toLowerCase().includes(inputValue.toLowerCase().trim()))
+    console.log('INPUT VALUE', inputValue);
+    
+    if (inputValue === '' && (
+      thread.userName.toLowerCase().includes(inputValue.toLowerCase().trim()) ||
+      thread.message.toLowerCase().includes(inputValue.toLowerCase().trim()))
     ) {
       return true
     } else {
@@ -111,7 +116,22 @@ export class ThreadListComponent implements OnInit {
   }
 
   initFullList() {
-    this.threadService.getAllThreadsOfUser()
-  }
 
+    this.firestore.collection('channels')
+      .get()
+      .pipe(
+        mergeMap(channels => from(channels.docs)),
+        mergeMap(channel => channel.ref.collection('threads').get()),
+        mergeMap(threads => from(threads.docs)),
+        mergeMap(thread => thread.ref.get()),
+        map(threadDoc => threadDoc.data())
+      )
+      .subscribe(threadData => {
+        if (threadData['userId'] == JSON.parse(localStorage.getItem('user')).uid) {
+          this.threads.push(threadData)
+        }
+      });
+  }
 }
+
+

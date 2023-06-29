@@ -1,8 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Thread } from '../models/thread.class';
-import { BehaviorSubject, Subject, map } from 'rxjs';
+import { BehaviorSubject, Subject, concatMap, from, map, mergeMap, switchMap, tap } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { doc, docData } from '@angular/fire/firestore';
+import { doc, docData, docSnapshots } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -10,29 +10,29 @@ import { doc, docData } from '@angular/fire/firestore';
 export class ThreadService implements OnInit {
   activeThread = new BehaviorSubject(new Thread);
   newThread: Subject<Thread> = new Subject;
-  deletedThreadId: Subject<number> = new Subject; 
+  deletedThreadId: Subject<number> = new Subject;
 
   constructor(
     private firestore: AngularFirestore,
-    
+
   ) {
 
   }
-  
-  ngOnInit(): void {  
+
+  ngOnInit(): void {
   }
 
-  deleteThread(threadObject) {   
+  deleteThread(threadObject) {
     this.getFirebaseDoc(threadObject).delete()
   }
 
   showThreadDetailsFromJSON(JSON) {
     this.getFirebaseDoc(JSON)
-    .get()
-    .subscribe((data) => {
-      let thrdObj: Thread = new Thread(data.data());
-      this.activeThread.next(thrdObj)
-    })
+      .get()
+      .subscribe((data) => {
+        let thrdObj: Thread = new Thread(data.data());
+        this.activeThread.next(thrdObj)
+      })
   }
 
   getFirebaseDoc(object: any) {
@@ -44,19 +44,34 @@ export class ThreadService implements OnInit {
     return threadDoc
   }
 
+  // getAllThreadsOfUser() {
+  //   this.firestore.collection('channels')
+  //     .get()
+  //     .pipe(
+  //       concatMap(channels => from(channels.docs)),
+  //       mergeMap(channel => channel.ref.collection('threads').get()),
+  //       map(threads => threads.docs.map(thread => thread.ref.id))
+  //     )
+  //     .subscribe(ids => {
+  //       console.log(ids);
+  //       // Weitere Verarbeitung der IDs
+  //     });
+  // }
+
   getAllThreadsOfUser() {
     this.firestore.collection('channels')
-    .snapshotChanges()
-    .pipe(map(doc => {
-      doc.forEach((doc) => console.log(doc)
+      .get()
+      .pipe(
+        mergeMap(channels => from(channels.docs)),
+        mergeMap(channel => channel.ref.collection('threads').get()),
+        mergeMap(threads => from(threads.docs)),
+        mergeMap(thread => thread.ref.get()),
+        map(threadDoc => threadDoc.data())
       )
-      
-    }))
-    .subscribe(() => {
-      console.log('document');
-
-    })
-    
-    
+      .subscribe(threadData => {
+        if(threadData['userId'] == JSON.parse(localStorage.getItem('user')).uid) {
+          console.log('data', threadData);
+        }
+      });
   }
 }
