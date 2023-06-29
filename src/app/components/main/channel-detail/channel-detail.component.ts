@@ -67,16 +67,4 @@ export class ChannelDetailComponent implements OnInit {
     return sortedThreads;
   }
 
-  // includesSearchValue(thread) {
-  //   const inputValue = this.searchService.searchValue;
-  //   if (inputValue != null && (
-  //     (JSON.stringify(thread.userName)).toLowerCase().includes(inputValue.toLowerCase().trim()) ||
-  //     (JSON.stringify(thread.message)).toLowerCase().includes(inputValue.toLowerCase().trim()))
-  //     )
-  //   {
-  //     return true 
-  //   } else {
-  //     return false
-  //   }
-  // }
 }
