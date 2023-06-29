@@ -15,7 +15,7 @@ export class ThreadListComponent implements OnInit {
   threadsCollection: AngularFirestoreCollection;
   fullViewUpdate: boolean = false;
   newThread: Thread = null;
-
+  channelId: string;
 
   constructor(
     private channelService: ChannelService,
@@ -25,15 +25,18 @@ export class ThreadListComponent implements OnInit {
 
   ) {
     this.channelService.channelId.subscribe((channelId) => {
-      this.setThreadsCollection(channelId);
-      this.fullViewUpdate = true;
-      this.getThreads();
+      if (channelId != this.channelId) {
+        this.setThreadsCollection(channelId);
+        this.fullViewUpdate = true;
+        this.subscribeThreads();
+      }
+
 
     })
   }
 
   ngOnInit(): void {
-  
+
     this.threadService.newThread.subscribe((threadObject) => {
       if (threadObject != null) {
         this.newThread = threadObject;
@@ -50,12 +53,13 @@ export class ThreadListComponent implements OnInit {
       .collection('threads');
   }
 
-  getThreads() {
+  subscribeThreads() {
     this.threadsCollection
       .valueChanges()
       .subscribe((threadsData: any) => {
         this.sortThreadsData(threadsData);
-        if (this.fullViewUpdate) { this.threads = threadsData, this.fullViewUpdate = false };
+
+        if (this.fullViewUpdate) { console.log('full view update', this.fullViewUpdate); this.threads = threadsData, this.fullViewUpdate = false };
         if (this.newThread !== null) { this.threads.push(this.newThread), this.newThread = null }
       })
   }
@@ -87,9 +91,8 @@ export class ThreadListComponent implements OnInit {
     if (inputValue != null && (
       (JSON.stringify(thread.userName)).toLowerCase().includes(inputValue.toLowerCase().trim()) ||
       (JSON.stringify(thread.message)).toLowerCase().includes(inputValue.toLowerCase().trim()))
-      )
-    {
-      return true 
+    ) {
+      return true
     } else {
       return false
     }

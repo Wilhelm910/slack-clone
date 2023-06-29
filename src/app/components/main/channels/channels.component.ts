@@ -20,7 +20,6 @@ export class ChannelsComponent implements OnInit {
   constructor(
     private firestore: AngularFirestore,
     public dialog: MatDialog,
-    private channelService: ChannelService,
   ) {
   }
 

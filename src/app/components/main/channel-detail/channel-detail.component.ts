@@ -49,22 +49,4 @@ export class ChannelDetailComponent implements OnInit {
         this.channelData = new Channel(channelData);
       })
   }
-
-
-
-  sortThreadsData(data: any) {
-    let sortedThreads = data.sort((a, b) => {
-      if (a.creationTime < b.creationTime) {
-        return -1;
-      }
-      if (a.creationTime > b.creationTime) {
-        return 1;
-      }
-      return 0;
-
-    });
-
-    return sortedThreads;
-  }
-
 }
