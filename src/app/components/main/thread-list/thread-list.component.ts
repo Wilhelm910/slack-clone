@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Thread } from 'src/app/core/models/thread.class';
 import { ChannelService } from 'src/app/core/services/channel.service';
@@ -16,6 +16,7 @@ export class ThreadListComponent implements OnInit {
   fullViewUpdate: boolean = false;
   newThread: Thread = null;
   channelId: string;
+  @Input() channelList: boolean;
 
   constructor(
     private channelService: ChannelService,
@@ -24,18 +25,18 @@ export class ThreadListComponent implements OnInit {
     private threadService: ThreadService,
 
   ) {
-    this.channelService.channelId.subscribe((channelId) => {
-      if (channelId != this.channelId) {
-        this.setThreadsCollection(channelId);
-        this.fullViewUpdate = true;
-        this.subscribeThreads();
-      }
 
-
-    })
   }
 
+
+
   ngOnInit(): void {
+
+    if (this.channelList) {
+      this.initChannelList()
+    } else {
+      this.initFullList()
+    }
 
     this.threadService.newThread.subscribe((threadObject) => {
       if (threadObject != null) {
@@ -59,7 +60,7 @@ export class ThreadListComponent implements OnInit {
       .subscribe((threadsData: any) => {
         this.sortThreadsData(threadsData);
 
-        if (this.fullViewUpdate) { console.log('full view update', this.fullViewUpdate); this.threads = threadsData, this.fullViewUpdate = false };
+        if (this.fullViewUpdate) { this.threads = threadsData, this.fullViewUpdate = false };
         if (this.newThread !== null) { this.threads.push(this.newThread), this.newThread = null }
       })
   }
@@ -86,7 +87,7 @@ export class ThreadListComponent implements OnInit {
   }
 
 
-  includesSearchValue(thread) {
+  hasSearchMatch(thread) {
     const inputValue = this.searchService.searchValue;
     if (inputValue != null && (
       (JSON.stringify(thread.userName)).toLowerCase().includes(inputValue.toLowerCase().trim()) ||
@@ -96,6 +97,21 @@ export class ThreadListComponent implements OnInit {
     } else {
       return false
     }
+  }
+
+  initChannelList() {
+    this.channelService.channelId.subscribe((channelId) => {
+      if (channelId != this.channelId) {
+        this.setThreadsCollection(channelId);
+        this.fullViewUpdate = true;
+        this.subscribeThreads();
+      }
+    }
+    )
+  }
+
+  initFullList() {
+    this.threadService.getAllThreadsOfUser()
   }
 
 }

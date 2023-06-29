@@ -10,6 +10,7 @@ import { LegalComponent } from './components/main/legal/legal.component';
 import { CreateChannelComponent } from './components/main/create-channel/create-channel.component';
 import { CreateChatComponent } from './components/main/create-chat/create-chat.component';
 import { ChatDetailComponent } from './components/main/chat-detail/chat-detail.component';
+import { ThreadOverviewComponent } from './components/main/thread-overview/thread-overview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: 'createChat', component: CreateChatComponent },
       { path: 'users', component: CreateChatComponent },
       { path: 'chat/:id', component: ChatDetailComponent },
+      { path: 'threads', component: ThreadOverviewComponent },
     ]
   },
 ];

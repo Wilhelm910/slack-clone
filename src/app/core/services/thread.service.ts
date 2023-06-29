@@ -1,7 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Thread } from '../models/thread.class';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, map } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { doc, docData } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,21 @@ export class ThreadService implements OnInit {
     const threadDoc = threadsCollection.doc(object.tId);
 
     return threadDoc
+  }
+
+  getAllThreadsOfUser() {
+    this.firestore.collection('channels')
+    .snapshotChanges()
+    .pipe(map(doc => {
+      doc.forEach((doc) => console.log(doc)
+      )
+      
+    }))
+    .subscribe(() => {
+      console.log('document');
+
+    })
+    
+    
   }
 }

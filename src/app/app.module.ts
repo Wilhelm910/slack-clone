@@ -78,6 +78,7 @@ import { LegalComponent } from './components/main/legal/legal.component';
 import { CreateChatComponent } from './components/main/create-chat/create-chat.component';
 import { ChatDetailComponent } from './components/main/chat-detail/chat-detail.component';
 import { ThreadListComponent } from './components/main/thread-list/thread-list.component';
+import { ThreadOverviewComponent } from './components/main/thread-overview/thread-overview.component';
 
 
 @NgModule({
@@ -103,6 +104,7 @@ import { ThreadListComponent } from './components/main/thread-list/thread-list.c
     CreateChatComponent,
     ChatDetailComponent,
     ThreadListComponent,
+    ThreadOverviewComponent,
     
   ],
   imports: [
