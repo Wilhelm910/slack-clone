@@ -32,6 +32,7 @@ export class DirectMessagesComponent implements OnInit {
       .collection('users')
       .valueChanges({ idField: 'ID' })
       .subscribe((changes: any) => {
+        
         this.users = changes;
         console.log(this.users)
        // this.updateChatData()

@@ -7,6 +7,7 @@ import { ThreadService } from 'src/app/core/services/thread.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User } from 'src/app/core/models/user.class';
 import { remove } from '@angular/fire/database';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-thread',
@@ -20,6 +21,7 @@ export class ThreadComponent implements OnInit {
   @Input() avatarImgPath: string;
   @Input() showAnswersAmount: boolean;
   @Output() removeIdFromView: EventEmitter<number> = new EventEmitter;
+  public showThis: boolean = false;
 
   onFocus: boolean;
   userIsCreator: boolean = false;
@@ -41,13 +43,16 @@ export class ThreadComponent implements OnInit {
     if(!this.thrdObj.isReply) {
           this.getAnswersAmount()
     }
-
+    
     this.transformTimestamp(this.thrdObj.creationTime)
 
     this.firestore.collection('users')
       .doc(this.thrdObj.userId)
-      .valueChanges()
-      .subscribe((userData) => {
+      .get()
+      .pipe(map((userSnapshot) => {
+          return userSnapshot.data();
+      }))
+      .subscribe((userData) => {            
         let user = new User(userData)
         this.avatarImgPath = user.userImgUrl;
 
@@ -87,5 +92,11 @@ export class ThreadComponent implements OnInit {
         }
       })  
   }
+
+  public lookout() {
+    console.log('test lookout');
+    
+  }
+
 }
 

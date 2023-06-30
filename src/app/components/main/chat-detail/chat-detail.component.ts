@@ -46,7 +46,7 @@ export class ChatDetailComponent implements OnInit {
       .collection('chats')
       .doc(this.chatId)
       .valueChanges()
-      .subscribe((chatData: any) => {
+      .subscribe((chatData: any) => {        
         this.chatData = new Chat(chatData)
         this.getUserNames();
       })

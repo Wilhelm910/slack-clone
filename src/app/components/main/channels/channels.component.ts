@@ -23,16 +23,13 @@ export class ChannelsComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-    console.log('was here');
-    
+  ngOnInit(): void {    
     this.firestore
       .collection('channels')
       .valueChanges({ idField: 'ID' })
       .subscribe((changes: any) => {
-        console.log('changes', changes);
+       
         this.allChannels = changes;
-        console.log('all Channels', this.allChannels);
       })
   }
 

@@ -29,8 +29,6 @@ export class ThreadListComponent implements OnInit {
 
   }
 
-
-
   ngOnInit(): void {
 
     if (this.channelList) {
@@ -59,6 +57,7 @@ export class ThreadListComponent implements OnInit {
     this.threadsCollection
       .valueChanges()
       .subscribe((threadsData: any) => {
+
         this.sortThreadsData(threadsData);
 
         if (this.fullViewUpdate) { this.threads = threadsData, this.fullViewUpdate = false };
@@ -66,7 +65,7 @@ export class ThreadListComponent implements OnInit {
       })
   }
 
-
+  
   sortThreadsData(data: any) {
     let sortedThreads = data.sort((a, b) => {
       if (a.creationTime < b.creationTime) {
@@ -88,25 +87,9 @@ export class ThreadListComponent implements OnInit {
   }
 
 
-  hasSearchMatch(thread) {
-    console.log(thread);
-    
-    const inputValue = this.searchService.searchValue;
-    console.log('INPUT VALUE', inputValue);
-    
-    if (inputValue === '' && (
-      thread.userName.toLowerCase().includes(inputValue.toLowerCase().trim()) ||
-      thread.message.toLowerCase().includes(inputValue.toLowerCase().trim()))
-    ) {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  initChannelList() {
+  initChannelList() {    
     this.channelService.channelId.subscribe((channelId) => {
-      if (channelId != this.channelId) {
+        if (channelId != this.channelId) {
         this.setThreadsCollection(channelId);
         this.fullViewUpdate = true;
         this.subscribeThreads();
@@ -116,7 +99,6 @@ export class ThreadListComponent implements OnInit {
   }
 
   initFullList() {
-
     this.firestore.collection('channels')
       .get()
       .pipe(
@@ -132,6 +114,7 @@ export class ThreadListComponent implements OnInit {
         }
       });
   }
+
 }
 
 

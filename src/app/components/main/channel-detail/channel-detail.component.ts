@@ -26,7 +26,6 @@ export class ChannelDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
     private channelService: ChannelService,
-    private threadService: ThreadService,
     public searchService: SearchFilterService,
   ) { }
 
@@ -46,7 +45,7 @@ export class ChannelDetailComponent implements OnInit {
       .valueChanges()
       .subscribe((channelData: any) => {
 
-        this.channelData = new Channel(channelData);
+        this.channelData = new Channel(channelData); 
       })
   }
 }

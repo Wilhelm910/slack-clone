@@ -58,20 +58,5 @@ export class ThreadService implements OnInit {
   //     });
   // }
 
-  getAllThreadsOfUser() {
-    this.firestore.collection('channels')
-      .get()
-      .pipe(
-        mergeMap(channels => from(channels.docs)),
-        mergeMap(channel => channel.ref.collection('threads').get()),
-        mergeMap(threads => from(threads.docs)),
-        mergeMap(thread => thread.ref.get()),
-        map(threadDoc => threadDoc.data())
-      )
-      .subscribe(threadData => {
-        if(threadData['userId'] == JSON.parse(localStorage.getItem('user')).uid) {
-          console.log('data', threadData);
-        }
-      });
-  }
+  
 }
