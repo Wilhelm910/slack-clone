@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Thread } from 'src/app/core/models/thread.class';
-import { ChannelService } from 'src/app/core/services/channel.service';
 import { Timestamp } from '@angular/fire/firestore';
 import { ThreadService } from 'src/app/core/services/thread.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User } from 'src/app/core/models/user.class';
-import { remove } from '@angular/fire/database';
 import { map } from 'rxjs';
+import { SearchFilterService } from 'src/app/core/services/search-filter.service';
 
 @Component({
   selector: 'app-thread',
@@ -20,8 +19,9 @@ export class ThreadComponent implements OnInit {
   @Input() viewId: number;
   @Input() avatarImgPath: string;
   @Input() showAnswersAmount: boolean;
+  @Input() showThis: boolean = true;
   @Output() removeIdFromView: EventEmitter<number> = new EventEmitter;
-  public showThis: boolean = false;
+
 
   onFocus: boolean;
   userIsCreator: boolean = false;
@@ -36,23 +36,48 @@ export class ThreadComponent implements OnInit {
     public threadService: ThreadService,
     private datePipe: DatePipe,
     private firestore: AngularFirestore,
+    public searchService: SearchFilterService,
   ) {
+
   }
 
-  ngOnInit(): void {    
-    if(!this.thrdObj.isReply) {
-          this.getAnswersAmount()
+  ngOnInit(): void {
+    if (!this.thrdObj.isReply) {
+      this.getAnswersAmount()
     }
-    
-    this.transformTimestamp(this.thrdObj.creationTime)
+    console.log('searchValue on init', this.searchService.searchValue);
 
+    this.checkSearchInput();
+    this.getUserData();
+    this.transformTimestamp(this.thrdObj.creationTime)
+  }
+
+  checkSearchInput() {
+    const message: string = this.thrdObj.message;
+    const userName: string = this.thrdObj.userName;
+
+    this.searchService.searchValue.subscribe((inputValue) => {
+      const adjustedValue = inputValue.toLocaleLowerCase().trim()
+
+      if (inputValue.length == 0 ||
+        message.toLowerCase().includes(adjustedValue) ||
+        userName.toLowerCase().includes(adjustedValue)
+      ) {
+        this.showThis = true;
+      } else {
+        this.showThis = false;
+      }
+    })
+  }
+
+  getUserData() {
     this.firestore.collection('users')
       .doc(this.thrdObj.userId)
       .get()
       .pipe(map((userSnapshot) => {
-          return userSnapshot.data();
+        return userSnapshot.data();
       }))
-      .subscribe((userData) => {            
+      .subscribe((userData) => {
         let user = new User(userData)
         this.avatarImgPath = user.userImgUrl;
 
@@ -90,12 +115,12 @@ export class ThreadComponent implements OnInit {
           case 1: this.answersText = `1 answer`; break;
           default: this.answersText = `${answers.size} answers`
         }
-      })  
+      })
   }
 
   public lookout() {
     console.log('test lookout');
-    
+    return true
   }
 
 }

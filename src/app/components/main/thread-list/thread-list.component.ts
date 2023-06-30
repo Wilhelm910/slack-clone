@@ -115,6 +115,10 @@ export class ThreadListComponent implements OnInit {
       });
   }
 
+  logThread(thread) {
+    return true
+    
+  }
 }
 
 
