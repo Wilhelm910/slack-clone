@@ -1,10 +1,17 @@
-<div class="content-wrapper">
+<div *ngIf="!showThreadList" class="empty-thread-list">
+    <h2>Welcome to Slack Clone</h2>
+    <p>Currently there are no threads to show.
+    </p>
+    <p>Feel free to start interacting in existing channels or create new ones.
+    </p>
+</div>
+
+<div *ngIf="showThreadList" class="content-wrapper">
     <!-- header -->
     <h2>Threads</h2>
     <!-- content -->
     <article class="channel-content">
         <app-thread-list [channelList]="false"></app-thread-list>
     </article>
-    <!-- footer -->
-    <app-text-editor></app-text-editor>
+
 </div>

@@ -43,7 +43,7 @@ export class AuthService {
 
         this.afAuth.authState.subscribe((user) => {
           if (user && user.emailVerified) {
-            this.router.navigate(['main']);
+            this.router.navigate(['threads']);
           }
         });
       })
@@ -81,7 +81,7 @@ export class AuthService {
   GoogleAuth() {
 
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate(['main']);
+      this.router.navigate(['threads']);
     });
   }
   // Auth logic to run auth providers

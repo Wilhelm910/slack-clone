@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Thread } from '../models/thread.class';
-import { BehaviorSubject, Subject, concatMap, from, map, mergeMap, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, concatMap, from, map, mergeMap, switchMap, tap } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { doc, docData, docSnapshots } from '@angular/fire/firestore';
 
@@ -11,7 +11,7 @@ export class ThreadService implements OnInit {
   activeThread = new BehaviorSubject(new Thread);
   newThread: Subject<Thread> = new Subject;
   deletedThreadId: Subject<number> = new Subject;
-
+  userHasThreads: Subject<boolean> = new Subject;
 
   constructor(
     private firestore: AngularFirestore,
@@ -21,6 +21,7 @@ export class ThreadService implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   deleteThread(threadObject) {
@@ -42,7 +43,12 @@ export class ThreadService implements OnInit {
     const threadsCollection = channelDoc.collection('threads');
     const threadDoc = threadsCollection.doc(object.tId);
 
-    return threadDoc
+    return threadDoc;
+  }
+
+  hello() {
+    console.log("hello");
+    
   }
   
 }

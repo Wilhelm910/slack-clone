@@ -65,7 +65,7 @@ export class ThreadListComponent implements OnInit {
       })
   }
 
-  
+
   sortThreadsData(data: any) {
     let sortedThreads = data.sort((a, b) => {
       if (a.creationTime < b.creationTime) {
@@ -86,9 +86,9 @@ export class ThreadListComponent implements OnInit {
     this.threads.splice(i, 1)
   }
 
-  initChannelList() {    
+  initChannelList() {
     this.channelService.channelId.subscribe((channelId) => {
-        if (channelId != this.channelId) {
+      if (channelId != this.channelId) {
         this.setThreadsCollection(channelId);
         this.fullViewUpdate = true;
         this.subscribeThreads();
@@ -98,6 +98,8 @@ export class ThreadListComponent implements OnInit {
   }
 
   initFullList() {
+    console.log('init full list');
+
     this.firestore.collection('channels')
       .get()
       .pipe(
@@ -107,11 +109,21 @@ export class ThreadListComponent implements OnInit {
         mergeMap(thread => thread.ref.get()),
         map(threadDoc => threadDoc.data())
       )
-      .subscribe(threadData => {
-        if (threadData['userId'] == JSON.parse(localStorage.getItem('user')).uid) {
-          this.threads.push(threadData);
+      .subscribe({
+        next: (threadData) => {
+          console.log('NExT');
 
+          if (threadData['userId'] == JSON.parse(localStorage.getItem('user')).uid) {
+            this.threads.push(threadData);
+          }
+        },
+        complete: () => {
+          console.log('threads length', this.threads.length);
+          
+          const hasThreads = this.threads.length == 0 ? false : true;
+          this.threadService.userHasThreads.next(hasThreads)
         }
+
       });
   }
 
