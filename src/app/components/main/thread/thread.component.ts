@@ -5,7 +5,7 @@ import { Timestamp } from '@angular/fire/firestore';
 import { ThreadService } from 'src/app/core/services/thread.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User } from 'src/app/core/models/user.class';
-import { map } from 'rxjs';
+import { from, map, mergeMap } from 'rxjs';
 import { SearchFilterService } from 'src/app/core/services/search-filter.service';
 
 @Component({
@@ -25,9 +25,12 @@ export class ThreadComponent implements OnInit {
 
   onFocus: boolean;
   userIsCreator: boolean = false;
+  answerIncludesSearchValue: boolean = false;
+  searchIndicator: string;
   answersAmount: number = 0;
   answersText: string;
   confirmDelete: boolean = false;
+
 
   dayAsString: string;
   timeAsString: string;
@@ -45,7 +48,6 @@ export class ThreadComponent implements OnInit {
     if (!this.thrdObj.isReply) {
       this.getAnswersAmount()
     }
-    console.log('searchValue on init', this.searchService.searchValue);
 
     this.checkSearchInput();
     this.getUserData();
@@ -59,15 +61,48 @@ export class ThreadComponent implements OnInit {
     this.searchService.searchValue.subscribe((inputValue) => {
       const adjustedValue = inputValue.toLocaleLowerCase().trim()
 
-      if (inputValue.length == 0 ||
+      if (adjustedValue.length == 0 ||
         message.toLowerCase().includes(adjustedValue) ||
         userName.toLowerCase().includes(adjustedValue)
       ) {
         this.showThis = true;
       } else {
-        this.showThis = false;
+        this.checkAnswers(inputValue)
       }
     })
+  }
+
+  checkAnswers(inputValue) {
+    if(this.answersAmount == 0) { this.showThis = false} else {
+    this.threadService.getFirebaseDoc(this.thrdObj)
+      .collection('answers')
+      .get()
+      .pipe(
+        mergeMap(answers => from(answers.docs)),
+        mergeMap(answer => answer.ref.get()),
+        map(answer => answer.data())
+      )
+      .subscribe((answer) => {
+        console.log('input', inputValue);
+
+        console.log('answer data 1', answer);
+        if (
+          answer['message'].toLowerCase().includes(inputValue) ||
+          answer['userName'].toLowerCase().includes(inputValue)
+        ) {
+          this.searchIndicator = inputValue
+          this.answerIncludesSearchValue = true;
+          this.showThis = true
+        } else {
+          this.answerIncludesSearchValue = false;
+          this.showThis = false
+        }
+      })
+
+    }
+
+
+
   }
 
   getUserData() {

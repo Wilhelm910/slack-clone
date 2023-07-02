@@ -26,7 +26,10 @@
                 </div>
             </div>
             <p [innerHTML]="thrdObj.message"></p>
-            <a (click)="showDetails(thrdObj)" *ngIf="showAnswersAmount">{{ answersText }}</a>
+            <div class="footer">
+                <a (click)="showDetails(thrdObj)" *ngIf="showAnswersAmount">{{ answersText }}</a>
+                <span class="searchIndicator" *ngIf="answerIncludesSearchValue">answers include "{{ searchIndicator }}"</span>
+            </div>
         </div>
     </div>
 </ng-container>

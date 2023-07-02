@@ -12,6 +12,7 @@ export class ThreadService implements OnInit {
   newThread: Subject<Thread> = new Subject;
   deletedThreadId: Subject<number> = new Subject;
 
+
   constructor(
     private firestore: AngularFirestore,
 
@@ -43,20 +44,5 @@ export class ThreadService implements OnInit {
 
     return threadDoc
   }
-
-  // getAllThreadsOfUser() {
-  //   this.firestore.collection('channels')
-  //     .get()
-  //     .pipe(
-  //       concatMap(channels => from(channels.docs)),
-  //       mergeMap(channel => channel.ref.collection('threads').get()),
-  //       map(threads => threads.docs.map(thread => thread.ref.id))
-  //     )
-  //     .subscribe(ids => {
-  //       console.log(ids);
-  //       // Weitere Verarbeitung der IDs
-  //     });
-  // }
-
   
 }

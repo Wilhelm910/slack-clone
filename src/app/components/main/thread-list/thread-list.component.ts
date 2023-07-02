@@ -86,7 +86,6 @@ export class ThreadListComponent implements OnInit {
     this.threads.splice(i, 1)
   }
 
-
   initChannelList() {    
     this.channelService.channelId.subscribe((channelId) => {
         if (channelId != this.channelId) {
@@ -110,15 +109,12 @@ export class ThreadListComponent implements OnInit {
       )
       .subscribe(threadData => {
         if (threadData['userId'] == JSON.parse(localStorage.getItem('user')).uid) {
-          this.threads.push(threadData)
+          this.threads.push(threadData);
+
         }
       });
   }
 
-  logThread(thread) {
-    return true
-    
-  }
 }
 
 
