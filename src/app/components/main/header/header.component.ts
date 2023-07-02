@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     const keyUpEvent$ = fromEvent(this.searchInput.nativeElement, 'keyup')
     
     keyUpEvent$.pipe(debounceTime(300))
-      .subscribe(() => {
+      .subscribe(() => {        
         this.search()
       })
   }
@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   search() {
-    const inputValue = this.searchInput.nativeElement.value;
+    const inputValue = this.searchInput.nativeElement.value;        
     this.searchService.searchValue.next(inputValue);
     
   }

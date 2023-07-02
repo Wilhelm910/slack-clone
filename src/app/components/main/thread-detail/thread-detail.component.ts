@@ -1,6 +1,5 @@
-import { getLocaleCurrencyCode } from '@angular/common';
 import { Component, OnInit, Output } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs';
 import { Thread } from 'src/app/core/models/thread.class';
 import { User } from 'src/app/core/models/user.class';

@@ -3,10 +3,11 @@ import { DatePipe } from '@angular/common';
 import { Thread } from 'src/app/core/models/thread.class';
 import { Timestamp } from '@angular/fire/firestore';
 import { ThreadService } from 'src/app/core/services/thread.service';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
 import { User } from 'src/app/core/models/user.class';
-import { from, map, mergeMap } from 'rxjs';
+import { audit, from, map, mergeMap } from 'rxjs';
 import { SearchFilterService } from 'src/app/core/services/search-filter.service';
+import { InputText } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-thread',
@@ -25,8 +26,8 @@ export class ThreadComponent implements OnInit {
 
   onFocus: boolean;
   userIsCreator: boolean = false;
-  answerIncludesSearchValue: boolean = false;
-  searchIndicator: string;
+  showIndicator: boolean = false;
+  indicatorValue: string;
   answersAmount: number = 0;
   answersText: string;
   confirmDelete: boolean = false;
@@ -49,60 +50,77 @@ export class ThreadComponent implements OnInit {
       this.getAnswersAmount()
     }
 
-    this.checkSearchInput();
+    this.setVisibility();
     this.getUserData();
     this.transformTimestamp(this.thrdObj.creationTime)
   }
 
-  checkSearchInput() {
-    const message: string = this.thrdObj.message;
-    const userName: string = this.thrdObj.userName;
-
+  setVisibility() {
     this.searchService.searchValue.subscribe((inputValue) => {
       const adjustedValue = inputValue.toLocaleLowerCase().trim()
 
-      if (adjustedValue.length == 0 ||
-        message.toLowerCase().includes(adjustedValue) ||
-        userName.toLowerCase().includes(adjustedValue)
-      ) {
+      if (adjustedValue.length == 0) {
         this.showThis = true;
+        this.showIndicator = false;
       } else {
-        this.checkAnswers(inputValue)
+        this.checkSearchInput(adjustedValue)
       }
+    })
+
+  }
+
+  checkSearchInput(searchValue) {
+    const message: string = this.thrdObj.message;
+    const userName: string = this.thrdObj.userName;
+
+    if (
+      message.toLowerCase().includes(searchValue) ||
+      userName.toLowerCase().includes(searchValue)
+    ) {
+      this.showThis = true;
+    } else {
+      this.checkAnswers(searchValue)
+    }
+  }
+
+  checkAnswers(searchValue) {
+    if (this.answersAmount == 0) {
+      this.showThis = false;
+      this.showIndicator = false
+    } else {
+      this.getAnswersData(searchValue)
+
+    
+    }
+  }
+
+  getAnswersData(searchValue) {
+    this.threadService.getFirebaseDoc(this.thrdObj)
+    .collection('answers')
+    .get()
+    .pipe(
+      mergeMap(answers => from(answers.docs)),
+      mergeMap(answer => answer.ref.get()),
+      map(answer => answer.data())
+    )
+    .subscribe((answer) => {
+      this.compareWithSearchInput(answer, searchValue)
     })
   }
 
-  checkAnswers(inputValue) {
-    if(this.answersAmount == 0) { this.showThis = false} else {
-    this.threadService.getFirebaseDoc(this.thrdObj)
-      .collection('answers')
-      .get()
-      .pipe(
-        mergeMap(answers => from(answers.docs)),
-        mergeMap(answer => answer.ref.get()),
-        map(answer => answer.data())
-      )
-      .subscribe((answer) => {
-        console.log('input', inputValue);
+  compareWithSearchInput(answer: DocumentData, searchValue: string) {
+      if (
+        answer['message'].toLowerCase().includes(searchValue) ||
+        answer['userName'].toLowerCase().includes(searchValue)
+      ) {
+        this.showIndicator = true;
+        this.showThis = true;
+        this.indicatorValue = searchValue;
 
-        console.log('answer data 1', answer);
-        if (
-          answer['message'].toLowerCase().includes(inputValue) ||
-          answer['userName'].toLowerCase().includes(inputValue)
-        ) {
-          this.searchIndicator = inputValue
-          this.answerIncludesSearchValue = true;
-          this.showThis = true
-        } else {
-          this.answerIncludesSearchValue = false;
-          this.showThis = false
-        }
-      })
-
-    }
-
-
-
+      } else {
+        this.showIndicator = false;
+        this.showThis = false;
+      }
   }
 
   getUserData() {
