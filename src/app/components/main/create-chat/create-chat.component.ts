@@ -35,7 +35,6 @@ export class CreateChatComponent implements OnInit {
         this.allDisplayNames.push(element.displayName)
       }
     });
-    console.log(this.allDisplayNames)
   }
 
 

@@ -79,6 +79,8 @@ import { CreateChatComponent } from './components/main/create-chat/create-chat.c
 import { ChatDetailComponent } from './components/main/chat-detail/chat-detail.component';
 import { ThreadListComponent } from './components/main/thread-list/thread-list.component';
 import { ThreadOverviewComponent } from './components/main/thread-overview/thread-overview.component';
+import { ClickOutsideDirective } from './core/directives/click-outside.directive';
+
 
 
 @NgModule({
@@ -105,6 +107,8 @@ import { ThreadOverviewComponent } from './components/main/thread-overview/threa
     ChatDetailComponent,
     ThreadListComponent,
     ThreadOverviewComponent,
+    ClickOutsideDirective,
+
     
   ],
   imports: [

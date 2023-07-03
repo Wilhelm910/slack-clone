@@ -42,11 +42,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   sidenavToggled: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   onSidenavToggled() {
-    if (this.opened == true) {
-      this.opened = false;
-    } else {
-      this.opened = true;
-    }
+   this.opened = !this.opened
     this.sidenavToggled.emit(this.opened)
   }
 
@@ -58,6 +54,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     const inputValue = this.searchInput.nativeElement.value;        
     this.searchService.searchValue.next(inputValue);
     
+  }
+
+
+  clickedOutside() {
+    this.openMenu = false;
+    console.log("tzest")
   }
 
 }
