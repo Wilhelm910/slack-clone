@@ -59,7 +59,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   clickedOutside() {
     this.openMenu = false;
-    console.log("tzest")
   }
 
 }

@@ -1,7 +1,7 @@
 <div class="chat-container">
     <div *ngFor="let chat of allChats; let i = index" routerLink="{{ '/chat/' + chat.ID }}" class="chat">
         <img src="{{ chat.userImgUrl }}">
-        <p id="{{ chat.ID }}">{{ chat.name }}</p>
+        <p id="{{ chat.ID }}">{{ chat.chatName }}</p>
     </div>
 </div>
 <div class="create-chat-container">

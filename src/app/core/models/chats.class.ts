@@ -1,24 +1,24 @@
 
 export class Chat {
 
-    public name: any[] = [];
+    public chatName: any[] = [];
     public userImgUrl: any[] = [];
     public messages: any[] = [];
-    public userInfo: any[] = [];
+    public userId: any[] = [];
 
     constructor(obj?: any) {
-        this.name = obj ? obj.name : '';
+        this.chatName = obj ? obj.chatName : '';
         this.userImgUrl = obj ? obj.userImgUrl : [];
         this.messages = obj ? obj.messages : [];
-        this.userInfo = obj ? obj.userInfo : [];
+        this.userId = obj ? obj.userId : [];
     }
 
     public toJson() {
         return {
-            name: this.name,
+            chatName: this.chatName,
             userImgUrl: this.userImgUrl,
             messages: this.messages,
-            userInfo: this.userInfo,
+            userId: this.userId,
         }
     }
 

@@ -19,8 +19,8 @@ export class ChatDetailComponent implements OnInit {
   chatData: Chat = new Chat;
   userNames = [];
   messageData = [];
- // message = [];
- // allMessages = [];
+  // message = [];
+  // allMessages = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +46,7 @@ export class ChatDetailComponent implements OnInit {
       .collection('chats')
       .doc(this.chatId)
       .valueChanges()
-      .subscribe((chatData: any) => {        
+      .subscribe((chatData: any) => {
         this.chatData = new Chat(chatData)
         this.getUserNames();
       })
@@ -98,29 +98,28 @@ export class ChatDetailComponent implements OnInit {
 
 
   getUserNames() {
+    console.log(this.chatData)
     this.userNames = [];
-    this.chatData.userInfo.forEach(element => {
-      this.userNames.push(element.displayName)
-    });
+    this.userNames.push(this.chatData.chatName)
   }
 
-/*
-  getUserImgUrl() {
-    const userIds = [];
-    this.messageData.forEach(element => {
-      userIds.push(element.userId)
-    });
-    userIds.forEach(element => {
-      this.firestore
-        .collection('users')
-        .doc(element)
-        .valueChanges()
-        .subscribe((changes: any) => {
-          this.userImgUrl.push(changes.userImgUrl)
-        })
-    });
-  }
-*/
+  /*
+    getUserImgUrl() {
+      const userIds = [];
+      this.messageData.forEach(element => {
+        userIds.push(element.userId)
+      });
+      userIds.forEach(element => {
+        this.firestore
+          .collection('users')
+          .doc(element)
+          .valueChanges()
+          .subscribe((changes: any) => {
+            this.userImgUrl.push(changes.userImgUrl)
+          })
+      });
+    }
+  */
 
   editorContent: string;
   editorForm: FormGroup;

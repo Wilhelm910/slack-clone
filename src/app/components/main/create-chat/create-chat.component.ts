@@ -59,8 +59,9 @@ export class CreateChatComponent implements OnInit {
     if (this.selectedUsers.length > 0) {
       this.selectedUsers.forEach(element => {
         this.chat.userImgUrl.push(element.userImgUrl)
+        this.chat.userId.push(element.uid)
       });
-      this.chat.userInfo = this.selectedUsers;
+     // this.chat.userInfo = this.selectedUsers;
       this.createChatName();
       this.addChatToFirestore();
       this.selectedUsers = [];
@@ -75,7 +76,7 @@ export class CreateChatComponent implements OnInit {
   }
 
   createChatName() {
-    this.chat.name = this.selectedUsers[0].displayName
+    this.chat.chatName = this.selectedUsers[0].displayName
   }
 
 

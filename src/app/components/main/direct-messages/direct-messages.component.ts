@@ -32,10 +32,8 @@ export class DirectMessagesComponent implements OnInit {
       .collection('users')
       .valueChanges({ idField: 'ID' })
       .subscribe((changes: any) => {
-        
         this.users = changes;
-        console.log(this.users)
-       // this.updateChatData()
+        this.updateChatData()
       })
   }
 
@@ -48,21 +46,32 @@ export class DirectMessagesComponent implements OnInit {
       this.imgUrls.push(element[0].userImgUrl)
     }); 
     */
-    this.users.forEach(element => {
-      this.userInfo.push(element.userImgUrl)
-    });
-    console.log(this.userInfo)
+    /*  this.users.forEach(element => {
+        this.userInfo.push(element.userImgUrl)
+      }); */
   }
-// IDs vergleichen. und dann imgUrl updaten
+  // IDs vergleichen. und dann imgUrl updaten
+
   updateChatData() {
     this.allChats.forEach(element => {
+      console.log(this.users.length)
       for (let i = 0; i < this.users.length; i++) {
-        if (element.ID == this.users[i].userImgUrl) {
+        // console.log(element.userId)
+        // console.log(this.users[i].uid)
+        if (element.userId == this.users[i].uid) {
           element.userImgUrl = this.users[i].userImgUrl
+          element.chatName = this.users[i].displayName
+          this.updateFirebase(element.ID, this.users[i].displayName, this.users[i].userImgUrl)
         }
       }
     });
-    console.log(this.allChats)
+  }
+
+  updateFirebase(ID, name, imgurl) {
+    this.firestore
+      .collection('chats')
+      .doc(ID)
+      .update({ chatName: name, userImgUrl: imgurl })
   }
 
 

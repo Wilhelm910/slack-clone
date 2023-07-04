@@ -64,14 +64,10 @@ export class EditUserComponent implements OnInit {
     if (this.formTemplate.valid) {
       const filePath = `${this.uID}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}`;
       const fileRef = this.storage.ref(filePath);
-      console.log("t3st")
       this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
-          console.log("test")
           fileRef.getDownloadURL().subscribe((url) => {
             formValue['imageUrl'] = url;
-            console.log(formValue);
-            console.log(url)
             this.updateLocalStorage(formValue)
             this.updateFirebase(formValue)
             //this.service.insertImageDetails(formValue);
@@ -85,6 +81,7 @@ export class EditUserComponent implements OnInit {
     let currentUserInfo = JSON.parse(localStorage.getItem('user'))
     currentUserInfo.firstName = formValue.firstname;
     currentUserInfo.lastName = formValue.lastname;
+    currentUserInfo.displayName = formValue.firstname + ' ' + formValue.lastname 
     currentUserInfo.userImgUrl = formValue.imageUrl
     localStorage.setItem('user', JSON.stringify(currentUserInfo));
   }
@@ -94,7 +91,7 @@ export class EditUserComponent implements OnInit {
     this.firestore
       .collection('users')
       .doc(this.uID)
-      .update({userImgUrl: formValue.imageUrl, firstName: formValue.firstname, lastName: formValue.lastname})
+      .update({userImgUrl: formValue.imageUrl, firstName: formValue.firstname, lastName: formValue.lastname, displayName: formValue.firstname + ' ' + formValue.lastname})
   }
     
 
