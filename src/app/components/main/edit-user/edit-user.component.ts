@@ -8,6 +8,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { updateCurrentUser } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { QuerySnapshot } from '@angular/fire/firestore';
 
 
 @Component({
@@ -71,11 +72,13 @@ export class EditUserComponent implements OnInit {
               this.updateLocalStorage(formValue)
               this.updateFirebase(formValue)
               //this.service.insertImageDetails(formValue);
+              this.updateThreadsUserName()
             })
           })).subscribe();
       } else {
         this.updateLocalStorage(formValue)
-        this. updateWithoutImg(formValue)
+        this.updateWithoutImg(formValue)
+        this.updateThreadsUserName()
       }
     }
 
@@ -102,12 +105,23 @@ export class EditUserComponent implements OnInit {
 
   updateWithoutImg(formValue) {
     this.firestore
-    .collection('users')
-    .doc(this.uID)
-    .update({firstName: formValue.firstname, lastName: formValue.lastname, displayName: formValue.firstname + ' ' + formValue.lastname })
+      .collection('users')
+      .doc(this.uID)
+      .update({ firstName: formValue.firstname, lastName: formValue.lastname, displayName: formValue.firstname + ' ' + formValue.lastname })
 
   }
 
+
+  updateThreadsUserName() {
+    let channelIds = []
+    this.firestore
+    .collection('channels')
+    .valueChanges({idField: 'ID'})
+    .subscribe((changes) => {
+      channelIds.push(changes)
+      console.log(channelIds)
+    })
+  }
 
 
   getInfoFromLocalStorage() {
