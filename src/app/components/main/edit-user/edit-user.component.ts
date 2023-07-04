@@ -41,7 +41,7 @@ export class EditUserComponent implements OnInit {
   async ngOnInit() {
     this.getInfoFromLocalStorage();
     this.userIsGuest = this.uID == 'cvbncetIG8Tdbm01uT18jBoIYSI2' ? true : false;
-    
+
     //this.getUserFotoFromFireStorage();
   }
 
@@ -59,20 +59,24 @@ export class EditUserComponent implements OnInit {
   }
 
   submit(formValue: any) {
-    
     this.isSubmitted = true;
     if (this.formTemplate.valid) {
-      const filePath = `${this.uID}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}`;
-      const fileRef = this.storage.ref(filePath);
-      this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            formValue['imageUrl'] = url;
-            this.updateLocalStorage(formValue)
-            this.updateFirebase(formValue)
-            //this.service.insertImageDetails(formValue);
-          })
-        })).subscribe();
+      if (formValue.imageUrl != '') {
+        const filePath = `${this.uID}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}`;
+        const fileRef = this.storage.ref(filePath);
+        this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              formValue['imageUrl'] = url;
+              this.updateLocalStorage(formValue)
+              this.updateFirebase(formValue)
+              //this.service.insertImageDetails(formValue);
+            })
+          })).subscribe();
+      } else {
+        this.updateLocalStorage(formValue)
+        this. updateWithoutImg(formValue)
+      }
     }
 
   }
@@ -81,8 +85,10 @@ export class EditUserComponent implements OnInit {
     let currentUserInfo = JSON.parse(localStorage.getItem('user'))
     currentUserInfo.firstName = formValue.firstname;
     currentUserInfo.lastName = formValue.lastname;
-    currentUserInfo.displayName = formValue.firstname + ' ' + formValue.lastname 
-    currentUserInfo.userImgUrl = formValue.imageUrl
+    currentUserInfo.displayName = formValue.firstname + ' ' + formValue.lastname
+    if (formValue.imageUrl != '') {
+      currentUserInfo.userImgUrl = formValue.imageUrl
+    }
     localStorage.setItem('user', JSON.stringify(currentUserInfo));
   }
 
@@ -91,11 +97,19 @@ export class EditUserComponent implements OnInit {
     this.firestore
       .collection('users')
       .doc(this.uID)
-      .update({userImgUrl: formValue.imageUrl, firstName: formValue.firstname, lastName: formValue.lastname, displayName: formValue.firstname + ' ' + formValue.lastname})
+      .update({ userImgUrl: formValue.imageUrl, firstName: formValue.firstname, lastName: formValue.lastname, displayName: formValue.firstname + ' ' + formValue.lastname })
   }
-    
 
-  
+  updateWithoutImg(formValue) {
+    this.firestore
+    .collection('users')
+    .doc(this.uID)
+    .update({firstName: formValue.firstname, lastName: formValue.lastname, displayName: formValue.firstname + ' ' + formValue.lastname })
+
+  }
+
+
+
   getInfoFromLocalStorage() {
     this.user = JSON.parse(localStorage.getItem('user'))
     this.uID = this.user.uid
@@ -104,12 +118,12 @@ export class EditUserComponent implements OnInit {
 
 
   getUserFotoFromFireStorage() {
-      const storage = getStorage();
-      getDownloadURL(ref(storage, `${this.uID}/1`)).then((url) => {
-        console.log(url)
-        this.imgUrl = url;
-      })
-    }
+    const storage = getStorage();
+    getDownloadURL(ref(storage, `${this.uID}/1`)).then((url) => {
+      console.log(url)
+      this.imgUrl = url;
+    })
+  }
 }
 
 

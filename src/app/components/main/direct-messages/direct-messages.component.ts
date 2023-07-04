@@ -23,8 +23,9 @@ export class DirectMessagesComponent implements OnInit {
       .valueChanges({ idField: 'ID' })
       .subscribe((changes: any) => {
         this.allChats = changes;
-        this.getUser()
+       
       })
+      this.getUser()
   }
 
   getUser() {

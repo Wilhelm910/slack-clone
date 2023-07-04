@@ -29,7 +29,7 @@
             </quill-editor>
             <span *ngIf="editorForm.get('editor').value != null">{{ 1000 - editorForm.get('editor').value.length
                 }}</span>
-            <button mat-button>Submit</button>
+            <button mat-button [ngClass]="editorForm.get('editor').value != null ? 'active': 'inactive'">Submit</button>
         </div>
 
     </form>

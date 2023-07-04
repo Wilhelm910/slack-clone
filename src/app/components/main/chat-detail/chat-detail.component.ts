@@ -139,16 +139,19 @@ export class ChatDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    let user = JSON.parse(localStorage.getItem('user'));
-    let reply = new ChatMessage({
-      userName: user.displayName,
-      userId: user.uid,
-      message: this.editorForm.get('editor').value,
-      date: new Date,
-      userImgUrl: user.userImgUrl
-    })
-    this.editorForm.reset();
-    this.updateChatMessages(reply.toJson())
+    console.log(this.editorForm.get('editor').value)
+    if (this.editorForm.get('editor').value != null) {
+      let user = JSON.parse(localStorage.getItem('user'));
+      let reply = new ChatMessage({
+        userName: user.displayName,
+        userId: user.uid,
+        message: this.editorForm.get('editor').value,
+        date: new Date,
+        userImgUrl: user.userImgUrl
+      })
+      this.editorForm.reset();
+      this.updateChatMessages(reply.toJson())
+    }
   }
 
 
